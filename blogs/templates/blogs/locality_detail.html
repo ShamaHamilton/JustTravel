@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="container">
+    {{ localities_item.title }}
+    <br>
+    {% if localities_item.photo %}
+    <img src="{{ localities_item.photo.url }}" alt="">
+    {% endif %}
+    <br>
+    {{ localities_item.content }}
+    <br>
+    <br>
+    {{ localities_item.created_at }}
+  </div>
+
+{% endblock %}

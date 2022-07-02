@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% for item in localities_list %}
+  <div class="container">
+    <a href="{{ item.get_absolute_url }}">{{ item.title }}</a>
+    <br>
+    {{ item.content|truncatewords_html:20|safe }}
+    <br>
+    {{ item.created_at }}
+  </div>
+  <br>
+  {% endfor%}
+{% endblock %}

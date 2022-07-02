@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'blogs:home' %}">JustTravel</a>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'blogs:home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'blogs:localities' %}">Населенные пункты</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'rooms:rooms' %}">Жилье</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        {% if request.user.is_authenticated %}
+        Добро пожаловать, {{ user.first_name }} | <a href="{% url 'accounts:logout' %}">Выход</a>
+        {% else %}
+        <a href="{% url 'accounts:login' %}">Вход</a> | <a href="{% url 'accounts:register' %}">Регистрация</a>
+        {% endif %}
+      </span>
+      <span class="navbar-text">
+        <a href="{% url 'rooms:create_room' %}">&nbsp;| Сдайте жилье</a>
+      </span>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% for item in rooms_list %}
+    <div class="container">
+    <a href="{{ item.get_absolute_url }}">{{ item.housing_header }}</a>
+    <br>
+    {{ item.created_at }}
+    <br>
+    </div>
+    <br>
+  {% endfor%}
+{% endblock %}

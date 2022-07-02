@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <p>
+    {{ room_details.housing_header }}
+  </p>
+  <p>
+    {{ room_details.housing_type }}
+  </p>
+  <p>
+    {{ room_details.photos }}
+  </p>
+  <p>
+    {{ room_details.housing_description }}
+  </p>
+  <p>
+    Удобства: {{ room_details.popular_amenities }}
+  </p>
+  <p>
+    Человеков: {{ room_details.number_of_guests }} шт.
+  </p>
+  <p>
+    Цена за ночь: {{ room_details.price }} р.
+  </p>
+</div>
+------------------------------------------------
+<div>
+  <form method="post">
+    {% csrf_token %}
+    {% if request.user.is_authenticated %}
+    {{ room_reserv.as_p }}
+    {% endif %}
+    <button type="submit" class="btn btn-primary btn-block">Зарезервировать</button>
+  </form>
+</div>
+
+{% endblock %}
