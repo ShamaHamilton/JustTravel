@@ -149,10 +149,7 @@ MEDIA_URL = '/media/'               # для построения URL
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Использовать кастомную модель регистрации
-AUTH_USER_MODEL = 'accounts.CustomCreateUser'
-
-# Отключить валидацию пароля
-AUTH_PASSWORD_VALIDATORS = []
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Django Debug Toolbar
 INTERNAL_IPS = ["127.0.0.1"]

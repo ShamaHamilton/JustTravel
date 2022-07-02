@@ -3,9 +3,8 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from django.core.exceptions import ValidationError
 
-from .models import CustomCreateUser
+from .models import CustomUser
 
 
 class UserCreationForm(forms.ModelForm):
@@ -13,7 +12,7 @@ class UserCreationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
 
     class Meta:
-        model = CustomCreateUser
+        model = CustomUser
         fields = ('phone', 'password', 'first_name', 'last_name', 'email')
 
     def save(self, commit=True):
@@ -30,7 +29,7 @@ class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = CustomCreateUser
+        model = CustomUser
         fields = (
             'phone',
             'password',
@@ -82,7 +81,7 @@ class CreateUserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
-admin.site.register(CustomCreateUser, CreateUserAdmin)
+admin.site.register(CustomUser, CreateUserAdmin)
 admin.site.unregister(Group)
 
 admin.site.site_title = 'JustTravel'
