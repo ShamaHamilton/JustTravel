@@ -36,6 +36,13 @@ class LocalitiesDetailView(DetailView):
     template_name = 'blogs/locality_detail.html'
     context_object_name = 'localities_item'
 
+    def get_context_data(self, **kwargs):
+        """Метод для вывода динамичных данных."""
+        context = super().get_context_data(**kwargs)
+        self.object.views = F('views') + 1
+        self.object.save()
+        self.object.refresh_from_db()
+        return context
 
 class InterestingPlacesView(ListView):
     model = InterestingPlaces
