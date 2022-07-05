@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style_home.css' %}">
+  <title>JustTravel</title>
+</head>
+
+<body>
+
+  <div class="header">
+    <nav id="navBar">
+      <a href="{% url 'blogs:home' %}" class="logo">JustTravel</a>
+      <ul class="nav-links">
+        <li><a href="{% url 'blogs:localities' %}">Населенные пункты</a></li>
+        <li><a href="{% url 'blogs:places' %}">Интересные места</a></li>
+        <li><a href="{% url 'rooms:rooms' %}">Жилье</a></li>
+      </ul>
+      <ul class='nav-btn'>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'rooms:create_room' %}" class="create_room-btn">Сдайте жилье</a></li>
+        <li><a href="{% url 'accounts:logout' %}" class="logout-btn">Выход</a></li>
+        {% else %}
+        <li><a href="{% url 'accounts:login' %}" class="login-btn">Вход</a></li>
+        <li><a href="{% url 'accounts:register' %}" class="register-btn">Регистрация</a></li>
+        <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
+        {% endif %}
+        <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
+    </nav>
+    <div class="container">
+      <h1></h1>
+      <div class="search-bar">
+        <form>
+          <div class="location-input">
+            <label>Место</label>
+            <input type="text" placeholder="Куда направляетесь?">
+          </div>
+          <div>
+            <label>Прибытие</label>
+            <input type="text" placeholder="Когда?">
+          </div>
+          <div>
+            <label>Выезд</label>
+            <input type="text" placeholder="Когда?">
+          </div>
+          <div>
+            <label>Сколько гостей?</label>
+            <input type="text" placeholder="Добавить гостей">
+          </div>
+          <button type="submit"><img src="{%static 'images/search.png' %}"></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="sub-title">Интересные места</h2>
+    <div class="places">
+      {% for place in places_view %}
+      <a href="{{ place.get_absolute_url }}">
+        <div>
+          {% if place.photo %}
+          <img src="{{ place.photo.url }}" alt="">
+          {% endif %}
+          <span>
+            <h3>{{ place.title }}</h3>
+            <p>{{ place.category.title }}</p>
+          </span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <h2 class="sub-title">Населенные пункты</h2>
+    <div class="locality">
+      {% for locality in localities_view %}
+      <a href="{{ locality.get_absolute_url }}">
+        <div>
+          {% if locality.photo %}
+          <img src="{{ locality.photo.url }}">
+          {% endif %}
+          <h3>{{ locality.title }}</h3>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <div class="about-msg">
+      <h2>About JustTravel</h2>
+      <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
+        in a piece of classical Latin literature from 45 BC, making it over 2000 years
+        old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,
+        looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum
+        passage, and going through the cites of the word in classical literature,
+        discovered the undoubtable source.</p>
+    </div>
+
+    <div class="footer">
+      <a href="https://facebook.com"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://youtube.com"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://twitter.com"><i class="fa-brands fa-twitter"></i></a>
+      <a href="https://linkedin.com"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://instagram.com"><i class="fa-brands fa-instagram"></i></a>
+      <hr>
+      <p>Copyright © 2022, JustTravel.</p>
+    </div>
+
+  </div>
+
+  <script>
+    var navBar = document.getElementById("navBar");
+    function togglebtn() {
+      navBar.classList.toggle("hidemenu");
+    }
+  </script>
+</body>
+
+</html>

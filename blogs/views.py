@@ -1,7 +1,23 @@
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.db.models import F
 
+import rooms
+
 from .models import Localities, InterestingPlaces
+from rooms.models import RoomsApplicationModel
+
+
+def home(request):
+    places_view = InterestingPlaces.objects.filter(is_published=True)
+    localities_view = Localities.objects.filter(is_published=True)
+    rooms_view = RoomsApplicationModel.objects.filter(status=True)
+    context = {
+        'places_view': places_view,
+        'localities_view': localities_view,
+        'rooms_view': rooms_view,
+    }
+    return render(request, 'blogs/home.html', context)
 
 
 class LocalitiesView(ListView):
