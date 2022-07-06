@@ -9,20 +9,31 @@
   <!-- <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"> -->
   <!-- <link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}"> -->
   <link rel="stylesheet" href="{% static 'css/style_navbar.css' %}">
-  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style_rooms_list.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style_room_details.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style_tooter.css' %}">
+  <title>{% block title %} JustTravel {% endblock %}</title>
 </head>
 
 <body>
 
   {% include 'inc/_navbar.html' %}
 
-  {% block content %}CONTENT{% endblock %}
+  {% block content %} CONTENT {% endblock %}
+
+  {% include 'inc/_footer.html' %}
 
   <!-- <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> -->
   <script src="https://kit.fontawesome.com/4f4432713b.js" crossorigin="anonymous"></script>
   <!-- <script src="{% static 'js/jquery.min.js' %}"></script> -->
   <!-- <script src="{% static 'js/moment.min.js' %}"></script> -->
   <!-- <script src="{% static 'js/daterangepicker.js' %}"></script> -->
+  <script>
+    var navBar = document.getElementById("navBar");
+    function togglebtn(){
+      navBar.classList.toggle("hidemenu");
+    }
+  </script>
 </body>
 
 </html>

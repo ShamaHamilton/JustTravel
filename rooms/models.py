@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from . import constants
 from django.urls import reverse
 from django.db import models
@@ -10,6 +11,10 @@ User = get_user_model()
 
 
 # from accounts.models import CustomCreateUser
+
+
+def rooms_photo_upload_to(instance, filename):
+    return f'rooms/{instance.landlord}/{instance.id}/{filename}'
 
 
 def create_session_room_hash():
@@ -87,8 +92,33 @@ class RoomsApplicationModel(models.Model):
         blank=True,
     )
     # шаг 7: Добавьте несколько фото жилья
-    photos = models.CharField(
-        verbose_name='добавьте несколько фото жилья',
+    photo1 = models.ImageField(
+        verbose_name='Фото 1',
+        upload_to=rooms_photo_upload_to,
+        max_length=255,
+        blank=True,
+    )
+    photo2 = models.ImageField(
+        verbose_name='Фото 2',
+        upload_to=rooms_photo_upload_to,
+        max_length=255,
+        blank=True,
+    )
+    photo3 = models.ImageField(
+        verbose_name='Фото 3',
+        upload_to=rooms_photo_upload_to,
+        max_length=255,
+        blank=True,
+    )
+    photo4 = models.ImageField(
+        verbose_name='Фото 4',
+        upload_to=rooms_photo_upload_to,
+        max_length=255,
+        blank=True,
+    )
+    photo5 = models.ImageField(
+        verbose_name='Фото 5',
+        upload_to=rooms_photo_upload_to,
         max_length=255,
         blank=True,
     )
@@ -119,7 +149,11 @@ class RoomsApplicationModel(models.Model):
         'offer_type',
         'location',
         'number_of_guests',
-        'photos',
+        'photo1',
+        'photo2',
+        'photo3',
+        'photo4',
+        'photo5',
         'housing_header',
         'housing_description',
         'price',
@@ -142,7 +176,7 @@ class RoomsApplicationModel(models.Model):
         elif stage == constants.STAGE_6:
             fields.extend(['special_amenities', 'popular_amenities', 'safety'])
         elif stage == constants.STAGE_7:
-            fields.extend(['photos'])
+            fields.extend(['photo1', 'photo2', 'photo3', 'photo4', 'photo5'])
         elif stage == constants.STAGE_8:
             fields.extend(['housing_header'])
         elif stage == constants.STAGE_9:

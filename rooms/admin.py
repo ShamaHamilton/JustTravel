@@ -22,7 +22,11 @@ class RoomCreationForm(forms.ModelForm):
             'special_amenities',
             'popular_amenities',
             'safety',
-            'photos',
+            'photo1',
+            'photo2',
+            'photo3',
+            'photo4',
+            'photo5',
             'price',
         )
 
@@ -45,7 +49,11 @@ class RoomChangeForm(forms.ModelForm):
             'special_amenities',
             'popular_amenities',
             'safety',
-            'photos',
+            'photo1',
+            'photo2',
+            'photo3',
+            'photo4',
+            'photo5',
             'price',
         )
 
@@ -80,7 +88,11 @@ class RoomAdmin(admin.ModelAdmin):
         'special_amenities',
         'popular_amenities',
         'safety',
-        'photos',
+        'photo1',
+        'photo2',
+        'photo3',
+        'photo4',
+        'photo5',
         'price',
         'created_at',
         'updated_at',
