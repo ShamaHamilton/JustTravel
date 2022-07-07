@@ -7,7 +7,7 @@
   <h1>Населенные пункты Гунибского района</h1>
   {% for locality in localities_list %}
   <div class="list-container-locality">
-    <div class="left-col">
+    <div class="locality-left-col">
       <div class="locality">
         <div class="locality-img">
           {% if locality.photo %}
@@ -18,7 +18,9 @@
           <h3>{{ locality.title }}</h3>
           <p>{{ locality.content|truncatewords_html:50|safe }}</p>
           <br>
-          добавить кнопку: Читать далее ...
+          <a href="{{ locality.get_absolute_url }}">
+            <button type="submit">Читать далее...</button>
+          </a>
           <div class="locality-date">
             <p>{{ locality.created_at|date:"d-m-Y" }}</p>
           </div>
@@ -26,7 +28,7 @@
       </div>
     </div>
 
-    <div class="right-col">
+    <div class="locality-right-col">
       <div class="sidebar">
         <h2>Интересные места:</h2>
         {% for place in locality.places.all %}
