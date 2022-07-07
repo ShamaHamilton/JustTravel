@@ -45,6 +45,11 @@ class RoomsApplicationModel(models.Model):
         verbose_name='хозяин жилья',
         blank=True,
     )
+    views = models.IntegerField(
+        verbose_name='количество просмотров',
+        default=0,
+        blank=True,
+    )
     # шаг 1: Какое у вас жилье?
     housing = models.CharField(
         verbose_name='какое у вас жилье?',

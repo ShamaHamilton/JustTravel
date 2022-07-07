@@ -67,9 +67,10 @@ class RoomAdmin(admin.ModelAdmin):
         'landlord',
         'status',
         'housing',
-        'housing_type',
+        'housing_header',
         'offer_type',
         'price',
+        'views',
     )
     list_display_links = ('id', 'landlord')
     search_fields = ('landlord',)
@@ -94,6 +95,7 @@ class RoomAdmin(admin.ModelAdmin):
         'photo4',
         'photo5',
         'price',
+        'views',
         'created_at',
         'updated_at',
     )

@@ -5,6 +5,7 @@ from django.views.generic import FormView, ListView
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.forms import modelform_factory
+from django.db.models import F
 # from django.contrib import messages
 
 from django.contrib.auth import get_user_model
@@ -86,6 +87,8 @@ class RoomsView(ListView):
 
 def room_reservation(request, pk):
     room_details = RoomsApplicationModel.objects.get(pk=pk)
+    room_details.views += 1
+    room_details.save()
     if request.method == 'POST':
         room_reserv = ReservationForm(request.POST)
         if room_reserv.is_valid():
