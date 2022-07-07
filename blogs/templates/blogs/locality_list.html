@@ -1,14 +1,54 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
-  {% for item in localities_list %}
-  <div class="container">
-    <a href="{{ item.get_absolute_url }}">{{ item.title }}</a>
-    <br>
-    {{ item.content|truncatewords_html:20|safe }}
-    <br>
-    {{ item.created_at }}
+<div class="container">
+  <h1>Населенные пункты Гунибского района</h1>
+  {% for locality in localities_list %}
+  <div class="list-container-locality">
+    <div class="left-col">
+      <div class="locality">
+        <div class="locality-img">
+          {% if locality.photo %}
+          <img src="{{ locality.photo.url }}">
+          {% endif %}
+        </div>
+        <div class="locality-info">
+          <h3>{{ locality.title }}</h3>
+          <p>{{ locality.content|truncatewords_html:50|safe }}</p>
+          <br>
+          добавить кнопку: Читать далее ...
+          <div class="locality-date">
+            <p>{{ locality.created_at|date:"d-m-Y" }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-col">
+      <div class="sidebar">
+        <h2>Интересные места:</h2>
+        {% for place in locality.places.all %}
+        <a href="{{ place.get_absolute_url }}">
+          <h3>{{ place }}</h3>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
   </div>
-  <br>
   {% endfor%}
+</div>
+
+<div class="pagination">
+  <img src="{% static 'images/arrow.png' %}">
+  <span class="current">1</span>
+  <span>2</span>
+  <span>3</span>
+  <span>4</span>
+  <span>5</span>
+  <span>&middot; &middot; &middot; &middot;</span>
+  <span>20</span>
+  <img src="{% static 'images/arrow.png' %}" class="right-arrow">
+</div>
 {% endblock %}

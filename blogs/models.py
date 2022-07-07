@@ -104,6 +104,7 @@ class InterestingPlaces(models.Model):
     category = models.ForeignKey(
         Localities,
         on_delete=models.PROTECT,
+        related_name='places',
         verbose_name='категория',
     )
     views = models.IntegerField(
