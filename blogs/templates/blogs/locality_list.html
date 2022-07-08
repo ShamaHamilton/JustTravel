@@ -18,12 +18,12 @@
           <h3>{{ locality.title }}</h3>
           <p>{{ locality.content|truncatewords_html:50|safe }}</p>
           <br>
-          <a href="{{ locality.get_absolute_url }}">
-            <button type="submit">Читать далее...</button>
-          </a>
           <div class="locality-date">
             <p>{{ locality.created_at|date:"d-m-Y" }}</p>
           </div>
+          <a href="{{ locality.get_absolute_url }}">
+            <button type="submit">Читать далее...</button>
+          </a>
         </div>
       </div>
     </div>
@@ -35,6 +35,8 @@
         <a href="{{ place.get_absolute_url }}">
           <h3>{{ place }}</h3>
         </a>
+        {% empty %}
+        <h3>Еще не добавлены :-(</h3>
         {% endfor %}
       </div>
     </div>

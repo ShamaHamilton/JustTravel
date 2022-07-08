@@ -19,12 +19,12 @@
           <h3>{{ place.title }}</h3>
           <p>{{ place.content|truncatewords_html:50|safe }}</p>
           <br>
-          <a href="{{ place.get_absolute_url }}">
-            <button type="submit">Читать далее...</button>
-          </a>
           <div class="house-price">
             <p>{{ place.created_at|date:"d-m-Y" }}</p>
           </div>
+          <a href="{{ place.get_absolute_url }}">
+            <button type="submit">Читать далее...</button>
+          </a>
         </div>
       </div>
       {% endfor%}

@@ -10,29 +10,32 @@
     <div class="left-col">
       <h1>Рекомендуемое жилье в Гунибском районе</h1>
       {% for item in rooms_list %}
-      <a href="{{ item.get_absolute_url }}">
-        <div class="house">
-          <div class="house-img">
-            {% if item.photo1 %}
-            <img src="{{ item.photo1.url }}">
-            {% endif %}
+      <div class="house">
+        <div class="house-img">
+          {% if item.photo1 %}
+          <img src="{{ item.photo1.url }}">
+          {% endif %}
+        </div>
+        <div class="house-info">
+          <p>Расположение: {{ item.location }}</p>
+          <h3>{{ item.housing_header }}</h3>
+          <p>1 Bedroom / 1 Bathroom / Wifi / Kitchen</p>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star-half-alt"></i>
+          <i class="fa-regular fa-star"></i>
+          <div class="house-price">
+            <p>{{ item.number_of_guests }} Гость</p>
+            <h4>{{ item.price }} р <span>/ день</span></h4>
           </div>
-          <div class="house-info">
-            <p>Расположение: {{ item.location }}</p>
-            <h3>{{ item.housing_header }}</h3>
-            <p>1 Bedroom / 1 Bathroom / Wifi / Kitchen</p>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star-half-alt"></i>
-            <i class="fa-regular fa-star"></i>
-            <div class="house-price">
-              <p>{{ item.number_of_guests }} Гость</p>
-              <h4>{{ item.price }} р <span>/ день</span></h4>
-            </div>
+          <div class="button" >
+            <a href="{{ item.get_absolute_url }}">
+              <button type="submit">Подробнее</button>
+            </a>
           </div>
         </div>
-      </a>
+      </div>
       {% endfor%}
     </div>
     <!-- <div class="right-col">
