@@ -16,7 +16,7 @@
       <i class="fa-solid fa-star"></i>
       <i class="fa-solid fa-star-half-alt"></i>
       <i class="fa-regular fa-star"></i>
-      <span>245 Просмотров</span>
+      <span>Просмотров: {{ room_details.views }}</span>
       <div>
         <p>{{ room_details.location }}</p>
       </div>
@@ -42,8 +42,8 @@
   </div>
 
   <div class="small-details">
-    <h2>Entire rental unit hosted by {{ room_details.landlord.get_short_name }}</h2>
-    <p>2 quest &nbsp; &nbsp; 2 beds &nbsp; &nbsp; 1 bathroom</p>
+    <h2>Хозяин объекта {{ room_details.landlord.get_short_name }}</h2>
+    <p>Гостей: 1 &nbsp; &nbsp; Кровати: 2 &nbsp; &nbsp; Ванная: 1</p>
     <h4>{{ room_details.price }} р / день</h4>
   </div>
 
@@ -51,16 +51,16 @@
 
   <form class="check-form">
     <div>
-      <label>Check-in</label>
-      <input type="text" placeholder="Add date">
+      <label>Прибытие</label>
+      <input type="text" placeholder="Укажите дату">
     </div>
     <div>
-      <label>Check-out</label>
-      <input type="text" placeholder="Add date">
+      <label>Выезд</label>
+      <input type="text" placeholder="Укажите дату">
     </div>
     <div class="guest-field">
-      <label>Guest</label>
-      <input type="text" placeholder="2 guest">
+      <label>Гостей</label>
+      <input type="text" placeholder="2 Гостя">
     </div>
     <button type="submit">Check Availability</button>
   </form>
@@ -92,14 +92,14 @@
   <hr class="line">
 
   <div class="map">
-    <h3>Location on map</h3>
+    <h3>Местоположение на карте</h3>
     <iframe
       src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d548.7258786056058!2d47.03069028642799!3d42.32065588274649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sru!2sru!4v1656957836931!5m2!1sru!2sru"
       width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
       referrerpolicy="no-referrer-when-downgrade">
     </iframe>
-    <b>San Francisco, California, United States</b>
-    <p>It's like a home away from home.</p>
+    <b>{{ room_details.location }}</b>
+    <!-- <p></p> -->
   </div>
 
   <hr class="line">
@@ -107,7 +107,7 @@
   <div class="host">
     <img src="images/host.png">
     <div>
-      <h2>Hosted by Brandon</h2>
+      <h2>Владелец жилья {{ room_details.landlord }}</h2>
       <p>
         <span>
           <i class="fa-solid fa-star"></i>
@@ -123,18 +123,18 @@
     </div>
   </div>
   <a href="#" class="contact-host">Contact Host</a>
-</div>
 
-------------------------------------------------
-<div>
-  <form method="post">
-    {% csrf_token %}
-    {% if request.user.is_authenticated %}
-    {{ room_reserv.as_p }}
-    {% endif %}
-    <button type="submit" class="btn btn-primary btn-block">Зарезервировать</button>
-  </form>
-</div>
+  <br>
+  ------------------------------------------------
+  <div>
+    <form method="post">
+      {% csrf_token %}
+      {% if request.user.is_authenticated %}
+      {{ room_reserv.as_p }}
+      {% endif %}
+      <button type="submit" class="btn btn-primary btn-block">Зарезервировать</button>
+    </form>
+  </div>
 
 </div>
 
