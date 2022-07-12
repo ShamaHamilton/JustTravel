@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
   <link rel="stylesheet" href="{% static 'css/style_navbar.css' %}">
   <link rel="stylesheet" href="{% static 'css/style_locality_list.css' %}">
   <link rel="stylesheet" href="{% static 'css/style_places_list.css' %}">
@@ -26,9 +27,12 @@
 
   <!-- flatpickr -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+  <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
   <script>
     const value1 = JSON.parse(document.getElementById('value1').textContent);
     config = {
+      "locale": "ru",
       dateFormat: "d.m.Y",
       minDate: "today",
       disable: value1
@@ -37,6 +41,7 @@
 
     const value2 = JSON.parse(document.getElementById('value2').textContent);
     config = {
+      "locale": "ru",
       dateFormat: "d.m.Y",
       minDate: "today",
       disable: value2
