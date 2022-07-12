@@ -1,5 +1,6 @@
 from django.forms.models import ModelForm
 from django import forms
+from django.core.exceptions import ValidationError
 
 from .models import Reservation, RoomsApplicationModel
 
@@ -48,12 +49,12 @@ class ReservationForm(forms.ModelForm):
     #         ValidationError('некорректная дата прибытия')
     #     return start_date
 
-    # def clean_end_date(self):
-    #     start_date = self.cleaned_data['start_date']
-    #     end_date = self.cleaned_data['end_date']
-    #     if str(end_date) < str(start_date):
-    #         ValidationError('Некорректная дата')
-    #     return end_date
+    def clean_end_date(self):
+        start_date = self.cleaned_data['start_date']
+        end_date = self.cleaned_data['end_date']
+        if end_date < start_date:
+            raise ValidationError('Некорректная дата выезда')
+        return end_date
 
     # def clean_end_date(self):
     #     start_date = self.cleaned_data['start_date']
