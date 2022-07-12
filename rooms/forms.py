@@ -25,21 +25,21 @@ class ReservationForm(forms.ModelForm):
         label='прибытие',
         widget=forms.DateInput(
             format='%d-%m-%Y',
-            attrs={'type': 'date'},
+            attrs={'type': 'date_in'},
         ),
     )
     end_date = forms.DateField(
         label='выезд',
         widget=forms.DateInput(
             format='%d-%m-%Y',
-            attrs={'type': 'date'},
+            attrs={'type': 'date_out'},
         ),
     )
 
     class Meta:
         model = Reservation
         fields = '__all__'
-        exclude = ('name_reserv', 'apartment', 'days_total', 'price_total',)
+        exclude = ('name_reserv', 'apartment', 'days_total', 'price_total', 'status')
         # fields = ('start_date', 'end_date',)
 
     # def clean_start_date(self):

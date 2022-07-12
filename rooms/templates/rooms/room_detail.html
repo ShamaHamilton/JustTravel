@@ -6,8 +6,13 @@
 
 {% block content %}
 
-
 <div class="house-details">
+
+  <br>
+  {{ reserv_days_in }}
+  <br>
+  {{ reserv_days_out }}
+
   <div class="house-title">
     <h1>{{ room_details.housing_header }}</h1>
     <div>
@@ -62,7 +67,7 @@
       <label>Гостей</label>
       <input type="text" placeholder="2 Гостя">
     </div>
-    <button type="submit">Check Availability</button>
+    <button type="submit">Забронировать</button>
   </form>
 
   <ul class="details-list">
@@ -105,7 +110,7 @@
   <hr class="line">
 
   <div class="host">
-    <img src="images/host.png">
+    <img src="#">
     <div>
       <h2>Владелец жилья {{ room_details.landlord }}</h2>
       <p>
@@ -137,5 +142,8 @@
   </div>
 
 </div>
+<!-- Передача зарезервированных дат в JS для блокирования доступа в календаре -->
+{{ reserv_days_in|json_script:'value1' }}
+{{ reserv_days_out|json_script:'value2' }}
 
 {% endblock %}

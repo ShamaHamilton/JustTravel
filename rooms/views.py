@@ -1,12 +1,13 @@
 from . import constants
 from .forms import CreateRoomForm, ReservationForm
-from .models import RoomsApplicationModel
+from .models import RoomsApplicationModel, Reservation
 from django.views.generic import FormView, ListView
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.forms import modelform_factory
 from django.db.models import F
 # from django.contrib import messages
+from datetime import date, timedelta
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -86,7 +87,26 @@ class RoomsView(ListView):
 
 
 def room_reservation(request, pk):
+    """Функция для просмотра и резервирования жилья."""
     room_details = RoomsApplicationModel.objects.get(pk=pk)
+    # Извлечение броней связанных с данных жильем
+    reservs = Reservation.objects.filter(apartment_id=room_details.pk)
+    reserv_days_in = []     # Список зарезервированных дат
+    reserv_days_out = []     # Список зарезервированных дат
+    # Извлечение списка зарезервированных дат для передачи в календарь
+    for reserv in reservs:
+        if reserv.end_date >= date.today():
+            start_day = reserv.start_date
+            end_day = reserv.end_date
+            delta_days = int((end_day - start_day).days)
+            day = 0
+            for day in range(delta_days):
+                reserv_days_in.append(start_day.strftime("%d-%m-%Y"))
+                reserv_days_out.append(end_day.strftime("%d-%m-%Y"))
+                start_day += timedelta(days=1)
+                end_day -= timedelta(days=1)
+    reserv_days_in.sort()   # Сортировка дат по возрастанию
+    reserv_days_out.sort()  # Сортировка дат по возрастанию
     room_details.views += 1
     room_details.save()
     if request.method == 'POST':
@@ -104,5 +124,8 @@ def room_reservation(request, pk):
     context = {
         'room_details': room_details,
         'room_reserv': room_reserv,
+        'reservs': reservs,
+        'reserv_days_in': reserv_days_in,
+        'reserv_days_out': reserv_days_out,
     }
     return render(request, template_name='rooms/room_detail.html', context=context)
