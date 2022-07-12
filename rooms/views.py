@@ -56,8 +56,8 @@ class CreateRoomView(FormView):
 
     def get_form_class(self):
         """Возвращает класс формы с полями текущей стадии выполнения приложения."""
-        # Если нашелся RentApplication, который соответствует текущему хешу сеанса,
-        # обратиться к его атрибуту stage, чтобы решить на какой стадии регистрации
+        # Если нашелся RoomsApplicationModel, который соответствует текущему хешу сеанса,
+        # обратиться к его атрибуту stage, чтобы решить на какой стадии создания
         # находится пользователь. В противном случае предполагается, что пользователь
         # находится на стации 1.
         stage = self.create_room.stage if self.create_room else constants.STAGE_1
@@ -91,8 +91,8 @@ def room_reservation(request, pk):
     room_details = RoomsApplicationModel.objects.get(pk=pk)
     # Извлечение броней связанных с данных жильем
     reservs = Reservation.objects.filter(apartment_id=room_details.pk)
-    reserv_days_in = []     # Список зарезервированных дат
-    reserv_days_out = []     # Список зарезервированных дат
+    reserv_days_in = []      # Список дат для блокировки
+    reserv_days_out = []     # Список дат для брокировки
     # Извлечение списка зарезервированных дат для передачи в календарь
     for reserv in reservs:
         if reserv.end_date >= date.today():

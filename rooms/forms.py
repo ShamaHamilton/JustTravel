@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 
 from .models import Reservation, RoomsApplicationModel
 
+
 class CreateRoomForm(ModelForm):
     
     def __init__(self, *args, **kwargs):
@@ -41,13 +42,6 @@ class ReservationForm(forms.ModelForm):
         model = Reservation
         fields = '__all__'
         exclude = ('name_reserv', 'apartment', 'days_total', 'price_total', 'status')
-        # fields = ('start_date', 'end_date',)
-
-    # def clean_start_date(self):
-    #     start_date = self.cleaned_data['start_date']
-    #     if str(start_date) <= str(datetime.datetime.now()):
-    #         ValidationError('некорректная дата прибытия')
-    #     return start_date
 
     def clean_end_date(self):
         start_date = self.cleaned_data['start_date']
@@ -55,15 +49,3 @@ class ReservationForm(forms.ModelForm):
         if end_date < start_date:
             raise ValidationError('Некорректная дата выезда')
         return end_date
-
-    # def clean_end_date(self):
-    #     start_date = self.cleaned_data['start_date']
-    #     start_date = datetime.datetime.strptime(str(start_date), '%Y-%m-%d').date()
-    #     end_date = self.cleaned_data['end_date']
-    #     end_date = datetime.datetime.strptime(str(end_date), '%Y-%m-%d').days
-    #     # days_total = self.cleaned_data['days_total']
-    #     # price_total = self.cleaned_data['price_total']
-    #     if start_date < end_date:
-    #         self.days_total = end_date - start_date
-    #         self.price_total = 1000
-    #     return self.days_total, self.price_total
