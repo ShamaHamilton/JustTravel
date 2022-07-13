@@ -7,6 +7,7 @@
     <li><a href="{% url 'blogs:localities' %}">Населенные пункты</a></li>
     <li><a href="{% url 'blogs:places' %}">Интересные места</a></li>
     <li><a href="{% url 'rooms:rooms' %}">Жилье</a></li>
+    <li><a href="{% url 'accounts:account' %}">Личный кабинет</a></li>
   </ul>
   <ul class='nav-btn'>
     {% if request.user.is_authenticated %}

@@ -118,7 +118,7 @@ def room_reservation(request, pk):
             room_reserv.instance.days_total = delta.days
             room_reserv.instance.price_total = delta.days * room_details.price
             room_reserv.save()
-            return redirect('blogs:home')
+            return redirect('accounts:account')
     else:
         room_reserv = ReservationForm()
     context = {

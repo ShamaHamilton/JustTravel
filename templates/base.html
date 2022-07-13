@@ -30,6 +30,7 @@
   <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
   <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
   <script>
+    // Прибытие
     const value1 = JSON.parse(document.getElementById('value1').textContent);
     config = {
       "locale": "ru",
@@ -38,7 +39,7 @@
       disable: value1
     }
     flatpickr("input[type=date_in]", config);
-
+    // Выезд
     const value2 = JSON.parse(document.getElementById('value2').textContent);
     config = {
       "locale": "ru",

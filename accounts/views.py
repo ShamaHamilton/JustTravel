@@ -1,9 +1,20 @@
+from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.contrib.auth import login, logout
 from django.contrib import messages
 
 from .forms import UserRegisterForm, UserLoginForm
+from rooms.models import Reservation
+
+
+def user_account(request):
+    """Личный кабинет пользователя."""
+    user_reservs = Reservation.objects.filter(name_reserv_id=request.user)
+    context = {
+        'user_reservs': user_reservs,
+    }
+    return render(request, 'accounts/account.html', context)
 
 
 def user_register(request):
