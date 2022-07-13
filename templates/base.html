@@ -23,9 +23,9 @@
 
   <div class="container">
     {% if messages %}
-      {% for message in messages %}
-        {{ message }}
-      {% endfor%}
+    {% for message in messages %}
+    {{ message }}
+    {% endfor%}
     {% endif %}
   </div>
 
@@ -38,24 +38,30 @@
   <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
   <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
   <script>
-    // Прибытие
+    // Прибытие-настройки
     const value1 = JSON.parse(document.getElementById('value1').textContent);
-    config = {
+    config1 = {
       "locale": "ru",
       dateFormat: "d.m.Y",
       minDate: "today",
-      disable: value1
+      disable: value1,
+      onOpen: function (selectedDates, dateStr, instance) {
+        endPicker.open();
+      },
     }
-    flatpickr("input[type=date_in]", config);
-    // Выезд
+    // Выезд-настройки
     const value2 = JSON.parse(document.getElementById('value2').textContent);
-    config = {
+    config2 = {
       "locale": "ru",
       dateFormat: "d.m.Y",
       minDate: "today",
-      disable: value2
+      disable: value2,
+      onOpen: function (selectedDates, dateStr, instance) {
+        startPicker.open();
+      },
     }
-    flatpickr("input[type=date_out]", config);
+    startPicker = flatpickr("input[type=date_in]", config1);
+    endPicker = flatpickr("input[type=date_out]", config2);
   </script>
 
   <!-- fontawesome -->

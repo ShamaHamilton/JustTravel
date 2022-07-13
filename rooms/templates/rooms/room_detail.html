@@ -130,9 +130,11 @@
     <form method="post">
       {% csrf_token %}
       {% if request.user.is_authenticated %}
-      {{ room_reserv.as_p }}
+      {{ room_reserv.start_date }}
+      {{ room_reserv.end_date }}
       {% endif %}
-      <button type="submit" class="btn btn-primary btn-block">Зарезервировать</button>
+      <br>
+      <button type="submit" class="btn-reserv">Зарезервировать</button>
     </form>
   </div>
 
