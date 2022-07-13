@@ -14,7 +14,7 @@
   {% if active_reservs %}
   Активных броней: {{ active_reservs|length }}
   {% endif %}
-  {% for reserv in active_reservs %}
+  {% for reserv in active_reservs|dictsort:"start_date" %}
   <ul>
     <li>
       <a href="{{ reserv.get_absolute_url }}">
