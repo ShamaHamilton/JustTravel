@@ -251,8 +251,8 @@ class Reservation(models.Model):
         auto_now_add=True,
     )
 
-    # def get_absolute_url(self):
-    #     return reverse('rooms:room_detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('rooms:room_reserv_details', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.apartment.housing_header

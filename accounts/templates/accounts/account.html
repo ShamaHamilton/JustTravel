@@ -11,11 +11,13 @@
 <br>
 <br>
 <div class="container">
+  {% if active_reservs %}
   Активных броней: {{ active_reservs|length }}
+  {% endif %}
   {% for reserv in active_reservs %}
   <ul>
     <li>
-      <a href="{{ reserv.apartment.get_absolute_url }}">
+      <a href="{{ reserv.get_absolute_url }}">
         {{ reserv.apartment }}
       </a>
       <br>
@@ -30,7 +32,9 @@
   {% endfor %}
 
   <br>
+  {% if inactive_reservs %}
   Неактивных броней: {{ inactive_reservs|length }}
+  {% endif %}
   {% for reserv in inactive_reservs %}
   <ul>
     <li>

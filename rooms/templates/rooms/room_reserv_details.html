@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <ul>
+    <li>
+        {{ current_reserv.apartment }}
+      <br>
+      Прибытие: {{ current_reserv.start_date }} &nbsp; &nbsp;
+      Выезд: {{ current_reserv.end_date }} <br>
+      Всего дней: {{ current_reserv.days_total }} <br>
+      Итого к оплате: {{ current_reserv.price_total|floatformat:"2g" }} р. <br>
+      Оплата наличными на месте.
+    </li>
+  </ul>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Отменить бронь</button>
+  </form>
+  <br>
+
+{% endblock %}

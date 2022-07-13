@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.forms import modelform_factory
 from django.db.models import F
-# from django.contrib import messages
+from django.contrib import messages
 from datetime import date, timedelta
 
 from django.contrib.auth import get_user_model
@@ -129,3 +129,15 @@ def room_reservation(request, pk):
         'reserv_days_out': reserv_days_out,
     }
     return render(request, template_name='rooms/room_detail.html', context=context)
+
+
+def room_reser_details(request, pk):
+    current_reserv = Reservation.objects.get(pk=pk)
+    if request.method == 'POST':
+        current_reserv.delete()
+        messages.success(request, 'Бронь отменена')
+        return redirect('accounts:account')
+    context = {
+        'current_reserv': current_reserv,
+    }
+    return render(request, 'rooms/room_reserv_details.html', context)
