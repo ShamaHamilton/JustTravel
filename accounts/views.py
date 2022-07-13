@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.contrib.auth import login, logout
 from django.contrib import messages
 
+from datetime import date
+
 from .forms import UserRegisterForm, UserLoginForm
 from rooms.models import Reservation
 
@@ -11,8 +13,16 @@ from rooms.models import Reservation
 def user_account(request):
     """Личный кабинет пользователя."""
     user_reservs = Reservation.objects.filter(name_reserv_id=request.user)
+    active_reservs = []
+    inactive_reservs = []
+    for user_reserv in user_reservs:
+        if user_reserv.end_date >= date.today():
+            active_reservs.append(user_reserv)
+        else:
+            inactive_reservs.append(user_reserv)
     context = {
-        'user_reservs': user_reservs,
+        'active_reservs': active_reservs,
+        'inactive_reservs': inactive_reservs,
     }
     return render(request, 'accounts/account.html', context)
 

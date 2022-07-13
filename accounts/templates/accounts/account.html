@@ -11,7 +11,8 @@
 <br>
 <br>
 <div class="container">
-  {% for reserv in user_reservs %}
+  Активных броней: {{ active_reservs|length }}
+  {% for reserv in active_reservs %}
   <ul>
     <li>
       <a href="{{ reserv.apartment.get_absolute_url }}">
@@ -21,7 +22,26 @@
       Прибытие: {{ reserv.start_date }} &nbsp; &nbsp;
       Выезд: {{ reserv.end_date }} <br>
       Всего дней: {{ reserv.days_total }} <br>
-      Итого к оплате: {{ reserv.price_total }} р. <br>
+      Итого к оплате: {{ reserv.price_total|floatformat:"2g" }} р. <br>
+      Оплата наличными на месте.
+    </li>
+  </ul>
+  <br>
+  {% endfor %}
+
+  <br>
+  Неактивных броней: {{ inactive_reservs|length }}
+  {% for reserv in inactive_reservs %}
+  <ul>
+    <li>
+      <a href="{{ reserv.apartment.get_absolute_url }}">
+        {{ reserv.apartment }}
+      </a>
+      <br>
+      Прибытие: {{ reserv.start_date }} &nbsp; &nbsp;
+      Выезд: {{ reserv.end_date }} <br>
+      Всего дней: {{ reserv.days_total }} <br>
+      Итого к оплате: {{ reserv.price_total|floatformat:"2g" }} р. <br>
       Оплата наличными на месте.
     </li>
   </ul>
