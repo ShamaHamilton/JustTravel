@@ -60,6 +60,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         blank=True,
     )
     # дополнительная информация
+    rents_apartment = models.BooleanField(default=False, verbose_name='арендодатель?')
     about = models.TextField(max_length=500, blank=True, verbose_name='о пользователе')
     last_login = models.DateTimeField(auto_now=True, verbose_name='последний вход')
     date_joined = models.DateTimeField(auto_now_add=True, verbose_name='дата регистрации')

@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 
 from .forms import UserRegisterForm, UserLoginForm
-from accounts.fuctions.account_func import get_reservs_list
+from accounts.functions.account_func import get_reservs_list
 
 
 def user_register(request):
