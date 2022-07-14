@@ -12,6 +12,7 @@
 <br>
 
 <nav id="navBar" class="navbar-white">
+  {% if request.user.is_authenticated %}
   <ul class="nav-links">
     <li>
       <a href="{% url 'accounts:user_active_reservs' %}">
@@ -38,11 +39,9 @@
     </li>
   </ul>
   <ul class='nav-btn'>
-    {% if request.user.is_authenticated %}
     <li><a href="#">Личные данные</a></li>
-    {% endif %}
-    <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
   </ul>
+  {% endif %}
 </nav>
 
 {% endblock %}
