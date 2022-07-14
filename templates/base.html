@@ -39,32 +39,7 @@
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
   <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
-  <script>
-    // Прибытие-настройки
-    const value1 = JSON.parse(document.getElementById('value1').textContent);
-    config1 = {
-      "locale": "ru",
-      dateFormat: "d.m.Y",
-      minDate: "today",
-      disable: value1,
-      onOpen: function (selectedDates, dateStr, instance) {
-        endPicker.open();
-      },
-    }
-    // Выезд-настройки
-    const value2 = JSON.parse(document.getElementById('value2').textContent);
-    config2 = {
-      "locale": "ru",
-      dateFormat: "d.m.Y",
-      minDate: "today",
-      disable: value2,
-      onOpen: function (selectedDates, dateStr, instance) {
-        startPicker.open();
-      },
-    }
-    startPicker = flatpickr("input[type=date_in]", config1);
-    endPicker = flatpickr("input[type=date_out]", config2);
-  </script>
+  <script src="{% static 'js/flatpickr.js' %}"></script>
 
   <!-- fontawesome -->
   <script src="https://kit.fontawesome.com/4f4432713b.js" crossorigin="anonymous"></script>
