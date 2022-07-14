@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/style_navbar.css' %}">
   <link rel="stylesheet" href="{% static 'css/style_locality_list.css' %}">
   <link rel="stylesheet" href="{% static 'css/style_places_list.css' %}">
@@ -33,6 +34,7 @@
 
   {% include 'inc/_footer.html' %}
 
+  <script src="{% static 'js/functions.js' %}"></script>
   <!-- flatpickr -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>

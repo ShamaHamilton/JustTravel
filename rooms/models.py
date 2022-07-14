@@ -244,7 +244,7 @@ class Reservation(models.Model):
     )
     status = models.BooleanField(
         verbose_name='Бронь подтверждена?',
-        default=False,
+        default=True,
     )
     created_at = models.DateTimeField(
         verbose_name='дата бронирования',

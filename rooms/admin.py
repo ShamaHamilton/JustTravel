@@ -120,6 +120,7 @@ class ReservationAdmin(admin.ModelAdmin):
         'id',
         'name_reserv',
         'apartment',
+        'status',
         'start_date',
         'end_date',
         'days_total',
@@ -127,7 +128,7 @@ class ReservationAdmin(admin.ModelAdmin):
     )
     list_display_links = ('id', 'name_reserv', 'apartment',)
     # search_fields = ('apartment',)
-    # list_editable = ('',)
+    list_editable = ('status',)
     # list_filter = ('apartment',)
     fields = (
         'apartment',

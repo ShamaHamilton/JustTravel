@@ -134,7 +134,8 @@ def room_reservation(request, pk):
 def room_reser_details(request, pk):
     current_reserv = Reservation.objects.get(pk=pk)
     if request.method == 'POST':
-        current_reserv.delete()
+        current_reserv.status = False
+        current_reserv.save()
         messages.success(request, 'Бронь отменена')
         return redirect('accounts:account')
     context = {

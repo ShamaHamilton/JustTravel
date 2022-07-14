@@ -10,47 +10,39 @@
 <br>
 <br>
 <br>
-<div class="container">
-  {% if active_reservs %}
-  Активных броней: {{ active_reservs|length }}
-  {% endif %}
-  {% for reserv in active_reservs|dictsort:"start_date" %}
-  <ul>
-    <li>
-      <a href="{{ reserv.get_absolute_url }}">
-        {{ reserv.apartment }}
-      </a>
-      <br>
-      Прибытие: {{ reserv.start_date }} &nbsp; &nbsp;
-      Выезд: {{ reserv.end_date }} <br>
-      Всего дней: {{ reserv.days_total }} <br>
-      Итого к оплате: {{ reserv.price_total|floatformat:"2g" }} р. <br>
-      Оплата наличными на месте.
-    </li>
-  </ul>
-  <br>
-  {% endfor %}
 
-  <br>
-  {% if inactive_reservs %}
-  Неактивных броней: {{ inactive_reservs|length }}
-  {% endif %}
-  {% for reserv in inactive_reservs %}
-  <ul>
+<nav id="navBar" class="navbar-white">
+  <ul class="nav-links">
     <li>
-      <a href="{{ reserv.apartment.get_absolute_url }}">
-        {{ reserv.apartment }}
+      <a href="{% url 'accounts:user_active_reservs' %}">
+        {% if active_reservs %}
+        Активных бронирований: {{ active_reservs|length }}
+        {% endif %}
       </a>
-      <br>
-      Прибытие: {{ reserv.start_date }} &nbsp; &nbsp;
-      Выезд: {{ reserv.end_date }} <br>
-      Всего дней: {{ reserv.days_total }} <br>
-      Итого к оплате: {{ reserv.price_total|floatformat:"2g" }} р. <br>
-      Оплата наличными на месте.
+    </li>
+
+    <li>
+      <a href="{% url 'accounts:user_inactive_reservs' %}">
+        {% if inactive_reservs %}
+        Неактивных бронирований: {{ inactive_reservs|length }}
+        {% endif %}
+      </a>
+    </li>
+
+    <li>
+      <a href="{% url 'accounts:user_canceled_reservs' %}">
+        {% if canceled_reservs %}
+        Отмененных бронирований: {{ canceled_reservs|length }}
+        {% endif %}
+      </a>
     </li>
   </ul>
-  <br>
-  {% endfor %}
-</div>
+  <ul class='nav-btn'>
+    {% if request.user.is_authenticated %}
+    <li><a href="#">Личные данные</a></li>
+    {% endif %}
+    <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
+  </ul>
+</nav>
 
 {% endblock %}

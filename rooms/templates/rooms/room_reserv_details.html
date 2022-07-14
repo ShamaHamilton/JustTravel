@@ -18,10 +18,12 @@
       Оплата наличными на месте.
     </li>
   </ul>
+  {% if current_reserv.status %}
   <form method="post">
     {% csrf_token %}
     <button type="submit">Отменить бронь</button>
   </form>
+  {% endif %}
   <br>
 
 {% endblock %}

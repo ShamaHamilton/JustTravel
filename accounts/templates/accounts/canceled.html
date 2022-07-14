@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  {% if canceled_reservs %}
+  Отмененных бронирований: {{ canceled_reservs|length }}
+  {% endif %}
+  {% for reserv in canceled_reservs|dictsort:"start_date" %}
+  <ul>
+    <li>
+      <a href="{{ reserv.get_absolute_url }}">
+        {{ reserv.apartment }}
+      </a>
+      <br>
+      Прибытие: {{ reserv.start_date }} <br>
+      Выезд: {{ reserv.end_date }} <br>
+      Всего дней: {{ reserv.days_total }} <br>
+      Итого к оплате: {{ reserv.price_total|floatformat:"2g" }} р. <br>
+      Оплата наличными на месте.
+    </li>
+  </ul>
+  <br>
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -15,16 +15,55 @@ def user_account(request):
     user_reservs = Reservation.objects.filter(name_reserv_id=request.user)
     active_reservs = []
     inactive_reservs = []
+    canceled_reservs = []
     for user_reserv in user_reservs:
-        if user_reserv.end_date >= date.today():
+        if user_reserv.end_date >= date.today() and user_reserv.status:
             active_reservs.append(user_reserv)
+        elif user_reserv.status == False:
+            canceled_reservs.append(user_reserv)
         else:
             inactive_reservs.append(user_reserv)
     context = {
         'active_reservs': active_reservs,
         'inactive_reservs': inactive_reservs,
+        'canceled_reservs': canceled_reservs,
     }
     return render(request, 'accounts/account.html', context)
+
+
+def user_active_reservs(request):
+    user_reservs = Reservation.objects.filter(name_reserv_id=request.user)
+    active_reservs = []
+    for user_reserv in user_reservs:
+        if user_reserv.end_date >= date.today() and user_reserv.status:
+            active_reservs.append(user_reserv)
+    context = {
+        'active_reservs': active_reservs,
+    }
+    return render(request, 'accounts/active.html', context)
+
+def user_inactive_reservs(request):
+    user_reservs = Reservation.objects.filter(name_reserv_id=request.user)
+    inactive_reservs = []
+    for user_reserv in user_reservs:
+        if user_reserv.end_date < date.today():
+            inactive_reservs.append(user_reserv)
+    context = {
+        'inactive_reservs': inactive_reservs,
+    }
+    return render(request, 'accounts/inactive.html', context)
+
+
+def user_canceled_reservs(request):
+    user_reservs = Reservation.objects.filter(name_reserv_id=request.user)
+    canceled_reservs = []
+    for user_reserv in user_reservs:
+        if user_reserv.status == False:
+            canceled_reservs.append(user_reserv)
+    context = {
+        'canceled_reservs': canceled_reservs,
+    }
+    return render(request, 'accounts/canceled.html', context)
 
 
 def user_register(request):
