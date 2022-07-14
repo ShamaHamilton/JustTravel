@@ -45,8 +45,11 @@ def user_logout(request):
 
 def user_account(request):
     """Личный кабинет пользователя."""
-    context = get_reservs_list(request)
-    return render(request, 'accounts/account.html', context)
+    if request.user.rents_apartment:
+        return render(request, 'accounts/account_landlord.html')
+    else:
+        context = get_reservs_list(request)
+        return render(request, 'accounts/account.html', context)
 
 
 def user_active_reservs(request):

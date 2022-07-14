@@ -66,7 +66,9 @@ class CreateUserAdmin(BaseUserAdmin):
             'first_name',
             'last_name',
         )}),
-        ('Разрешения', {'fields': ('is_active', 'is_staff', 'is_superuser',)}),
+        ('Разрешения', {'fields': (
+            'is_active', 'rents_apartment', 'is_staff', 'is_superuser',
+        )}),
         ('Прочее', {'fields': ('about', 'date_joined', 'last_login')}),
     )
     readonly_fields = ('date_joined', 'last_login',)
