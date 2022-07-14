@@ -95,7 +95,7 @@ def room_reservation(request, pk):
     reserv_days_out = []     # Список дат для брокировки
     # Извлечение списка зарезервированных дат для передачи в календарь
     for reserv in reservs:
-        if reserv.end_date >= date.today():
+        if reserv.end_date >= date.today() and reserv.status:
             start_day = reserv.start_date
             end_day = reserv.end_date
             delta_days = int((end_day - start_day).days)
