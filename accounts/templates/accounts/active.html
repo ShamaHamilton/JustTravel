@@ -1,6 +1,43 @@
 {% extends 'base.html' %}
 
+{% block title %}
+Активные бронирования
+{% endblock %}
+
 {% block content %}
+
+<nav id="navBar" class="navbar-white">
+  {% if request.user.is_authenticated %}
+  <ul class="nav-links">
+    <li>
+      <a href="{% url 'accounts:user_active_reservs' %}">
+        {% if active_reservs %}
+        Активных бронирований: {{ active_reservs|length }}
+        {% endif %}
+      </a>
+    </li>
+
+    <li>
+      <a href="{% url 'accounts:user_inactive_reservs' %}">
+        {% if inactive_reservs %}
+        Неактивных бронирований: {{ inactive_reservs|length }}
+        {% endif %}
+      </a>
+    </li>
+
+    <li>
+      <a href="{% url 'accounts:user_canceled_reservs' %}">
+        {% if canceled_reservs %}
+        Отмененных бронирований: {{ canceled_reservs|length }}
+        {% endif %}
+      </a>
+    </li>
+  </ul>
+  <ul class='nav-btn'>
+    <li><a href="#">Личные данные</a></li>
+  </ul>
+  {% endif %}
+</nav>
 
 <br>
 <br>
