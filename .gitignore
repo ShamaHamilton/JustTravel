@@ -2,6 +2,8 @@
 
 media/
 
-static/
+static
+config/static/bootstrap/
+!config/static
 
 db.sqlite3

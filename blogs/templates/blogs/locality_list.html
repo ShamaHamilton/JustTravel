@@ -5,20 +5,20 @@
 {% block content %}
 <div class="container">
   <h1>Населенные пункты Гунибского района</h1>
-  {% for locality in localities_list %}
-  <div class="list-container-locality">
-    <div class="locality-left-col">
-      <div class="locality">
-        <div class="locality-img">
+  <div class="list-container">
+    {% for locality in localities_list %}
+    <div class="container-left-col">
+      <div class="object">
+        <div class="object-img">
           {% if locality.photo %}
           <img src="{{ locality.photo.url }}">
           {% endif %}
         </div>
-        <div class="locality-info">
+        <div class="object-info">
           <h3>{{ locality.title }}</h3>
           <p>{{ locality.content|truncatewords_html:50|safe }}</p>
           <br>
-          <div class="locality-date">
+          <div class="object-date">
             <p>{{ locality.created_at|date:"d-m-Y" }}</p>
           </div>
           <a href="{{ locality.get_absolute_url }}">
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="locality-right-col">
+    <div class="container-right-col">
       <div class="sidebar">
         <h2>Интересные места:</h2>
         {% for place in locality.places.all %}
@@ -40,8 +40,8 @@
         {% endfor %}
       </div>
     </div>
+    {% endfor%}
   </div>
-  {% endfor%}
 </div>
 
 <div class="pagination">

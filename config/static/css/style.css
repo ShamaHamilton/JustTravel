@@ -1,0 +1,383 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+/*----- locality list / intresting places -----*/
+.container {
+    padding: 0px 7%;
+}
+
+.container h1 {
+    color: #333;
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+.list-container {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.container-left-col {
+    flex-basis: 70%;
+}
+
+.container-right-col {
+    flex-basis: 25%;
+}
+
+.object {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 30px 0;
+    border-top: 1px solid #ccc;
+}
+
+.object-img {
+    flex-basis: 40%;
+}
+
+.object-info {
+    flex-basis: 58%;
+    color: #555;
+}
+
+.object-img img {
+    width: 100%;
+    border-radius: 12px;
+    width: 415px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.object-info h3 {
+    font-weight: 600;
+    color: #333;
+    font-size: 22px;
+    margin: 4px 0;
+}
+
+.object-info button {
+    background: #ff5361;
+    border: 0;
+    outline: none;
+    color: #fff;
+    padding: 18px;
+    width: 350px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.object-date {
+    text-align: right;
+}
+
+.sidebar {
+    border: 1px solid #999;
+    padding: 20px 30px;
+    margin-top: 30px;
+}
+
+.sidebar h2 {
+    font-weight: 500;
+}
+
+.sidebar a {
+    text-decoration: none;
+}
+
+.sidebar h3 {
+    font-weight: 500;
+    margin: 20px 0 10px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.pagination img {
+    width: 15px;
+    margin: 10px 20px;
+}
+
+.right-arrow {
+    transform: rotate(180deg);
+}
+
+.pagination span {
+    margin: 10px 8px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* ! добавить выделение в пагинатор */
+.pagination .current {
+    background: #333;
+    color: #fff;
+}
+
+/*----- small screen for listing page -----*/
+
+
+/*----- rooms list -----*/
+.object-info i {
+    color: #ff5361;
+    font-size: 18px;
+    margin: 10px 1px;
+}
+
+.object-price {
+    text-align: right;
+}
+
+.object-price h4 {
+    font-size: 20px;
+}
+
+.object-price h4 span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/*----- room details -----*/
+.house-details {
+    padding: 0 12%;
+}
+
+.house-title {
+    margin-top: 50px;
+}
+
+.house-title h1 {
+    font-weight: 600;
+}
+
+.house-title .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.house-title span {
+    margin: 0 20px;
+}
+
+.house-title i {
+    color: #ff5361;
+    font-size: 14px;
+}
+.house-title p{
+    margin-top: 5px;
+}
+.gallery {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: 'first first . .''first first . .';
+    margin: 20px 0;
+}
+
+.gallery div img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+.gallery-img-1 {
+    grid-area: first;
+}
+
+.small-details h2 {
+    font-weight: 500;
+}
+
+.small-details h4 {
+    text-align: right;
+    font-size: 22px;
+}
+
+.line {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px 0 50px;
+}
+
+.check-form {
+    margin: 30px 0;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px 50px;
+}
+
+.check-form label {
+    display: block;
+}
+
+.check-form div {
+    padding: 20px;
+}
+
+.check-form input {
+    background: transparent;
+    border: 0;
+    outline: none;
+}
+
+.check-form button {
+    background: #ff5361;
+    border: 0;
+    outline: none;
+    color: #fff;
+    padding: 18px;
+    width: 350px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.guest-field {
+    flex: 1;
+}
+
+.details-list {
+    list-style: none;
+    margin: 50px 0;
+}
+
+.details-list li {
+    margin-left: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #555;
+    position: relative;
+}
+
+.details-list li span {
+    display: block;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.details-list li i {
+    position: absolute;
+    top: 5px;
+    left: -40px;
+}
+
+.home-desc {
+    max-width: 700px;
+    margin-bottom: 50px;
+}
+
+.map {
+    margin: 50px 0;
+}
+
+.map iframe {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.map h3 {
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.map b {
+    display: block;
+    margin-bottom: 16px;
+}
+
+.host {
+    display: flex;
+    align-items: center;
+}
+
+.host img {
+    width: 80px;
+    border-radius: 50%;
+    margin-right: 30px;
+}
+
+.host h2 {
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.host i {
+    color: #ff5361;
+}
+
+.contact-host {
+    display: inline-block;
+    margin: 40px 0 40px 120px;
+    text-decoration: none;
+    color: #555;
+    padding: 15px 50px;
+    border: 1px solid #ff5361;
+    border-radius: 8px;
+}
+
+.flatpickr-input{
+    border: 1px solid #ff5361;
+    outline: none;
+    color: #555;
+    padding: 10px;
+    width: 200px;
+    border-radius: 8px;
+    font-size: 24px;
+    text-align: center;
+    margin-right: 150px;
+}
+
+.btn-reserv{
+    background: #ff5361;
+    border: 0;
+    outline: none;
+    color: #fff;
+    padding: 18px;
+    width: 350px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+    margin-left: 100px;
+}
+
+.flatpickr-day{
+    color: #000;
+    font-weight: 500;
+}
+
+.flatpickr-day.flatpickr-disabled{
+    /* background: #f7a8af; */
+    color: gray;
+    text-decoration: line-through;
+    text-decoration-color: #ff5361;
+    text-decoration-thickness: 1px;
+    font-weight: 400;
+}
+
+/* ----------media query for hous details page---------- */
