@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 
 
-{% block title %}
-Личный кабинет
-{% endblock %}
 
 {% block content %}
 
@@ -41,4 +38,16 @@
   {% endif %}
 </nav>
 
+
+<div class="container">
+  {% for reserv in reside|dictsort:"start_date" %}
+  {{ reserv.name_reserv }}
+  <br>
+  {{ reserv.start_date }}
+  {{ reserv.end_date }}
+  <br>
+  <br>
+  {% endfor %}
+</div>
+  
 {% endblock %}
