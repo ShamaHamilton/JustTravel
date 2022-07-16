@@ -24,18 +24,32 @@ class CreateRoomForm(ModelForm):
 class ReservationForm(forms.ModelForm):
     """Форма для резервирования жилья."""
     start_date = forms.DateField(
-        label='прибытие',
+        label='Прибытие',
+        help_text='дата прибытия',
         widget=forms.DateInput(
             format='%d-%m-%Y',
-            attrs={'type': 'date_in'},
+            attrs={
+                'type': 'date_in',
+                'placeholder': 'Укажите дату',
+            },
         ),
     )
     end_date = forms.DateField(
-        label='выезд',
+        label='Выезд',
         widget=forms.DateInput(
             format='%d-%m-%Y',
-            attrs={'type': 'date_out'},
+            attrs={
+                'type': 'date_out',
+                'placeholder': 'Укажите дату',
+            },
         ),
+    )
+    guests = forms.IntegerField(
+        label='Гостей',
+        help_text='количество гостей',
+        widget=forms.NumberInput(
+            attrs={'placeholder': 'Гостей'}
+        )
     )
 
     class Meta:

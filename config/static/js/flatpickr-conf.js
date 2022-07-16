@@ -5,9 +5,9 @@ config1 = {
     dateFormat: "d.m.Y",
     minDate: "today",
     disable: value1,
-    onOpen: function (selectedDates, dateStr, instance) {
-        endPicker.open();
-    },
+    // onOpen: function () {
+    //     endPicker.open();
+    // },
 }
 // Выезд-настройки
 const value2 = JSON.parse(document.getElementById('value2').textContent);
@@ -16,9 +16,9 @@ config2 = {
     dateFormat: "d.m.Y",
     minDate: "today",
     disable: value2,
-    onOpen: function (selectedDates, dateStr, instance) {
-        startPicker.open();
-    },
+    // onOpen: function () {
+    //     startPicker.open();
+    // },
 }
 startPicker = flatpickr("input[type=date_in]", config1);
 endPicker = flatpickr("input[type=date_out]", config2);

@@ -75,9 +75,25 @@ class RoomsApplicationModel(models.Model):
         blank=True,
     )
     # шаг 5: Сколько гостей вы готовы принять?
-    number_of_guests = models.CharField(
+    guests = models.IntegerField(
         verbose_name='сколько гостей вы готовы принять?',
-        max_length=10,
+        blank=True,
+    )
+    beds = models.IntegerField(
+        verbose_name='сколько у вас кроватей?',
+        blank=True,
+    )
+    BATHROOM_CHOICES = (
+        ('отдельная ванная', 'отдельная ванная'),
+        ('отдельная душевая', 'отдельная душевая'),
+        ('общая ванная', 'общая ванная'),
+        ('общая душевая', 'общая душевая'),
+        ('отсутствует', 'отсутствует'),
+    )
+    bathroom = models.CharField(
+        verbose_name='какая у вас ванная комната?',
+        max_length=17,
+        choices=BATHROOM_CHOICES,
         blank=True,
     )
     # шаг 6: Удобства/Преимущества
@@ -128,13 +144,13 @@ class RoomsApplicationModel(models.Model):
         blank=True,
     )
     # шаг 8: Придумайте яркий заголовок (название) жилья
-    housing_header = models.CharField(
+    header = models.CharField(
         verbose_name='придумайте яркое название жилья',
         max_length=50,
         blank=True,
     )
     # шаг 9: Опишите жилье
-    housing_description = models.TextField(
+    description = models.TextField(
         verbose_name='описание жилья',
         max_length=500,
         blank=True,
@@ -153,7 +169,9 @@ class RoomsApplicationModel(models.Model):
         'housing_type',
         'offer_type',
         'location',
-        'number_of_guests',
+        'guests',
+        'beds',
+        'bathroom',
         'photo1',
         'photo2',
         'photo3',
@@ -177,7 +195,7 @@ class RoomsApplicationModel(models.Model):
         elif stage == constants.STAGE_4:
             fields.extend(['location'])
         elif stage == constants.STAGE_5:
-            fields.extend(['number_of_guests'])
+            fields.extend(['guests', 'beds', 'bathroom'])
         elif stage == constants.STAGE_6:
             fields.extend(['special_amenities', 'popular_amenities', 'safety'])
         elif stage == constants.STAGE_7:

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 {{ room_details.housing_header }}
 {% endblock %}
@@ -9,16 +11,18 @@
 <div class="house-details">
 
   <div class="house-title">
-    <h1>{{ room_details.housing_header }}</h1>
-    <div>
-      <i class="fa-solid fa-star"></i>
-      <i class="fa-solid fa-star"></i>
-      <i class="fa-solid fa-star"></i>
-      <i class="fa-solid fa-star-half-alt"></i>
-      <i class="fa-regular fa-star"></i>
-      <span>Просмотров: {{ room_details.views }}</span>
+    <h1>{{ room_details.header }}</h1>
+    <div class="row">
       <div>
-        <p>{{ room_details.location }}</p>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star-half-alt"></i>
+        <i class="fa-regular fa-star"></i>
+        <span>Просмотров: {{ room_details.views }}</span>
+      </div>
+      <div>
+        <p>Расположение: {{ room_details.location }}</p>
       </div>
     </div>
   </div>
@@ -43,29 +47,42 @@
 
   <div class="small-details">
     <h2>Хозяин объекта {{ room_details.landlord.get_short_name }}</h2>
-    <p>Гостей: 1 &nbsp; &nbsp; Кровати: 2 &nbsp; &nbsp; Ванная: 1</p>
-    <h4>{{ room_details.price }} р / день</h4>
+    <p>
+      Гостей: {{ room_details.guests }} &nbsp; &nbsp;
+      Кровати: {{ room_details.beds }} &nbsp; &nbsp;
+      Ванная: {{ room_details.bathroom }}
+    </p>
+    <h4>{{ room_details.price }} р / ночь</h4>
   </div>
 
   <hr class="line">
 
-  <form class="check-form">
+  <form class="check-form" method="post">
+    {% csrf_token %}
+    {% if request.user.is_authenticated %}
     <div>
-      <label>Прибытие</label>
-      <input type="text" placeholder="Укажите дату">
+      <label for="{{ room_reserv.start_date.id_for_label }}">
+        {{ room_reserv.start_date.label }}
+      </label>
+      {{ room_reserv.start_date }}
     </div>
     <div>
-      <label>Выезд</label>
-      <input type="text" placeholder="Укажите дату">
+      <label for="{{ room_reserv.end_date.id_for_label }}">
+        {{ room_reserv.end_date.label }}
+      </label>
+      {{ room_reserv.end_date }}
     </div>
     <div class="guest-field">
-      <label>Гостей</label>
-      <input type="text" placeholder="2 Гостя">
+      <label for="{{ room_reserv.guests.id_for_label }}">
+        {{ room_reserv.guests.label }}
+      </label>
+      {{ room_reserv.guests }}
     </div>
     <button type="submit">Забронировать</button>
+    {% endif %}
   </form>
 
-  <ul class="details-list">
+  <!-- <ul class="details-list">
     <li><i class="fa-solid fa-house-chimney"></i>Entire Home
       <span>You will have the entire flat for you.</span>
     </li>
@@ -78,15 +95,12 @@
     <li><i class="fa-solid fa-heart"></i>Great Check-in Experience
       <span>100% of recent guests gave the check-in process a 5 star rating.</span>
     </li>
-  </ul>
+  </ul> -->
 
   <hr class="line">
 
-  <p class="home-desc">Guests will be allocated on the ground floor according to availability. You get a
-    comfortable Two bedroom apartment has a true city feeling. The price quoted is for
-    two guest, at the guest slot please mark the number of guests to get the exact price
-    for groups. The Guests will be allocated ground floor according to availability. You
-    get the comfortable two bedroom apartment that has a true city feeling.
+  <p class="home-desc">
+    {{ room_details.description }}
   </p>
 
   <hr class="line">
@@ -105,10 +119,10 @@
   <hr class="line">
 
   <div class="host">
-    <img src="#">
+    <img src="{% static 'images/user-regular.svg' %}">
     <div>
-      <h2>Владелец жилья {{ room_details.landlord }}</h2>
-      <p>
+      <h2>Владелец {{ room_details.landlord.get_short_name }}</h2>
+      <!-- <p>
         <span>
           <i class="fa-solid fa-star"></i>
           <i class="fa-solid fa-star"></i>
@@ -119,23 +133,9 @@
         &nbsp; &nbsp; 245 reviews
         &nbsp; &nbsp; Response rate 100%
         &nbsp; &nbsp; Response time: 60 min
-      </p>
+      </p> -->
+      <a href="#" class="contact-host">Связаться с владельцем</a>
     </div>
-  </div>
-  <a href="#" class="contact-host">Contact Host</a>
-
-  <br>
-  ------------------------------------------------
-  <div>
-    <form method="post">
-      {% csrf_token %}
-      {% if request.user.is_authenticated %}
-      {{ room_reserv.start_date }}
-      {{ room_reserv.end_date }}
-      {% endif %}
-      <br>
-      <button type="submit" class="btn-reserv">Зарезервировать</button>
-    </form>
   </div>
 
 </div>
