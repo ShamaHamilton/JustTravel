@@ -8,25 +8,25 @@
   {% if request.user.is_authenticated %}
   <ul class="nav-links">
     <li>
-      <a href="{% url 'accounts:landlord_leaving' %}">
+      <a href="{% url 'landlord:leaving' %}">
         Выезжают: ({{ leaving|length }})
       </a>
     </li>
 
     <li>
-      <a href="{% url 'accounts:landlord_reside' %}">
+      <a href="{% url 'landlord:reside' %}">
         Проживают: ({{ reside|length }})
       </a>
     </li>
 
     <li>
-      <a href="{% url 'accounts:landlord_will_arrive_soon' %}">
+      <a href="{% url 'landlord:will_arrive_soon' %}">
         Скоро приедут: ({{ will_arrive_soon|length }})
       </a>
     </li>
 
     <li>
-      <a href="{% url 'accounts:landlord_upcoming' %}">
+      <a href="{% url 'landlord:upcoming' %}">
         Предстоящие: ({{ upcoming|length }})
       </a>
     </li>
@@ -40,7 +40,7 @@
 
 
 <div class="container">
-  {% for reserv in upcoming|dictsort:"start_date" %}
+  {% for reserv in reside|dictsort:"start_date" %}
   {{ reserv.name_reserv }}
   <br>
   {{ reserv.start_date }}

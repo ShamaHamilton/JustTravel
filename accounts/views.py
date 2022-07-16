@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 
 from .forms import UserRegisterForm, UserLoginForm
-from accounts.functions.account_func import get_reservs_list, get_landlord_list
+from accounts.functions.account_func import get_reservs_list
 
 
 def user_register(request):
@@ -46,8 +46,7 @@ def user_logout(request):
 def user_account(request):
     """Личный кабинет пользователя."""
     if request.user.rents_apartment:
-        context = get_landlord_list(request)
-        return render(request, 'accounts/account_landlord.html', context)
+        return redirect(reverse('landlord:account'))
     else:
         context = get_reservs_list(request)
         return render(request, 'accounts/account.html', context)
@@ -66,27 +65,3 @@ def user_inactive_reservs(request):
 def user_canceled_reservs(request):
     context = get_reservs_list(request)
     return render(request, 'accounts/canceled.html', context)
-
-
-def landlord_leaving(request):
-    """Выезжают."""
-    context = get_landlord_list(request)
-    return render(request, 'accounts/leaving.html', context)
-
-
-def landlord_reside(request):
-    """Проживают."""
-    context = get_landlord_list(request)
-    return render(request, 'accounts/reside.html', context)
-
-
-def landlord_will_arrive_soon(request):
-    """Скоро приедут."""
-    context = get_landlord_list(request)
-    return render(request, 'accounts/will_arrive_soon.html', context)
-
-
-def landlord_upcoming(request):
-    """Предстоящие."""
-    context = get_landlord_list(request)
-    return render(request, 'accounts/upcoming.html', context)

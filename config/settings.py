@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts.apps.AccountsConfig',
+    'landlord.apps.LandlordConfig',
     'blogs.apps.BlogsConfig',
     'rooms.apps.RoomsConfig',
     'debug_toolbar',
