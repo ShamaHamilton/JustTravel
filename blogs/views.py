@@ -1,8 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from django.db.models import F
 
-from .models import Localities, LocalityImages, InterestingPlaces
+from .models import Localities, LocalityImages, InterestingPlaces, PlaceImages
 from rooms.models import RoomsApplicationModel
 
 
@@ -27,7 +25,7 @@ def localities_view(request):
     }
     return render(request, 'blogs/locality_list.html', context)
 
-
+# ! Добавить счетчик просмотров.
 def locality_detail_view(request, slug):
     locality = Localities.objects.get(slug=slug)
     images = LocalityImages.objects.filter(category_id=locality.pk)
@@ -38,44 +36,20 @@ def locality_detail_view(request, slug):
     return render(request, 'blogs/locality_detail.html', context)
 
 
-# class LocalitiesDetailView(DetailView):
-#     model = Localities
-#     template_name = 'blogs/locality_detail.html'
-#     context_object_name = 'locality'
-
-#     def get_context_data(self, **kwargs):
-#         """Метод для вывода динамичных данных."""
-#         context = super().get_context_data(**kwargs)
-#         self.object.views = F('views') + 1
-#         self.object.save()
-#         self.object.refresh_from_db()
-#         return context
-
-class InterestingPlacesView(ListView):
-    model = InterestingPlaces
-    template_name = 'blogs/places_list.html'
-    context_object_name = 'places_list'
-
-    def get_context_data(self, **kwargs):
-        """Метод для вывода динамичных данных."""
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Главная'
-        return context
-
-    def get_queryset(self):
-        """Метод фильтрации объекта по условию."""
-        return InterestingPlaces.objects.filter(is_published=True)
+def places_view(request):
+    places_list = InterestingPlaces.objects.filter(is_published=True)
+    context = {
+        'places_list': places_list,
+    }
+    return render(request, 'blogs/places_list.html', context)
 
 
-class InterestingPlacesDetailView(DetailView):
-    model = InterestingPlaces
-    template_name = 'blogs/places_detail.html'
-    context_object_name = 'place'
-
-    def get_context_data(self, **kwargs):
-        """Метод для вывода динамичных данных."""
-        context = super().get_context_data(**kwargs)
-        self.object.views = F('views') + 1
-        self.object.save()
-        self.object.refresh_from_db()
-        return context
+# ! Добавить счетчик просмотров.
+def place_detail_view(request, slug):
+    place = InterestingPlaces.objects.get(slug=slug)
+    images = PlaceImages.objects.filter(category_place_id=place.pk)
+    context = {
+        'place': place,
+        'images': images,
+    }
+    return render(request, 'blogs/place_detail.html', context)

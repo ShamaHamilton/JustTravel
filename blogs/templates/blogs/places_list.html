@@ -11,8 +11,8 @@
     <div class="container-left-col">
       <div class="object">
         <div class="object-img">
-          {% if place %}
-          <img src="{{ place.photo.url }}">
+          {% if place.image_place %}
+          <img src="{{ place.image_place.photo.url }}">
           {% endif %}
         </div>
         <div class="object-info">

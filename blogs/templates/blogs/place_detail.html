@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 
+{% block title %}
+{{ place.title }}
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
-  {{ locality.title }}
+  {{ place.title }}
   <br>
   <br>
   <div class="row justify-content-center">
@@ -16,10 +20,11 @@
     {% endif %}
   </div>
   <br>
-  {{ locality.content }}
+  {{ place.content }}
   <br>
+  {{ place.created_at }}
   <br>
-  {{ locality.created_at }}
+  <span>Кол. просмотров: {{ place.views }}</span>
 </div>
 
 {% endblock %}

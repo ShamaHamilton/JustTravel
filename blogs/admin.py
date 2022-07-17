@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Localities, LocalityImages, InterestingPlaces
+from .models import Localities, LocalityImages, InterestingPlaces, PlaceImages
 
 
 class LocalitiesAdmin(admin.ModelAdmin):
@@ -21,13 +21,15 @@ class LocalitiesAdmin(admin.ModelAdmin):
         'title',
         'slug',
         'content',
-        'photo',
         'created_at',
         'updated_at',
         'is_published',
         'views',
     )
     readonly_fields = ('created_at', 'updated_at', 'views')
+
+
+admin.site.register(Localities, LocalitiesAdmin)
 
 
 class InterestingPlacesAdmin(admin.ModelAdmin):
@@ -50,7 +52,6 @@ class InterestingPlacesAdmin(admin.ModelAdmin):
         'slug',
         'category',
         'content',
-        'photo',
         'created_at',
         'updated_at',
         'is_published',
@@ -60,7 +61,6 @@ class InterestingPlacesAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
-admin.site.register(Localities, LocalitiesAdmin)
 admin.site.register(InterestingPlaces, InterestingPlacesAdmin)
 
 
@@ -80,3 +80,21 @@ class LocalityImagesAdmin(admin.ModelAdmin):
 
 
 admin.site.register(LocalityImages, LocalityImagesAdmin)
+
+
+class PlaceImagesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'category_place', 'get_photo',)
+    list_display_links = ('category_place',)
+    search_fields = ('category_place',)
+    list_filter = ('category_place',)
+    fields = ('category_place', 'get_photo', 'photo',)
+    readonly_fields = ('get_photo',)
+
+    def get_photo(self, obj):
+        if obj.photo:
+            return mark_safe(f'<img src="{obj.photo.url}" width="75">')
+
+    get_photo.short_description = 'миниатюра'
+
+
+admin.site.register(PlaceImages, PlaceImagesAdmin)

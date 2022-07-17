@@ -43,7 +43,6 @@ class Localities(models.Model):
 
     # TODO: добавить метку на карте
 
-
     def get_absolute_url(self):
         """Возвращает URL объекта Localities."""
         return reverse('blogs:locality', kwargs={'slug': self.slug})
@@ -74,15 +73,13 @@ class LocalityImages(models.Model):
         upload_to=localities_photo_upload_to,
     )
 
+    def __str__(self):
+        return self.category.title
+
     class Meta:
-        verbose_name = 'изображение населенных пунктов'
+        verbose_name = 'изображение населенного пункта'
         verbose_name_plural = 'изображения населенных пунктов'
         ordering = ['category']
-
-
-def intresting_place_photo_upload_to(instance, filename):
-    """Динамический путь для сохранения изображений интересных мест."""
-    return f'photos/{instance.category}/{instance.title}/{filename}'
 
 
 class InterestingPlaces(models.Model):
@@ -100,11 +97,6 @@ class InterestingPlaces(models.Model):
     )
     content = models.TextField(
         verbose_name='содержание',
-        blank=True,
-    )
-    photo = models.ImageField(
-        verbose_name='изображение',
-        upload_to=intresting_place_photo_upload_to,
         blank=True,
     )
     created_at = models.DateTimeField(
@@ -143,3 +135,30 @@ class InterestingPlaces(models.Model):
         verbose_name = 'интересное место'
         verbose_name_plural = 'интересные места'
         ordering = ['title']
+
+
+def intresting_place_photo_upload_to(instance, filename):
+    """Динамический путь для сохранения изображений интересных мест."""
+    return f'photos/{instance.category_place.category}/{instance.category_place.title}/{filename}'
+
+
+class PlaceImages(models.Model):
+    category_place = models.ForeignKey(
+        InterestingPlaces,
+        on_delete=models.CASCADE,
+        verbose_name='место',
+        related_name='image_place',
+    )
+    photo = models.ImageField(
+        verbose_name='изображение',
+        upload_to=intresting_place_photo_upload_to,
+        blank=True,
+    )
+
+    def __str__(self):
+        return self.category_place.title
+
+    class Meta:
+        verbose_name = 'изображение интересного места'
+        verbose_name_plural = 'изображения интересных мест'
+        ordering = ['category_place']
