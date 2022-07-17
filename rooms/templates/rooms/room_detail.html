@@ -29,19 +29,39 @@
 
   <div class="gallery">
     {% if room_details.photo1 %}
-    <div class="gallery-img-1"><img src="{{ room_details.photo1.url }}"></div>
+    <div class="gallery-img-1">
+      <a href="{{ room_details.photo1.url }}" data-lightbox="room_imgs">
+        <img src="{{ room_details.photo1.url }}">
+      </a>
+    </div>
     {% endif %}
     {% if room_details.photo2 %}
-    <div><img src="{{ room_details.photo2.url }}"></div>
+    <div>
+      <a href="{{ room_details.photo2.url }}" data-lightbox="room_imgs">
+        <img src="{{ room_details.photo2.url }}">
+      </a>
+    </div>
     {% endif %}
     {% if room_details.photo3 %}
-    <div><img src="{{ room_details.photo3.url }}"></div>
+    <div>
+      <a href="{{ room_details.photo3.url }}" data-lightbox="room_imgs">
+        <img src="{{ room_details.photo3.url }}">
+      </a>
+    </div>
     {% endif %}
     {% if room_details.photo4 %}
-    <div><img src="{{ room_details.photo4.url }}"></div>
+    <div>
+      <a href="{{ room_details.photo4.url }}" data-lightbox="room_imgs">
+        <img src="{{ room_details.photo4.url }}">
+      </a>
+    </div>
     {% endif %}
     {% if room_details.photo5 %}
-    <div><img src="{{ room_details.photo5.url }}"></div>
+    <div>
+      <a href="{{ room_details.photo5.url }}" data-lightbox="room_imgs">
+        <img src="{{ room_details.photo5.url }}">
+      </a>
+    </div>
     {% endif %}
   </div>
 

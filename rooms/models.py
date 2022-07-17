@@ -218,7 +218,7 @@ class RoomsApplicationModel(models.Model):
                     break
 
     def __str__(self):
-        return self.housing_header
+        return self.header
 
     def get_absolute_url(self):
         return reverse('rooms:room_detail', kwargs={'pk': self.pk})
