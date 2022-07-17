@@ -11,9 +11,11 @@
     <div class="container-left-col">
       <div class="object">
         <div class="object-img">
-          {% if place.image_place %}
-          <img src="{{ place.image_place.photo.url }}">
-          {% endif %}
+          {% for image in place.image.all %}
+            {% if forloop.counter0 < 1 %}
+              <img src="{{ image.photo.url }}">
+            {% endif %}
+          {% endfor %}
         </div>
         <div class="object-info">
           <h3>{{ place.title }}</h3>

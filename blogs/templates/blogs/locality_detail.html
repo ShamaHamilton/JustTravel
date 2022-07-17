@@ -7,8 +7,8 @@
   <br>
   <br>
   <div class="row justify-content-center">
-    {% if images %}
-    {% for image in images %}
+    {% if locality.image %}
+    {% for image in locality.image.all %}
     <a href="{{ image.photo.url }}" data-lightbox="gallery-imgs">
       <img src="{{ image.photo.url }}" class="gallery-img">
     </a>

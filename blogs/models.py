@@ -147,7 +147,7 @@ class PlaceImages(models.Model):
         InterestingPlaces,
         on_delete=models.CASCADE,
         verbose_name='место',
-        related_name='image_place',
+        related_name='image',
     )
     photo = models.ImageField(
         verbose_name='изображение',

@@ -64,9 +64,11 @@
       {% for place in places_view %}
       <a href="{{ place.get_absolute_url }}">
         <div>
-          {% if place.photo %}
-          <img src="{{ place.photo.url }}" alt="">
-          {% endif %}
+          {% for image in place.image.all %}
+            {% if forloop.counter0 < 1 %}
+              <img src="{{ image.photo.url }}">
+            {% endif %}
+          {% endfor %}
           <span>
             <h3>{{ place.title }}</h3>
             <p>{{ place.category.title }}</p>
@@ -81,9 +83,11 @@
       {% for locality in localities_view %}
       <a href="{{ locality.get_absolute_url }}">
         <div>
-          {% if locality.photo %}
-          <img src="{{ locality.photo.url }}">
-          {% endif %}
+          {% for image in locality.image.all %}
+            {% if forloop.counter0 < 1 %}
+              <img src="{{ image.photo.url }}">
+            {% endif %}
+          {% endfor %}
           <h3>{{ locality.title }}</h3>
         </div>
       </a>
