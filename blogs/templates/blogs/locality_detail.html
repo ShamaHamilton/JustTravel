@@ -2,17 +2,22 @@
 
 {% block content %}
 
-  <div class="container">
-    {{ localities_item.title }}
-    <br>
-    {% if localities_item.photo %}
-    <img src="{{ localities_item.photo.url }}" alt="">
+<div class="container">
+  {{ locality.title }}
+  <div class="row justify-content-center">
+    {% if images %}
+    {% for image in images %}
+    <a href="{{ image.photo.url }}" data-lightbox="gallery-imgs">
+      <img src="{{ image.photo.url }}" class="img-fluid">
+    </a>
+    {% endfor %}
     {% endif %}
-    <br>
-    {{ localities_item.content }}
-    <br>
-    <br>
-    {{ localities_item.created_at }}
   </div>
+  <br>
+  {{ locality.content }}
+  <br>
+  <br>
+  {{ locality.created_at }}
+</div>
 
 {% endblock %}

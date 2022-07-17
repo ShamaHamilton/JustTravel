@@ -10,5 +10,5 @@ urlpatterns = [
     # path('locality/', LocalitiesView.as_view(), name='localities'),
     path('locality/', localities_view, name='localities'),
     path('<str:slug>/', InterestingPlacesDetailView.as_view(), name='place'),
-    path('locality/<str:slug>/', LocalitiesDetailView.as_view(), name='locality'),
+    path('locality/<str:slug>/', locality_detail_view, name='locality'),
 ]

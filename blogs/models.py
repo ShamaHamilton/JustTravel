@@ -2,11 +2,6 @@ from django.db import models
 from django.urls import reverse
 
 
-def localities_photo_upload_to(instance, filename):
-    """Динамический путь для сохранения изображений населенных пунктов."""
-    return f'photos/{instance.title}/{instance.title}/{filename}'
-
-
 class Localities(models.Model):
     """Населенные пункты."""
     title = models.CharField(
@@ -24,11 +19,11 @@ class Localities(models.Model):
         verbose_name='содержание',
         blank=True,
     )
-    photo = models.ImageField(
-        verbose_name='изображение',
-        upload_to=localities_photo_upload_to,
-        blank=True,
-    )
+    # photo = models.ImageField(
+    #     verbose_name='изображение',
+    #     upload_to=localities_photo_upload_to,
+    #     blank=True,
+    # )
     created_at = models.DateTimeField(
         verbose_name='дата создания',
         auto_now_add=True,
@@ -60,6 +55,29 @@ class Localities(models.Model):
         verbose_name = 'населенный пункт'
         verbose_name_plural = 'населенные пункты'
         ordering = ['title']
+
+
+def localities_photo_upload_to(instance, filename):
+    """Динамический путь для сохранения изображений населенных пунктов."""
+    return f'photos/{instance.category.title}/{instance.category.title}/{filename}'
+
+
+class LocalityImages(models.Model):
+    category = models.ForeignKey(
+        Localities,
+        on_delete=models.CASCADE,
+        verbose_name='населенный пункт',
+        related_name='image',
+    )
+    photo = models.ImageField(
+        verbose_name='изображение',
+        upload_to=localities_photo_upload_to,
+    )
+
+    class Meta:
+        verbose_name = 'изображение населенных пунктов'
+        verbose_name_plural = 'изображения населенных пунктов'
+        ordering = ['category']
 
 
 def intresting_place_photo_upload_to(instance, filename):

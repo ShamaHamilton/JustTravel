@@ -1,11 +1,8 @@
-from multiprocessing import context
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.db.models import F
 
-import rooms
-
-from .models import Localities, InterestingPlaces
+from .models import Localities, LocalityImages, InterestingPlaces
 from rooms.models import RoomsApplicationModel
 
 
@@ -21,41 +18,38 @@ def home(request):
     return render(request, 'blogs/home.html', context)
 
 
-# class LocalitiesView(ListView):
-#     model = Localities
-#     template_name = 'blogs/locality_list.html'
-#     context_object_name = 'localities_list'
-#     allow_empty = True
-
-#     def get_queryset(self):
-#         """Метод для фильтрации объектов по условию."""
-#         return Localities.objects.filter(is_published=True)
-
-
 def localities_view(request):
     localities_list = Localities.objects.filter(is_published=True)
     places_list = InterestingPlaces.objects.filter(is_published=True)
-    # places = localities_list.get(places)
     context = {
         'localities_list': localities_list,
         'places_list': places_list,
-        # 'places': places,
     }
     return render(request, 'blogs/locality_list.html', context)
 
 
-class LocalitiesDetailView(DetailView):
-    model = Localities
-    template_name = 'blogs/locality_detail.html'
-    context_object_name = 'localities_item'
+def locality_detail_view(request, slug):
+    locality = Localities.objects.get(slug=slug)
+    images = LocalityImages.objects.filter(category_id=locality.pk)
+    context = {
+        'locality': locality,
+        'images': images,
+    }
+    return render(request, 'blogs/locality_detail.html', context)
 
-    def get_context_data(self, **kwargs):
-        """Метод для вывода динамичных данных."""
-        context = super().get_context_data(**kwargs)
-        self.object.views = F('views') + 1
-        self.object.save()
-        self.object.refresh_from_db()
-        return context
+
+# class LocalitiesDetailView(DetailView):
+#     model = Localities
+#     template_name = 'blogs/locality_detail.html'
+#     context_object_name = 'locality'
+
+#     def get_context_data(self, **kwargs):
+#         """Метод для вывода динамичных данных."""
+#         context = super().get_context_data(**kwargs)
+#         self.object.views = F('views') + 1
+#         self.object.save()
+#         self.object.refresh_from_db()
+#         return context
 
 class InterestingPlacesView(ListView):
     model = InterestingPlaces
