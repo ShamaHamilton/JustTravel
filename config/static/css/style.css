@@ -105,16 +105,8 @@
     margin: 40px 0;
 }
 
-.pagination img {
-    width: 15px;
-    margin: 10px 20px;
-}
-
-.right-arrow {
-    transform: rotate(180deg);
-}
-
-.pagination span {
+.pagination li{
+    list-style-type: none;
     margin: 10px 8px;
     width: 40px;
     height: 40px;
@@ -124,8 +116,30 @@
     cursor: pointer;
 }
 
+.pagination a{
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination li .current {
+    background: #333;
+    color: #fff;
+}
+.pagination .current a {
+    color: #fff;
+}
+
+.pagination img {
+    width: 15px;
+    margin: 10px 20px;
+}
+
+.right-arrow {
+    transform: rotate(180deg);
+}
+
 /* ! добавить выделение в пагинатор */
-.pagination .current {
+.pagination .current{
     background: #333;
     color: #fff;
 }

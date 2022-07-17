@@ -80,6 +80,7 @@ class RoomsView(ListView):
     model = RoomsApplicationModel
     template_name = 'rooms/rooms_list.html'
     context_object_name = 'rooms_list'
+    paginate_by = 1
 
     def get_queryset(self):
         """Метод для фильтрации объектов по условию."""
