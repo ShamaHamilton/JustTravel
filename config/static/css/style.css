@@ -105,7 +105,7 @@
     margin: 40px 0;
 }
 
-.pagination li{
+.pagination li {
     list-style-type: none;
     margin: 10px 8px;
     width: 40px;
@@ -116,7 +116,7 @@
     cursor: pointer;
 }
 
-.pagination a{
+.pagination a {
     text-decoration: none;
     color: #333;
 }
@@ -125,6 +125,7 @@
     background: #333;
     color: #fff;
 }
+
 .pagination .current a {
     color: #fff;
 }
@@ -139,7 +140,7 @@
 }
 
 /* ! добавить выделение в пагинатор */
-.pagination .current{
+.pagination .current {
     background: #333;
     color: #fff;
 }
@@ -249,9 +250,9 @@
     display: block;
 }
 
-/* .check-form div {
+.check-form div {
     padding: 20px;
-} */
+}
 
 .check-form input {
     border: 1px solid #ff5361;
@@ -393,6 +394,58 @@
     cursor: pointer;
     margin: 10px;
     margin-left: 100px;
+}
+
+
+/* Checkbox stars */
+.rating {
+    overflow: hidden;
+    vertical-align: bottom;
+    display: inline-block;
+    width: 110px;
+    height: 20px;
+}
+
+.rating>input {
+    opacity: 0;
+    margin-right: -100%;
+}
+
+.rating>label {
+    position: relative;
+    display: block;
+    float: right;
+    background: url('../images/star-regular.svg');
+    background-size: 20px 20px;
+}
+
+.rating>label::before {
+    display: block;
+    opacity: 0;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: url('../images/star-on.png');
+    background-size: 20px 20px;
+    transition: opacity 0.2s linear;
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before,
+.rating:not(:hover)> :checked~label:before {
+    opacity: 1;
+}
+
+.review button {
+    background: #ff5361;
+    border: 0;
+    outline: none;
+    color: #fff;
+    padding: 18px;
+    width: 300px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 /* ----------media query for hous details page---------- */

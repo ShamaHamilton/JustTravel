@@ -1,4 +1,5 @@
 from distutils.command.upload import upload
+from tabnanny import verbose
 from . import constants
 from django.urls import reverse
 from django.db import models
@@ -8,9 +9,6 @@ import sys
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
-
-
-# from accounts.models import CustomCreateUser
 
 
 def rooms_photo_upload_to(instance, filename):
@@ -220,6 +218,10 @@ class RoomsApplicationModel(models.Model):
     def __str__(self):
         return self.header
 
+    def get_reviews(self):
+        """Возвращает список отзывов."""
+        return self.reviews_set.filter(status=True)
+
     def get_absolute_url(self):
         return reverse('rooms:room_detail', kwargs={'pk': self.pk})
 
@@ -273,9 +275,89 @@ class Reservation(models.Model):
         return reverse('rooms:room_reserv_details', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.apartment.housing_header
+        return self.apartment.housing
 
     class Meta:
         verbose_name = 'резерв жилья'
         verbose_name_plural = 'резерв жилья'
         ordering = ['created_at']
+
+
+class RatingStar(models.Model):
+    """Звезды оценки."""
+    value = models.SmallIntegerField('значение', default=0)
+
+    def __str__(self):
+        return f'{self.value}'
+
+    class Meta:
+        verbose_name = 'звезда оценки'
+        verbose_name_plural = 'звезды оценки'
+        ordering = ['-value']
+
+
+class Rating(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='пользователь',
+    )
+    apartment = models.ForeignKey(
+        RoomsApplicationModel,
+        on_delete=models.CASCADE,
+        verbose_name='жилье',
+    )
+    star = models.ForeignKey(
+        RatingStar,
+        on_delete=models.CASCADE,
+        verbose_name='звезда',
+    )
+    status = models.BooleanField(
+        default=True,
+        verbose_name='опубликован?'
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='дата создания',
+    )
+
+    def __str__(self):
+        return self.user_feedback.get_full_name()
+
+    class Meta:
+        verbose_name = 'оценка'
+        verbose_name_plural = 'оценки'
+
+
+class Reviews(models.Model):
+    """Отзывы."""
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='пользователь',
+    )
+    apartment = models.ForeignKey(
+        RoomsApplicationModel,
+        on_delete=models.CASCADE,
+        verbose_name='жилье',
+    )
+    review = models.TextField(
+        max_length=500,
+        verbose_name='отзыв',
+        blank=True,
+    )
+    status = models.BooleanField(
+        default=True,
+        verbose_name='опубликован?'
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='дата создания',
+    )
+
+    def __str__(self):
+        return f'{self.user_review} - {self.apartment}'
+
+    class Meta:
+        verbose_name = 'отзыв'
+        verbose_name_plural = 'отзывы'

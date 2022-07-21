@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-{{ room_details.housing_header }}
+{{ room.housing_header }}
 {% endblock %}
 
 {% block content %}
@@ -11,116 +11,99 @@
 <div class="house-details">
 
   <div class="house-title">
-    <h1>{{ room_details.header }}</h1>
+    <h1>{{ room.header }}</h1>
     <div class="row">
       <div>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star-half-alt"></i>
-        <i class="fa-regular fa-star"></i>
-        <span>Просмотров: {{ room_details.views }}</span>
+        <span>Оценка: {{ room.views }}</span>
+        <span>Просмотров: {{ room.views }}</span>
       </div>
       <div>
-        <p>Расположение: {{ room_details.location }}</p>
+        <p>Расположение: {{ room.location }}</p>
       </div>
     </div>
   </div>
 
   <div class="gallery">
-    {% if room_details.photo1 %}
+    {% if room.photo1 %}
     <div class="gallery-img-1">
-      <a href="{{ room_details.photo1.url }}" data-lightbox="room_imgs">
-        <img src="{{ room_details.photo1.url }}">
+      <a href="{{ room.photo1.url }}" data-lightbox="room_imgs">
+        <img src="{{ room.photo1.url }}">
       </a>
     </div>
     {% endif %}
-    {% if room_details.photo2 %}
+    {% if room.photo2 %}
     <div>
-      <a href="{{ room_details.photo2.url }}" data-lightbox="room_imgs">
-        <img src="{{ room_details.photo2.url }}">
+      <a href="{{ room.photo2.url }}" data-lightbox="room_imgs">
+        <img src="{{ room.photo2.url }}">
       </a>
     </div>
     {% endif %}
-    {% if room_details.photo3 %}
+    {% if room.photo3 %}
     <div>
-      <a href="{{ room_details.photo3.url }}" data-lightbox="room_imgs">
-        <img src="{{ room_details.photo3.url }}">
+      <a href="{{ room.photo3.url }}" data-lightbox="room_imgs">
+        <img src="{{ room.photo3.url }}">
       </a>
     </div>
     {% endif %}
-    {% if room_details.photo4 %}
+    {% if room.photo4 %}
     <div>
-      <a href="{{ room_details.photo4.url }}" data-lightbox="room_imgs">
-        <img src="{{ room_details.photo4.url }}">
+      <a href="{{ room.photo4.url }}" data-lightbox="room_imgs">
+        <img src="{{ room.photo4.url }}">
       </a>
     </div>
     {% endif %}
-    {% if room_details.photo5 %}
+    {% if room.photo5 %}
     <div>
-      <a href="{{ room_details.photo5.url }}" data-lightbox="room_imgs">
-        <img src="{{ room_details.photo5.url }}">
+      <a href="{{ room.photo5.url }}" data-lightbox="room_imgs">
+        <img src="{{ room.photo5.url }}">
       </a>
     </div>
     {% endif %}
   </div>
 
   <div class="small-details">
-    <h2>Хозяин объекта {{ room_details.landlord.get_short_name }}</h2>
+    <h2>Хозяин объекта {{ room.landlord.get_short_name }}</h2>
     <p>
-      Гостей: {{ room_details.guests }} &nbsp; &nbsp;
-      Кровати: {{ room_details.beds }} &nbsp; &nbsp;
-      Ванная: {{ room_details.bathroom }}
+      Гостей: {{ room.guests }} &nbsp; &nbsp;
+      Кровати: {{ room.beds }} &nbsp; &nbsp;
+      Ванная: {{ room.bathroom }}
     </p>
-    <h4>{{ room_details.price }} р / ночь</h4>
+    <h4>{{ room.price }} р / ночь</h4>
   </div>
 
   <hr class="line">
 
+  <!-- Резерв -->
   <form class="check-form" method="post">
     {% csrf_token %}
     {% if request.user.is_authenticated %}
     <div>
-      <label for="{{ room_reserv.start_date.id_for_label }}">
-        {{ room_reserv.start_date.label }}
+      <label for="{{ reserv.start_date.id_for_label }}">
+        {{ reserv.start_date.label }}
       </label>
-      {{ room_reserv.start_date }}
+      {{ reserv.start_date }}
     </div>
     <div>
-      <label for="{{ room_reserv.end_date.id_for_label }}">
-        {{ room_reserv.end_date.label }}
+      <label for="{{ reserv.end_date.id_for_label }}">
+        {{ reserv.end_date.label }}
       </label>
-      {{ room_reserv.end_date }}
+      {{ reserv.end_date }}
     </div>
     <div class="guest-field">
-      <label for="{{ room_reserv.guests.id_for_label }}">
-        {{ room_reserv.guests.label }}
+      <label for="{{ reserv.guests.id_for_label }}">
+        {{ reserv.guests.label }}
       </label>
-      {{ room_reserv.guests }}
+      {{ reserv.guests }}
     </div>
-    <button type="submit">Забронировать</button>
+    <button type="submit" name="reserv">Забронировать</button>
     {% endif %}
   </form>
-
-  <!-- <ul class="details-list">
-    <li><i class="fa-solid fa-house-chimney"></i>Entire Home
-      <span>You will have the entire flat for you.</span>
-    </li>
-    <li><i class="fa-solid fa-paintbrush"></i>Enhanced Clean
-      <span>This host has committed to staybnb's cleaning process</span>
-    </li>
-    <li><i class="fa-solid fa-location-dot"></i>Great Location
-      <span>90% of recent guests gave the location a 5 star reting.</span>
-    </li>
-    <li><i class="fa-solid fa-heart"></i>Great Check-in Experience
-      <span>100% of recent guests gave the check-in process a 5 star rating.</span>
-    </li>
-  </ul> -->
+  <!-- end Резерв -->
 
   <hr class="line">
 
   <p class="home-desc">
-    {{ room_details.description }}
+    {{ room.description }}
   </p>
 
   <hr class="line">
@@ -132,7 +115,7 @@
       width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
       referrerpolicy="no-referrer-when-downgrade">
     </iframe>
-    <b>{{ room_details.location }}</b>
+    <b>{{ room.location }}</b>
     <!-- <p></p> -->
   </div>
 
@@ -141,7 +124,7 @@
   <div class="host">
     <img src="{% static 'images/user-regular.svg' %}">
     <div>
-      <h2>Владелец {{ room_details.landlord.get_short_name }}</h2>
+      <h2>Владелец {{ room.landlord.get_short_name }}</h2>
       <!-- <p>
         <span>
           <i class="fa-solid fa-star"></i>
@@ -157,6 +140,52 @@
       <a href="#" class="contact-host">Связаться с владельцем</a>
     </div>
   </div>
+
+  <br>
+  <br>
+  ---------------------------------------------------------------------
+  <br>
+  <!-- Оценка -->
+  Оцените жилье
+  <form action="{% url 'rooms:add_rating' %}" method='post' name='rating'>
+    <b>Оценка:</b>
+    {% csrf_token %}
+    <input type="hidden" value='{{ room.id }}' name='apartment'>
+    <span class='rating'>
+      {% for k, v in star_form.fields.star.choices %}
+      <input id='rating{{ v }}' type="radio" name='star' value='{{ k }}'>
+      <label for="rating{{ v }}">
+        {{ k }}
+      </label>
+      {% endfor %}
+    </span>
+    <span>5.0</span>
+    </a>
+  </form>
+  <!-- end Оценка -->
+
+  <!-- Отзыв -->
+  Оставьте отзыв
+  <form action="{% url 'rooms:add_review' room.id %}" method='post' class='review'>
+    <b>Отзыв:</b>
+    {% csrf_token %}
+    <div class="review-text">
+      <label for="{{ review_form.review.id_for_label }}"></label>
+      {{ review_form.review }}
+    </div>
+    <button type="submit" name="add_review">Отправить</button>
+  </form>
+  <!-- end Отзыв -->
+
+  <!-- Список отзывов -->
+  {% for review in room.get_reviews %}
+  <div>
+    <h5>{{ review.user }}</h5>
+    <p>{{ review.review }}</p>
+  </div>
+  <br>
+  {% endfor %}
+  <!-- end Список отзывов -->
 
 </div>
 <!-- Передача зарезервированных дат в JS для блокирования доступа в календаре -->

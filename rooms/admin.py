@@ -1,7 +1,10 @@
 from django.contrib import admin
 from django import forms
 
-from .models import RoomsApplicationModel, Reservation
+from .models import (
+    RoomsApplicationModel, Reservation,
+    RatingStar, Rating, Reviews
+)
 
 
 class RoomCreationForm(forms.ModelForm):
@@ -120,6 +123,7 @@ class ReservationForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('created_at',)
 
+
 class ReservationAdmin(admin.ModelAdmin):
     """Форма для добавления и изменения пользовательских экземпляров."""
     list_display = (
@@ -149,3 +153,36 @@ class ReservationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Reservation, ReservationAdmin)
+
+
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+    """Оценки."""
+    list_display = ('star', 'apartment', 'user', 'status')
+
+
+@admin.register(Reviews)
+class ReviewsAdmin(admin.ModelAdmin):
+    """Отзывы."""
+    list_display = (
+        'id',
+        'user',
+        'apartment',
+        'review',
+        'status',
+        'created_at',
+    )
+    list_display_links = ('id', 'user',)
+    search_fields = ('apartment',)
+    list_filter = ('apartment',)
+    fields = (
+        'user',
+        'apartment',
+        'review',
+        'status',
+        'created_at',
+    )
+    readonly_fields = ('created_at',)
+
+
+admin.site.register(RatingStar)
