@@ -14,11 +14,22 @@
     <h1>{{ room.header }}</h1>
     <div class="row">
       <div>
-        <span>Оценка: {{ room.views }}</span>
+        <p><i class="fa-solid fa-star"></i>
+          {% if room.get_ratings.star__avg %}
+            {{ room.get_ratings.star__avg|floatformat:2 }}
+          {% else %}
+            <b>Новое</b>
+          {% endif %}
+        </p>
+      </div>
+      <div>
+        <span>Отзывов: {{ room.get_reviews.count }}</span>
+      </div>
+      <div>
         <span>Просмотров: {{ room.views }}</span>
       </div>
       <div>
-        <p>Расположение: {{ room.location }}</p>
+        <span>Расположение: {{ room.location }}</span>
       </div>
     </div>
   </div>
@@ -76,7 +87,6 @@
   <!-- Резерв -->
   <form class="check-form" method="post">
     {% csrf_token %}
-    {% if request.user.is_authenticated %}
     <div>
       <label for="{{ reserv.start_date.id_for_label }}">
         {{ reserv.start_date.label }}
@@ -96,7 +106,6 @@
       {{ reserv.guests }}
     </div>
     <button type="submit" name="reserv">Забронировать</button>
-    {% endif %}
   </form>
   <!-- end Резерв -->
 

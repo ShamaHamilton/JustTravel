@@ -19,11 +19,13 @@
           <p>Расположение: {{ item.location }}</p>
           <h3>{{ item.housing_header }}</h3>
           <p>1 Bedroom / 1 Bathroom / Wifi / Kitchen</p>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star-half-alt"></i>
-          <i class="fa-regular fa-star"></i>
+          <p><i class="fa-solid fa-star"></i>
+            {% if item.get_ratings.star__avg %}
+              {{ item.get_ratings.star__avg|floatformat:2 }}
+            {% else %}
+              <b>Новое</b>
+            {% endif %}
+          </p>
           <div class="object-price">
             <p>{{ item.number_of_guests }} Гость</p>
             <h4>{{ item.price }} р <span>/ ночь</span></h4>

@@ -91,10 +91,10 @@ class RoomsView(ListView):
 def room_detail_view(request, pk):
     """Функция для просмотра жилья."""
     room = RoomsApplicationModel.objects.get(pk=pk)
-    # Извлечение броней связанных с данных жильем
+    # Извлечение броней связанных с данным жильем
     reservs = Reservation.objects.filter(apartment_id=room.pk)
-    reserv_days_in = []      # Список дат для блокировки
-    reserv_days_out = []     # Список дат для брокировки
+    reserv_days_in = []      # Список занятых дат прибытия
+    reserv_days_out = []     # Список занятых дат выезда
     # Извлечение списка зарезервированных дат для передачи в календарь
     for reserv in reservs:
         if reserv.end_date >= date.today() and reserv.status:
@@ -153,6 +153,7 @@ def room_detail_view(request, pk):
 #         context = super().get_context_data(**kwargs)
 #         context['reserv'] = ReservationForm()
 #         context['star_form'] = RatingForm()
+#         context['review_form'] = ReviewForm()
 #         return context
 
 

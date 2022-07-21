@@ -1,8 +1,8 @@
-from distutils.command.upload import upload
-from tabnanny import verbose
 from . import constants
+
 from django.urls import reverse
 from django.db import models
+from django.db.models import Avg
 import hashlib
 import random
 import sys
@@ -222,6 +222,10 @@ class RoomsApplicationModel(models.Model):
         """Возвращает список отзывов."""
         return self.reviews_set.filter(status=True)
 
+    def get_ratings(self):
+        """Возвращает список оценок."""
+        return self.rating_set.filter(status=True).aggregate(Avg('star'))
+
     def get_absolute_url(self):
         return reverse('rooms:room_detail', kwargs={'pk': self.pk})
 
@@ -322,7 +326,7 @@ class Rating(models.Model):
     )
 
     def __str__(self):
-        return self.user_feedback.get_full_name()
+        return self.user.get_full_name()
 
     class Meta:
         verbose_name = 'оценка'

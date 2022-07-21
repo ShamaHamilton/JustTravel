@@ -415,7 +415,7 @@
     position: relative;
     display: block;
     float: right;
-    background: url('../images/star-regular.svg');
+    background: url('../images/star-off.png');
     background-size: 20px 20px;
 }
 

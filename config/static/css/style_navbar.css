@@ -19,8 +19,9 @@ nav {
     font-size: 24px;
     color: #ff5361;
 }
+
 .nav-links li,
-.nav-btn li{
+.nav-btn li {
     list-style: none;
     display: inline-block;
     margin: 10px 30px;
@@ -64,9 +65,10 @@ nav.navbar-white .fa-bars {
 }
 
 /* Кнопка выпадающего меню при наведении и фокусировке */
-.fa-bars:hover,
-.fa-bars:focus {
+nav.navbar-white .fa-bars:hover,
+nav.navbar-white .fa-bars:focus {
     background-color: #ff5361;
+    color: #fff;
 }
 
 /* Контейнер <div> - необходим для размещения выпадающего содержимого */
