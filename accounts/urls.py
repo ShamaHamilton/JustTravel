@@ -3,6 +3,7 @@ from django.urls import path
 from .views import (
     user_register, user_login, user_logout, user_account,
     user_active_reservs, user_inactive_reservs, user_canceled_reservs,
+    personal_data
 )
 
 app_name = 'accounts'
@@ -15,4 +16,5 @@ urlpatterns = [
     path('active/', user_active_reservs, name='user_active_reservs'),
     path('inactive/', user_inactive_reservs, name='user_inactive_reservs'),
     path('canceled/', user_canceled_reservs, name='user_canceled_reservs'),
+    path('personal-data/', personal_data, name='personal_data'),
 ]

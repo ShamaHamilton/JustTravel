@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 
 
-{% block title %}
-Личный кабинет
-{% endblock %}
-
 {% block content %}
 
 <nav id="navBar" class="navbar-white">
@@ -36,9 +32,15 @@
 
   </ul>
   <ul class='nav-btn'>
-    <li><a href="{% url 'accounts:personal_data' %}">Личные данные</a></li>
+    <li><a href="{% url 'landlord:personal_data' %}">Личные данные</a></li>
   </ul>
   {% endif %}
 </nav>
 
-{% endblock %}
+<div class="container">
+  {{ user }} <br>
+  {{ user.phone }} <br>
+  {{ user.email }} <br>
+</div>
+
+{% endblock content %}

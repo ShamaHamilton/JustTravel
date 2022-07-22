@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import login, logout
 from django.contrib import messages
 
+from .models import CustomUser
 from .forms import UserRegisterForm, UserLoginForm
 from accounts.functions.account_func import get_reservs_list
 
@@ -65,3 +66,8 @@ def user_inactive_reservs(request):
 def user_canceled_reservs(request):
     context = get_reservs_list(request)
     return render(request, 'accounts/canceled.html', context)
+
+
+def personal_data(request):
+    context = CustomUser.objects.get(id=request.user.id)
+    return render(request, 'accounts/personal_data.html', {'user': context})

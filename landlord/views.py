@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from accounts.models import CustomUser
 from landlord.functions.landlord_func import get_landlord_list
 
 
@@ -30,3 +31,8 @@ def upcoming(request):
     """Предстоящие."""
     context = get_landlord_list(request)
     return render(request, 'landlord/upcoming.html', context)
+
+
+def personal_data(request):
+    context = CustomUser.objects.get(id=request.user.id)
+    return render(request, 'accounts/personal_data.html', {'user': context})
