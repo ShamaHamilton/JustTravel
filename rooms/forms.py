@@ -92,6 +92,14 @@ class RatingForm(forms.ModelForm):
 
 class ReviewForm(forms.ModelForm):
     """Форма отзывов."""
+    review = forms.CharField(
+        widget = forms.Textarea(
+            attrs={
+                'placeholder': 'Ваш отзыв',
+                'rows': 5,
+            },
+        ),
+    )
 
     class Meta:
         model = Reviews

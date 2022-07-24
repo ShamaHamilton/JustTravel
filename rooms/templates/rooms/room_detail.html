@@ -16,9 +16,9 @@
       <div>
         <p><i class="fa-solid fa-star"></i>
           {% if room.get_ratings.star__avg %}
-            {{ room.get_ratings.star__avg|floatformat:2 }}
+          {{ room.get_ratings.star__avg|floatformat:2 }}
           {% else %}
-            <b>Новое</b>
+          <b>Новое</b>
           {% endif %}
         </p>
       </div>
@@ -150,50 +150,60 @@
     </div>
   </div>
 
-  <br>
-  <br>
-  ---------------------------------------------------------------------
-  <br>
-  <!-- Оценка -->
-  Оцените жилье
-  <form action="{% url 'rooms:add_rating' %}" method='post' name='rating'>
-    <b>Оценка:</b>
-    {% csrf_token %}
-    <input type="hidden" value='{{ room.id }}' name='apartment'>
-    <span class='rating'>
-      {% for k, v in star_form.fields.star.choices %}
-      <input id='rating{{ v }}' type="radio" name='star' value='{{ k }}'>
-      <label for="rating{{ v }}">
-        {{ k }}
-      </label>
-      {% endfor %}
-    </span>
-    <span>5.0</span>
-    </a>
-  </form>
-  <!-- end Оценка -->
+  <!-- Оценка / Отзыв -->
+  <div class="review-box">
+    <h3>Оцените жилье</h3>
+    <!-- Оценка -->
+    <form action="{% url 'rooms:add_rating' %}" method='post' name='rating'>
+      <b>Ваша оценка:</b>
+      {% csrf_token %}
+      <input type="hidden" value='{{ room.id }}' name='apartment'>
+      <span class='rating'>
+        {% for k, v in star_form.fields.star.choices %}
+        <input id='rating{{ v }}' type="radio" name='star' value='{{ k }}'>
+        <label for="rating{{ v }}">
+          {{ k }}
+        </label>
+        {% endfor %}
+      </span>
+    </form>
+    <!-- end Оценка -->
 
-  <!-- Отзыв -->
-  Оставьте отзыв
-  <form action="{% url 'rooms:add_review' room.id %}" method='post' class='review'>
-    <b>Отзыв:</b>
-    {% csrf_token %}
-    <div class="review-text">
-      <label for="{{ review_form.review.id_for_label }}"></label>
-      {{ review_form.review }}
-    </div>
-    <button type="submit" name="add_review">Отправить</button>
-  </form>
-  <!-- end Отзыв -->
+    <!-- Отзыв -->
+    <h4>Оставьте отзыв</h4>
+    <form action="{% url 'rooms:add_review' room.id %}" method='post' class='review-form'>
+      {% csrf_token %}
+      <div class="review-text">
+        <label for="{{ review_form.review.id_for_label }}"></label>
+        {{ review_form.review }}
+      </div>
+      <button type="submit" name="add_review">Отправить</button>
+    </form>
+    <!-- end Отзыв -->
+
+  </div>
+  <!-- end Оценка/Отзыв -->
+
+  <hr class="line">
 
   <!-- Список отзывов -->
-  {% for review in room.get_reviews %}
-  <div>
-    <h5>{{ review.user }}</h5>
-    <p>{{ review.review }}</p>
+  <div class="reviews">
+    <div class="reviews-row">
+      {% for review in room.get_reviews|slice:"6" %}
+      <div class="reviews-col">
+        {% if review.user.avatar %}
+        <img src="{{ review.user.avatar.url }}" alt="">
+        {% else %}
+        <img src="{% static 'images/user-regular.svg' %}" alt="">
+        {% endif %}
+        <div>
+          <h3>{{ review.user }}</h3>
+          <p>{{ review.review }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
-  <br>
-  {% endfor %}
   <!-- end Список отзывов -->
 
 </div>

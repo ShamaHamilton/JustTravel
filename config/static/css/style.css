@@ -436,17 +436,90 @@
     opacity: 1;
 }
 
-.review button {
-    background: #ff5361;
-    border: 0;
+.review-box {
+    border: 1px solid #ccc;
+    margin-top: 50px;
+    padding: 10px 20px;
+    width: 44%;
+}
+
+.review-box h3 {
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.review-box h4 {
+    margin-top: 10px;
+}
+
+.review-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: none;
     outline: none;
-    color: #fff;
+    background: #f0f0f0;
+}
+
+.review-form button {
+    background: #fff;
+    border: 1px solid #ff5361;
+    outline: none;
+    color: #ff5361;
     padding: 18px;
-    width: 300px;
+    width: 200px;
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
 }
+
+.review-form button:hover {
+    background: #ff5361;
+    color: #fff;
+    transition: 0.5s;
+}
+
+.reviews{
+    margin: 50px 0 20px;
+}
+
+.reviews-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 44%));
+    column-gap: 12%;
+    row-gap: 3%;
+    margin-bottom: 100px;
+}
+
+.reviews-col {
+    border-radius: 10px;
+    text-align: left;
+    background: #fff3f3;
+    padding: 25px;
+    cursor: pointer;
+    display: inline-flex;
+    transition: 0.5s;
+}
+
+.reviews-col img {
+    height: 40px;
+    margin-left: 5px;
+    margin-right: 30px;
+    border-radius: 50%;
+}
+
+.reviews-col h3{
+    padding: 0;
+}
+
+.reviews-col p{
+    margin-top: 15px;
+    text-align: left;
+}
+
+
+
 
 /* ----------media query for hous details page---------- */
 
