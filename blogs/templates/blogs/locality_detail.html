@@ -3,23 +3,29 @@
 {% block content %}
 
 <div class="container">
-  {{ locality.title }}
-  <br>
-  <br>
-  <div class="row justify-content-center">
-    {% if locality.image %}
-    {% for image in locality.image.all %}
-    <a href="{{ image.photo.url }}" data-lightbox="gallery-imgs">
-      <img src="{{ image.photo.url }}" class="gallery-img">
-    </a>
-    {% endfor %}
-    {% endif %}
+  <div class="detail-container">
+
+    <div class="detail-left-col">
+      <h1>{{ locality.title }}</h1>
+      <p>{{ locality.content|safe }}</p>
+      <div class="obj-date">
+        <p>{{ locality.created_at|date:"d F Y" }} г.</p>
+      </div>
+    </div>
+    
+    <div class="detail-right-col">
+    <div class="right-col-img">
+      {% if locality.image %}
+      {% for image in locality.image.all %}
+      <a href="{{ image.photo.url }}" data-lightbox="gallery-imgs">
+        <img src="{{ image.photo.url }}" class="gallery-img">
+      </a>
+      {% endfor %}
+      {% endif %}
+    </div>
   </div>
-  <br>
-  {{ locality.content }}
-  <br>
-  <br>
-  {{ locality.created_at }}
+
+</div>
 </div>
 
 {% endblock %}

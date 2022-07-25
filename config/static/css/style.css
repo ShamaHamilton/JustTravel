@@ -540,15 +540,15 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-header{
+.modal-header {
     padding: 30px 20px;
 }
 
-.modal-header span{
+.modal-header span {
     margin: 0;
 }
 
-.modal-header i{
+.modal-header i {
     font-size: 20px;
 }
 
@@ -598,9 +598,56 @@
 /* ----------media query for hous details page---------- */
 
 /* ----- locality list / places list ----- */
+
+.detail-container{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.detail-left-col {
+    flex-basis: 58%;
+}
+
+.detail-right-col {
+    flex-basis: 40%;
+    margin-top: 70px;
+}
+
+.container h1{
+    margin-top: 25px;
+}
+
+.detail-left-col h1{
+    color: #333;
+    font-weight: 600;
+
+}
+
+.detail-left-col p{
+    line-height: 1.3;
+    font-size: 20px;
+}
+
+.obj-date{
+    text-align: left;
+    margin-top: 20px;
+}
+
+.right-col-img{
+    border: 1px solid #999;
+    border-radius: 12px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2%;
+
+}
+
 .gallery-img {
     border-radius: 12px;
-    width: 288px;
-    height: 162px;
+    width: 100%;
+    height: 170px;
     object-fit: cover;
 }

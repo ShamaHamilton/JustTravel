@@ -7,24 +7,28 @@
 {% block content %}
 
 <div class="container">
-  {{ place.title }}
-  <br>
-  <br>
-  <div class="row justify-content-center">
-    {% if place.image %}
-    {% for image in place.image.all %}
-    <a href="{{ image.photo.url }}" data-lightbox="gallery-imgs">
-      <img src="{{ image.photo.url }}" class="gallery-img">
-    </a>
-    {% endfor %}
-    {% endif %}
-  </div>
-  <br>
-  {{ place.content }}
-  <br>
-  {{ place.created_at }}
-  <br>
-  <span>Кол. просмотров: {{ place.views }}</span>
-</div>
+  <div class="detail-container">
 
+    <div class="detail-left-col">
+      <h1>{{ place.title }}</h1>
+      <p>{{ place.content|safe }}</p>
+      <div class="obj-date">
+        <p>{{ place.created_at|date:"d F Y" }} г.</p>
+      </div>
+    </div>
+    
+    <div class="detail-right-col">
+    <div class="right-col-img">
+      {% if place.image %}
+      {% for image in place.image.all %}
+      <a href="{{ image.photo.url }}" data-lightbox="gallery-imgs">
+        <img src="{{ image.photo.url }}" class="gallery-img">
+      </a>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+</div>
 {% endblock %}
