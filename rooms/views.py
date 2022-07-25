@@ -92,12 +92,12 @@ def room_detail_view(request, pk):
     """Функция для просмотра жилья."""
     room = RoomsApplicationModel.objects.get(pk=pk)
     # Извлечение броней связанных с данным жильем
-    reservs = Reservation.objects.filter(apartment_id=room.pk)
+    reservs = Reservation.objects.filter(apartment_id=room.pk).filter(status=True)
     reserv_days_in = []      # Список занятых дат прибытия
     reserv_days_out = []     # Список занятых дат выезда
     # Извлечение списка зарезервированных дат для передачи в календарь
     for reserv in reservs:
-        if reserv.end_date >= date.today() and reserv.status:
+        if reserv.end_date >= date.today():
             start_day = reserv.start_date
             end_day = reserv.end_date
             delta_days = int((end_day - start_day).days)
