@@ -23,7 +23,32 @@
         </p>
       </div>
       <div>
-        <span>Отзывов: {{ room.get_reviews.count }}</span>
+        <span id="modalBtn">Отзывов: {{ room.get_reviews.count }}</span>
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="closeBtn">&times;</span>
+              <h3>
+                <i class="fa-solid fa-star"></i>
+                {% if room.get_ratings.star__avg %}
+                {{ room.get_ratings.star__avg|floatformat:2 }}
+                {% else %}
+                <b>Новое</b>
+                {% endif %}
+                &#183;
+                Отзывов: {{ room.get_reviews.count }}
+              </h3>
+            </div>
+            {% for review in room.get_reviews %}
+            <div class="modal-body">
+              <h3>{{ review.user }}</h3>
+              <p>{{ review.review }}</p>
+              <br>
+              <br>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
       </div>
       <div>
         <span>Просмотров: {{ room.views }}</span>
@@ -189,7 +214,7 @@
   <!-- Список отзывов -->
   <div class="reviews">
     <div class="reviews-row">
-      {% for review in room.get_reviews|slice:"6" %}
+      {% for review in room.get_reviews|slice:":6" %}
       <div class="reviews-col">
         {% if review.user.avatar %}
         <img src="{{ review.user.avatar.url }}" alt="">
@@ -198,6 +223,7 @@
         {% endif %}
         <div>
           <h3>{{ review.user }}</h3>
+          {{ review.created_at|date:"F Y" }} г.
           <p>{{ review.review }}</p>
         </div>
       </div>

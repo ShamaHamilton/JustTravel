@@ -220,7 +220,7 @@ class RoomsApplicationModel(models.Model):
 
     def get_reviews(self):
         """Возвращает список отзывов."""
-        return self.reviews_set.filter(status=True)
+        return self.reviews_set.filter(status=True).order_by('-id')
 
     def get_ratings(self):
         """Возвращает список оценок."""
