@@ -45,7 +45,7 @@
     <div class="info">
       {% for reserv in leaving|dictsort:"start_date" %}
       <div class="info-item">
-        <h2>{{ reserv.name_reserv }}</h2>
+        <h2>{{ reserv.user }}</h2>
         <p>Прибытие: {{ reserv.start_date }}</p>
         <p>Выезд: {{ reserv.end_date }}</p>
         <p>Всего ночей: {{ reserv.days_total }}</p>

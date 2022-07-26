@@ -110,7 +110,7 @@
   <hr class="line">
 
   <!-- Резерв -->
-  <form class="check-form" method="post">
+  <form action="{% url 'rooms:add_reserv' room.pk %}" class="check-form" method="post">
     {% csrf_token %}
     <div>
       <label for="{{ reserv.start_date.id_for_label }}">
@@ -130,7 +130,7 @@
       </label>
       {{ reserv.guests }}
     </div>
-    <button type="submit" name="reserv">Забронировать</button>
+    <button type="submit" name="add_reserv">Забронировать</button>
   </form>
   <!-- end Резерв -->
 

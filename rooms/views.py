@@ -1,6 +1,8 @@
+from multiprocessing import context
 from .forms import CreateRoomForm, ReservationForm, RatingForm, ReviewForm
 from .models import Rating, RoomsApplicationModel, Reservation
 from .import constants
+from .functions.rooms_func import get_reservs_date
 
 from django.http import HttpResponse
 from django.views.generic.base import View
@@ -9,7 +11,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.forms import modelform_factory
 from django.contrib import messages
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -88,77 +90,44 @@ class RoomsView(ListView):
         return RoomsApplicationModel.objects.filter(status=True)
 
 
-def room_detail_view(request, pk):
-    """Функция для просмотра жилья."""
-    room = RoomsApplicationModel.objects.get(pk=pk)
-    # Извлечение броней связанных с данным жильем
-    reservs = Reservation.objects.filter(apartment_id=room.pk).filter(status=True)
-    reserv_days_in = []      # Список занятых дат прибытия
-    reserv_days_out = []     # Список занятых дат выезда
-    # Извлечение списка зарезервированных дат для передачи в календарь
-    for reserv in reservs:
-        if reserv.end_date >= date.today():
-            start_day = reserv.start_date
-            end_day = reserv.end_date
-            delta_days = int((end_day - start_day).days)
-            day = 0
-            for day in range(delta_days):
-                reserv_days_in.append(start_day.strftime("%d-%m-%Y"))
-                reserv_days_out.append(end_day.strftime("%d-%m-%Y"))
-                start_day += timedelta(days=1)
-                end_day -= timedelta(days=1)
-    reserv_days_in.sort()   # Сортировка дат по возрастанию
-    reserv_days_out.sort()  # Сортировка дат по возрастанию
-    room.views += 1
-    room.save()
-    if request.method == 'POST':
-        if 'reserv' in request.POST:
-            room_reserv = ReservationForm(request.POST)
-            if room_reserv.is_valid():
-                room_reserv.instance.name_reserv = request.user
-                room_reserv.instance.apartment = room
-                delta = room_reserv.instance.end_date - room.instance.start_date
-                room_reserv.instance.days_total = delta.days
-                room_reserv.instance.price_total = delta.days * room.price
-                room_reserv.save()
-                return redirect('accounts:account')
-        elif 'review' in request.POST:
-            review = ReviewForm(request.POST)
-            if review.is_valid():
-                review.instance.user_feedback = request.user
-                review.instance.apartment = room
-                review.save()
-                return redirect('accounts:account')
-    room_reserv = ReservationForm()
-    review = ReviewForm()
-    context = {
-        'room': room,
-        'reserv': room_reserv,
-        'reservs': reservs,
-        'reserv_days_in': reserv_days_in,
-        'reserv_days_out': reserv_days_out,
-        'review': review,
-    }
-    context['star_form'] = RatingForm()
-    context['review_form'] = ReviewForm()
-    return render(request, template_name='rooms/room_detail.html', context=context)
+class RoomDetailView(DetailView):
+    model = RoomsApplicationModel
+    template_name = 'rooms/room_detail.html'
+    context_object_name = 'room'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        reserv_days_in, reserv_days_out = get_reservs_date(self.kwargs)
+        context['reserv'] = ReservationForm()
+        context['star_form'] = RatingForm()
+        context['review_form'] = ReviewForm()
+        context['reserv_days_in'] = reserv_days_in
+        context['reserv_days_out'] = reserv_days_out
+        return context
 
 
-# class RoomDetailView(DetailView):
-#     model = RoomsApplicationModel
-#     template_name = 'rooms/room_detail.html'
-#     context_object_name = 'room'
+class AddReserv(View):
+    """Резер жилья."""
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['reserv'] = ReservationForm()
-#         context['star_form'] = RatingForm()
-#         context['review_form'] = ReviewForm()
-#         return context
+    def post(self, request, pk):
+        form = ReservationForm(request.POST)
+        apartment = RoomsApplicationModel.objects.get(pk=pk)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = request.user
+            form.apartment_id = apartment.id
+            start_date = form.start_date
+            end_date = form.end_date
+            delta = (end_date - start_date).days
+            form.days_total = delta
+            form.price_total = delta * apartment.price
+            form.save()
+        return redirect('rooms:rooms')
 
 
 class AddStarRating(View):
     """Добавление рейтинга жилья."""
+
     def post(self, request):
         form = RatingForm(request.POST)
         if form.is_valid():
@@ -174,6 +143,7 @@ class AddStarRating(View):
 
 class AddReview(View):
     """Отзывы."""
+
     def post(self, request, pk):
         form = ReviewForm(request.POST)
         apartment = RoomsApplicationModel.objects.get(pk=pk)

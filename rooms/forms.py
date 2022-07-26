@@ -62,7 +62,7 @@ class ReservationForm(forms.ModelForm):
         model = Reservation
         fields = '__all__'
         exclude = (
-            'name_reserv',
+            'user',
             'apartment',
             'days_total',
             'price_total',

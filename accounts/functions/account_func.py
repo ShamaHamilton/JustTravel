@@ -7,7 +7,7 @@ register = template.Library()
 
 
 def get_reservs_list(request):
-    user_reservs = Reservation.objects.filter(name_reserv_id=request.user)
+    user_reservs = Reservation.objects.filter(user_id=request.user)
     active_reservs = []
     inactive_reservs = []
     canceled_reservs = []

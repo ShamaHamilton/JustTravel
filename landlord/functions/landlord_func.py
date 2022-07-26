@@ -3,8 +3,6 @@ from datetime import date, timedelta
 
 from rooms.models import RoomsApplicationModel, Reservation
 
-register = template.Library()
-
 
 def get_landlord_list(request):
     landlord_apartments = RoomsApplicationModel.objects.filter(

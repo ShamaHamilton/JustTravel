@@ -249,7 +249,7 @@ class Reservation(models.Model):
     end_date = models.DateField(
         verbose_name='выезд',
     )
-    name_reserv = models.ForeignKey(
+    user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='name_reserv',

@@ -128,7 +128,7 @@ class ReservationAdmin(admin.ModelAdmin):
     """Форма для добавления и изменения пользовательских экземпляров."""
     list_display = (
         'id',
-        'name_reserv',
+        'user',
         'apartment',
         'status',
         'start_date',
@@ -136,7 +136,7 @@ class ReservationAdmin(admin.ModelAdmin):
         'days_total',
         'price_total',
     )
-    list_display_links = ('id', 'name_reserv', 'apartment',)
+    list_display_links = ('id', 'user', 'apartment',)
     # search_fields = ('apartment',)
     list_editable = ('status',)
     list_filter = ('apartment',)
@@ -144,7 +144,7 @@ class ReservationAdmin(admin.ModelAdmin):
         'apartment',
         'start_date',
         'end_date',
-        'name_reserv',
+        'user',
         'days_total',
         'price_total',
         'status',
