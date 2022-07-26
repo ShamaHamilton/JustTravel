@@ -38,16 +38,26 @@
   {% endif %}
 </nav>
 
-
 <div class="container">
-  {% for reserv in reside|dictsort:"start_date" %}
-  {{ reserv.name_reserv }}
-  <br>
-  {{ reserv.start_date }}
-  {{ reserv.end_date }}
-  <br>
-  <br>
-  {% endfor %}
+  <div class="container-info">
+
+    {% if reside %}
+    <div class="info">
+      {% for reserv in reside|dictsort:"start_date" %}
+      <div class="info-item">
+        <h2>{{ reserv.name_reserv }}</h2>
+        <p>Прибытие: {{ reserv.start_date }}</p>
+        <p><b>Выезд: {{ reserv.end_date }}</b></p>
+        <p>Всего ночей: {{ reserv.days_total }}</p>
+        <p>К оплате: {{ reserv.price_total|floatformat:"0g" }} р.</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <p>Сейчас у вас нет гостей.</p>
+    {% endif %}
+  </div>
 </div>
-  
+
 {% endblock %}

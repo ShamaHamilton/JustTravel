@@ -54,6 +54,7 @@ class CreateUserAdmin(BaseUserAdmin):
         'last_name',
         'email',
         'is_active',
+        'rents_apartment',
         'is_superuser',
     )
     list_display_links = ('id', 'phone', 'first_name', 'last_name',)
