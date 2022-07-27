@@ -1,4 +1,3 @@
-from multiprocessing import context
 from .forms import CreateRoomForm, ReservationForm, RatingForm, ReviewForm
 from .models import Rating, RoomsApplicationModel, Reservation
 from .import constants
@@ -11,7 +10,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.forms import modelform_factory
 from django.contrib import messages
-from datetime import date, timedelta, datetime
+from django.db.models import Q
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -175,7 +174,11 @@ class Search(ListView):
     paginate_by = 1
 
     def get_queryset(self):
-        return RoomsApplicationModel.objects.filter(location__icontains=self.request.GET.get('place'))
+        queryset = RoomsApplicationModel.objects.filter(
+            Q(status=True),
+            Q(location__icontains=self.request.GET.get('place'))
+        )
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

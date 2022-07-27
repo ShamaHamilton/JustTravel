@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="{% static 'css/style_home.css' %}">
   <link rel="stylesheet" href="{% static 'css/style_footer.css' %}">
   <title>JustTravel</title>
@@ -38,15 +39,15 @@
         <form action="{% url 'rooms:search' %}" method="get">
           <div class="location-input">
             <label>Место</label>
-            <input type="text" name="place" placeholder="Куда направляетесь?">
+            <input type="text" name="place" placeholder="Куда направляетесь?" required>
           </div>
           <div>
             <label>Прибытие</label>
-            <input type="text" placeholder="Когда?">
+            <input type="date" name="start_date" placeholder="Укажите дату" required>
           </div>
           <div>
             <label>Выезд</label>
-            <input type="text" placeholder="Когда?">
+            <input type="date" name="end_date" placeholder="Укажите дату" required>
           </div>
           <div>
             <label>Сколько гостей?</label>
@@ -65,14 +66,13 @@
       <a href="{{ place.get_absolute_url }}">
         <div>
           {% for image in place.image.all %}
-            {% if forloop.counter0 < 1 %}
-              <img src="{{ image.photo.url }}">
+          {% if forloop.counter0 < 1 %} <img src="{{ image.photo.url }}">
             {% endif %}
-          {% endfor %}
-          <span>
-            <h3>{{ place.title }}</h3>
-            <p>{{ place.category.title }}</p>
-          </span>
+            {% endfor %}
+            <span>
+              <h3>{{ place.title }}</h3>
+              <p>{{ place.category.title }}</p>
+            </span>
         </div>
       </a>
       {% endfor %}
@@ -84,11 +84,10 @@
       <a href="{{ locality.get_absolute_url }}">
         <div>
           {% for image in locality.image.all %}
-            {% if forloop.counter0 < 1 %}
-              <img src="{{ image.photo.url }}">
+          {% if forloop.counter0 < 1 %} <img src="{{ image.photo.url }}">
             {% endif %}
-          {% endfor %}
-          <h3>{{ locality.title }}</h3>
+            {% endfor %}
+            <h3>{{ locality.title }}</h3>
         </div>
       </a>
       {% endfor %}
@@ -114,6 +113,17 @@
     function togglebtn() {
       navBar.classList.toggle("hidemenu");
     }
+  </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
+  <script>
+    config = {
+    "locale": "ru",
+    // dateFormat: "Y-m-d",
+    minDate: "today",
+    }
+    datepickr = flatpickr("input[type=date]", config);
   </script>
 </body>
 
