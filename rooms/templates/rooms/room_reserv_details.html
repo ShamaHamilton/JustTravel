@@ -2,28 +2,27 @@
 
 {% block content %}
 
-<br>
-<br>
-<br>
-<br>
 <div class="container">
-  <ul>
-    <li>
-        {{ current_reserv.apartment }}
-      <br>
-      Прибытие: {{ current_reserv.start_date }} &nbsp; &nbsp;
-      Выезд: {{ current_reserv.end_date }} <br>
-      Всего дней: {{ current_reserv.days_total }} <br>
-      Итого к оплате: {{ current_reserv.price_total|floatformat:"2g" }} р. <br>
-      Оплата наличными на месте.
-    </li>
-  </ul>
-  {% if current_reserv.status %}
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit">Отменить бронь</button>
-  </form>
-  {% endif %}
-  <br>
+  <div class="container-info">
+    <div class="info">
+      <div class="info-item">
+        <a href="{{ current_reserv.apartment.get_absolute_url }}">
+          <h2>{{ current_reserv.apartment }}</h2>
+        </a>
+        <p>Прибытие: {{ current_reserv.start_date }}</p>
+        <p>Выезд: {{ current_reserv.end_date }}</p>
+        <p>Всего ночей: {{ current_reserv.days_total }}</p>
+        <p>Итого к оплате: {{ current_reserv.price_total|floatformat:"0g" }} р.</p>
+        <p>Оплата наличными на месте.</p>
+        {% if current_reserv.status %}
+          <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="cancel-btn">Отменить бронирование</button>
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 
-{% endblock %}
+  {% endblock %}

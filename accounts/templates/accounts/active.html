@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<nav id="navBar" class="navbar-white">
+<nav id="navBar" class="navbar-white navbar-account">
   {% if request.user.is_authenticated %}
   <ul class="nav-links">
     <li>
@@ -39,30 +39,30 @@
   {% endif %}
 </nav>
 
-<br>
-<br>
-<br>
-<br>
 <div class="container">
-  {% if active_reservs %}
-  Активных бронирований: {{ active_reservs|length }}
-  {% endif %}
-  {% for reserv in active_reservs|dictsort:"start_date" %}
-  <ul>
-    <li>
-      <a href="{{ reserv.get_absolute_url }}">
-        {{ reserv.apartment }}
-      </a>
-      <br>
-      Прибытие: {{ reserv.start_date }} <br>
-      Выезд: {{ reserv.end_date }} <br>
-      Всего дней: {{ reserv.days_total }} <br>
-      Итого к оплате: {{ reserv.price_total|floatformat:"2g" }} р. <br>
-      Оплата наличными на месте.
-    </li>
-  </ul>
-  <br>
-  {% endfor %}
+  <div class="container-info">
+    {% if active_reservs %}
+    <div class="info">
+      {% for reserv in active_reservs|dictsort:"start_date" %}
+      <div class="info-item">
+        <a href="{{ reserv.apartment.get_absolute_url }}">
+          <h2>{{ reserv.apartment }}</h2>
+        </a>
+        <p>Прибытие: {{ reserv.start_date }}</p>
+        <p>Выезд: {{ reserv.end_date }}</p>
+        <p>Всего ночей: {{ reserv.days_total }}</p>
+        <p>Итого к оплате: {{ reserv.price_total|floatformat:"0g" }} р.</p>
+        <p>Оплата наличными на месте.</p>
+        <div class="cancel">
+          <a href="{{ reserv.get_absolute_url }}">
+            <h3>Отменить</h3>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
 </div>
 
 {% endblock %}
