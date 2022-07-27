@@ -166,3 +166,18 @@ def room_reser_details(request, pk):
         'current_reserv': current_reserv,
     }
     return render(request, 'rooms/room_reserv_details.html', context)
+
+
+class Search(ListView):
+    """Поиск жилья."""
+    template_name = 'rooms/rooms_list.html'
+    context_object_name = 'rooms_list'
+    paginate_by = 1
+
+    def get_queryset(self):
+        return RoomsApplicationModel.objects.filter(location__icontains=self.request.GET.get('place'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['place'] = f"place={self.request.GET.get('place')}&"
+        return context

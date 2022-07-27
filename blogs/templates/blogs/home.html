@@ -35,10 +35,10 @@
     <div class="container">
       <h1></h1>
       <div class="search-bar">
-        <form>
+        <form action="{% url 'rooms:search' %}" method="get">
           <div class="location-input">
             <label>Место</label>
-            <input type="text" placeholder="Куда направляетесь?">
+            <input type="text" name="place" placeholder="Куда направляетесь?">
           </div>
           <div>
             <label>Прибытие</label>
