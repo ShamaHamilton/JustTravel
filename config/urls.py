@@ -11,6 +11,7 @@ urlpatterns = [
     path('account/', include('accounts.urls')),
     path('landlord/', include('landlord.urls')),
     path('rooms/', include('rooms.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:

@@ -1,10 +1,21 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from django import forms
+from ckeditor.widgets import CKEditorWidget
 
 from .models import Localities, LocalityImages, InterestingPlaces, PlaceImages
 
 
+class LocalitiesAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = Localities
+        fields = '__all__'
+
+
 class LocalitiesAdmin(admin.ModelAdmin):
+    form = LocalitiesAdminForm
     prepopulated_fields = {'slug': ('title',)}
     list_display = (
         'id',
@@ -32,7 +43,16 @@ class LocalitiesAdmin(admin.ModelAdmin):
 admin.site.register(Localities, LocalitiesAdmin)
 
 
+class InterestingPlacesAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = InterestingPlaces
+        fields = '__all__'
+
+
 class InterestingPlacesAdmin(admin.ModelAdmin):
+    form = InterestingPlacesAdminForm
     prepopulated_fields = {'slug': ('title',)}
     save_as = True
     list_display = (
