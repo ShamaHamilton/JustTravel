@@ -3,8 +3,6 @@ from datetime import date
 
 from rooms.models import Reservation
 
-register = template.Library()
-
 
 def get_reservs_list(request):
     user_reservs = Reservation.objects.filter(user_id=request.user)
