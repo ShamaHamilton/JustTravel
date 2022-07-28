@@ -7,8 +7,43 @@ from .models import CustomUser
 
 
 class UserRegisterForm(ModelForm):
-    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Повторите пароль', widget=forms.PasswordInput)
+    phone = forms.CharField(
+        label='',
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Номер телефона'
+        }),
+    )
+    first_name = forms.CharField(
+        label='',
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Имя'
+        }),
+    )
+    last_name = forms.CharField(
+        label='',
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Фамилия'
+        }),
+    )
+    email = forms.EmailField(
+        label='Пароль',
+        required=False,
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'Email'
+        }),
+    )
+    password1 = forms.CharField(
+        label='Пароль',
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Введите пароль'
+        }),
+    )
+    password2 = forms.CharField(
+        label='Повторите пароль',
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Повторите пароль'
+        }),
+    )
 
     class Meta:
         model = CustomUser
@@ -33,10 +68,14 @@ class UserRegisterForm(ModelForm):
 class UserLoginForm(AuthenticationForm):
     """Форма аутентификации"""
     username = forms.CharField(
-        label='Номер телефона',
-        widget=forms.TextInput(attrs={"class": "form-control"}),
+        label='',
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Номер телефона'
+        }),
     )
     password = forms.CharField(
-        label='Пароль',
-        widget=forms.PasswordInput(attrs={"class": "form-control"})
+        label='',
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Пароль'
+        })
     )

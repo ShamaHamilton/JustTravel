@@ -2,12 +2,19 @@
 
 {% block content %}
 
-<div class="container-login center">
-  <h1>Вход</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary btn-block">Вход</button>
-  </form>
+<div class="container">
+  <div class="container-login-register">
+    <h1>Вход</h1>
+    <form method="post" class="login-register-form">
+      {% csrf_token %}
+      {% for field in form %}
+      <div>
+        {{ field }}
+      </div>
+      {% endfor %}
+      <button type="submit">Вход</button>
+    </form>
+  </div>
 </div>
+
 {% endblock %}

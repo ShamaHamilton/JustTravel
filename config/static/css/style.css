@@ -720,3 +720,50 @@
     margin-top: 10px;
     font-weight: 600;
 }
+
+/* ----- login / register ----- */
+.container-login-register{
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    text-align: center;
+    border: 1px solid #ff5361;
+    border-radius: 20px;
+    padding: 0 50px 50px;
+}
+.container-login-register h1{
+    margin-bottom: 20px;
+}
+.login-register-form div{
+    margin-bottom: 20px;
+}
+.login-register-form label{
+    font-size: 20px;
+    font-weight: 600;
+}
+.login-register-form input{
+    border: 1px solid #ff5361;
+    border-radius: 20px;
+    width: 300px;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+}
+.login-register-form button{
+    border: 1px solid #ff5361;
+    background: #fff;
+    color: #ff5361;
+    padding: 10px;
+    width: 300px;
+    border-radius: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: 600;
+}
+.login-register-form button:hover {
+    background: #ff5361;
+    color: #fff;
+    transition: 0.5s;
+}
