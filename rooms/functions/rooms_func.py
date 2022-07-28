@@ -22,4 +22,6 @@ def get_reservs_date(kwargs):
                 end_day -= timedelta(days=1)
     reserv_days_in.sort()   # Сортировка дат по возрастанию
     reserv_days_out.sort()  # Сортировка дат по возрастанию
+    room.views += 1
+    room.save()
     return(reserv_days_in, reserv_days_out)
