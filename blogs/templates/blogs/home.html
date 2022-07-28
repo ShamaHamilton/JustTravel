@@ -29,8 +29,8 @@
         {% else %}
         <li><a href="{% url 'accounts:login' %}" class="login-btn">Вход</a></li>
         <li><a href="{% url 'accounts:register' %}" class="register-btn">Регистрация</a></li>
-        <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
         {% endif %}
+      </ul>
         <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
     </nav>
     <div class="container">
@@ -110,7 +110,7 @@
   <script src="https://kit.fontawesome.com/4f4432713b.js" crossorigin="anonymous"></script>
   <script>
     var navBar = document.getElementById("navBar");
-    function togglebtn() {
+    function togglebtn(){
       navBar.classList.toggle("hidemenu");
     }
   </script>
@@ -121,7 +121,9 @@
     config = {
     "locale": "ru",
     // dateFormat: "Y-m-d",
+    dateFormat: "d-m-Y",
     minDate: "today",
+    disableMobile: "true",
     }
     datepickr = flatpickr("input[type=date]", config);
   </script>
