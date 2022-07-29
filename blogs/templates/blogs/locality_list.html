@@ -3,9 +3,10 @@
 {% load static %}
 
 {% block content %}
+
 <div class="container">
-  <h1>Населенные пункты Гунибского района</h1>
   <div class="list-container">
+    <h1>Населенные пункты Гунибского района</h1>
     {% for locality in localities_list %}
     <div class="container-left-col">
       <div class="object">
@@ -44,39 +45,9 @@
     </div>
     {% endfor%}
   </div>
-</div>
 
-{% if page_obj.has_other_pages %}
-<div class="pagination">
-
-  {% if page_obj.has_previous %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
-        <img src="{% static 'images/arrow.png' %}">
-      </a>
-    </li>
-  {% endif %}
-
-  {% for p in page_obj.paginator.page_range %}
-    {% if page_obj.number == p %}
-      <li class="page-item current">
-        <a class="page-link" href="?page={{ p }}">{{ p }}</a>
-      </li>
-    {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3 %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ p }}">{{ p }}</a>
-      </li>
-    {% endif %}
-  {% endfor %}
-
-  {% if page_obj.has_next %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-        <img src="{% static 'images/arrow.png' %}" class="right-arrow">
-      </a>
-    </li>
-  {% endif %}
+  {% include 'inc/_paginator.html' %}
 
 </div>
-{% endif %}
+
 {% endblock %}

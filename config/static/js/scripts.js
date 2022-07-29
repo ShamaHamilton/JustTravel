@@ -18,6 +18,12 @@ window.onclick = function (event) {
     }
 }
 
+// для маленьких экранов
+var navBar = document.getElementById("navBar");
+function togglebtn() {
+    navBar.classList.toggle("hidemenu");
+}
+
 // Add star rating
 const rating = document.querySelector('form[name=rating]');
 

@@ -336,6 +336,9 @@ nav .fa-bars {
     .sub-title {
         font-size: 4.5vw;
     }
+    .about-msg {
+        margin: 50px 0;
+    }
 }
 
 /* ----------for small screen devices ( up to 700px) ---------- */

@@ -49,7 +49,6 @@
 }
 
 .object-img img {
-    width: 100%;
     border-radius: 12px;
     width: 415px;
     height: 300px;
@@ -98,55 +97,105 @@
     margin: 20px 0 10px;
 }
 
-.pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 40px 0;
+/* ----------for small screen devices ( up to 1280px) ---------- */
+
+@media (max-width: 1280px) {
+
+    .list-container {
+        margin-top: 70px;
+    }
+
+    .container .list-container h1 {
+        font-size: 26px;
+    }
+
+    .container-left-col {
+        flex-basis: 60%;
+    }
+
+    .container-right-col {
+        flex-basis: 40%;
+    }
+
+    .object-img {
+        flex-basis: 90%;
+    }
+
+    .object-info {
+        flex-basis: 90%;
+    }
+
+    .object-img img {
+        width: 100%;
+        max-height: 400px;
+    }
+
+    .object-date {
+        margin-bottom: 10px;
+    }
 }
 
-.pagination li {
-    list-style-type: none;
-    margin: 10px 8px;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border-radius: 50%;
-    cursor: pointer;
+/* ----------for small screen devices ( up to 900px) ---------- */
+
+@media (max-width: 900px) {
+    .container .list-container h1 {
+        font-size: 22px;
+    }
+
+    .container-left-col,
+    .container-right-col,
+    .object-img,
+    .object-info {
+        flex-basis: 100%;
+    }
+
+    .object {
+        padding-bottom: 0;
+    }
+
+    .object-info h3 {
+        font-size: 18px;
+    }
+
+    .container-right-col {
+        margin-bottom: 20px;
+    }
+    .sidebar{
+        padding: 10px 30px;
+        margin-top: 20px;
+    }
+    .sidebar h3{
+        margin: 10px 0 10px;
+    }
 }
 
-.pagination a {
-    text-decoration: none;
-    color: #333;
+/* ----------for small screen devices ( up to 400px) ---------- */
+
+@media (max-width: 400px) {
+    .container .list-container h1 {
+        font-size: 20px;
+    }
+    .object-img img {
+        width: 100%;
+        height: 100%;
+    }
+    .object-info h3 {
+        font-size: 18px;
+    }
+    .object-info button {
+        width: 100%;
+    }
+    .sidebar{
+        padding: 10px 20px;
+    }
+    .sidebar h2{
+        font-size: 20px;
+    }
+    .sidebar h3{
+        font-size: 18px;
+        margin: 10px 0 10px;
+    }
 }
-
-.pagination li .current {
-    background: #333;
-    color: #fff;
-}
-
-.pagination .current a {
-    color: #fff;
-}
-
-.pagination img {
-    width: 15px;
-    margin: 10px 20px;
-}
-
-.right-arrow {
-    transform: rotate(180deg);
-}
-
-/* ! добавить выделение в пагинатор */
-.pagination .current {
-    background: #333;
-    color: #fff;
-}
-
-/*----- small screen for listing page -----*/
-
 
 /*----- rooms list -----*/
 .object-info i {
@@ -597,7 +646,7 @@
 
 /* ----------media query for hous details page---------- */
 
-/* ----- locality list / places list ----- */
+/* ----- locality detail / place detail ----- */
 
 .detail-container {
     margin-top: 50px;
@@ -705,7 +754,7 @@
     color: #ff5361;
 }
 
-.cancel-btn{
+.cancel-btn {
     background: #ff5361;
     border: 0;
     outline: none;
@@ -720,7 +769,7 @@
 }
 
 /* ----- login / register ----- */
-.container-login-register{
+.container-login-register {
     margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
@@ -730,17 +779,21 @@
     border-radius: 20px;
     padding: 0 50px 50px;
 }
-.container-login-register h1{
+
+.container-login-register h1 {
     margin-bottom: 20px;
 }
-.login-register-form div{
+
+.login-register-form div {
     margin-bottom: 20px;
 }
-.login-register-form label{
+
+.login-register-form label {
     font-size: 20px;
     font-weight: 600;
 }
-.login-register-form input{
+
+.login-register-form input {
     border: 1px solid #ff5361;
     border-radius: 20px;
     width: 300px;
@@ -748,7 +801,8 @@
     text-align: center;
     padding: 10px;
 }
-.login-register-form button{
+
+.login-register-form button {
     border: 1px solid #ff5361;
     background: #fff;
     color: #ff5361;
@@ -760,6 +814,7 @@
     margin-top: 10px;
     font-weight: 600;
 }
+
 .login-register-form button:hover {
     background: #ff5361;
     color: #fff;

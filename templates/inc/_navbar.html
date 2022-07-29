@@ -21,11 +21,12 @@
     <div class="dropdown">
       {% if request.user.is_authenticated %}
         <i class="fa-solid fa-bars" onclick="myFunction()"></i>
-      <div id="myDropdown" class="dropdown-content">
+      <!-- <div id="myDropdown" class="dropdown-content">
         <a href="{% url 'accounts:account' %}">Личный кабинет</a>
         <a href="{% url 'rooms:create_room' %}">Сдайте жилье</a>
-      </div>
+      </div> -->
       {% endif %}
     </div>
+    <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
   </ul>
 </nav>

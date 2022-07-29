@@ -24,7 +24,7 @@
       </ul>
       <ul class='nav-btn'>
         {% if request.user.is_authenticated %}
-        <li><a href="{% url 'rooms:create_room' %}" class="create_room-btn">Сдайте жилье</a></li>
+        <!-- <li><a href="{% url 'rooms:create_room' %}" class="create_room-btn">Сдайте жилье</a></li> -->
         <li><a href="{% url 'accounts:logout' %}" class="logout-btn">Выход</a></li>
         {% else %}
         <li><a href="{% url 'accounts:login' %}" class="login-btn">Вход</a></li>
@@ -108,12 +108,7 @@
   {% include 'inc/_footer.html' %}
 
   <script src="https://kit.fontawesome.com/4f4432713b.js" crossorigin="anonymous"></script>
-  <script>
-    var navBar = document.getElementById("navBar");
-    function togglebtn(){
-      navBar.classList.toggle("hidemenu");
-    }
-  </script>
+  <script src="{% static 'js/scripts.js' %}"></script>
   
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>

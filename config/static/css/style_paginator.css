@@ -1,0 +1,59 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.pagination li {
+    list-style-type: none;
+    margin: 10px 8px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.pagination a {
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination li .current {
+    background: #333;
+    color: #fff;
+}
+
+.pagination .current a {
+    color: #fff;
+}
+
+.pagination img {
+    width: 15px;
+    margin: 10px 20px;
+}
+
+.right-arrow {
+    transform: rotate(180deg);
+}
+
+.pagination .current {
+    background: #333;
+    color: #fff;
+}
+
+/* ----------for small screen devices ( up to 900px) ---------- */
+@media (max-width: 900px) {
+    .pagination {
+        margin-top: 30px;
+    }
+}
+
+/* ----------for small screen devices ( up to 400px) ---------- */
+@media (max-width: 400px) {
+    .pagination {
+        margin-top: 20px;
+    }
+}

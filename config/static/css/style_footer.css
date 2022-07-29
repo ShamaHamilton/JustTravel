@@ -22,3 +22,10 @@
 .footer p {
     padding-bottom: 15px;
 }
+
+/* ----------for small screen devices ( up to 900px) ---------- */
+@media (max-width: 900px) {
+    .footer {
+        margin: 20px 0 10px;
+    }
+}
