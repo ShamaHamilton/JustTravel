@@ -99,11 +99,9 @@
 
   <div class="small-details">
     <h2>Хозяин объекта {{ room.landlord.get_short_name }}</h2>
-    <p>
-      Гостей: {{ room.guests }} &nbsp; &nbsp;
-      Кровати: {{ room.beds }} &nbsp; &nbsp;
-      Ванная: {{ room.bathroom }}
-    </p>
+      <p>Гостей: {{ room.guests }}</p>
+      <p>Кровати: {{ room.beds }}</p>
+      <p>Ванная: {{ room.bathroom }}</p>
     <h4>{{ room.price }} р / ночь</h4>
   </div>
 
@@ -216,14 +214,20 @@
     <div class="reviews-row">
       {% for review in room.get_reviews|slice:":6" %}
       <div class="reviews-col">
-        {% if review.user.avatar %}
-        <img src="{{ review.user.avatar.url }}" alt="">
-        {% else %}
-        <img src="{% static 'images/user-regular.svg' %}" alt="">
-        {% endif %}
+        <div class="reviews-col-header">
+          <div>
+            {% if review.user.avatar %}
+            <img src="{{ review.user.avatar.url }}" alt="">
+            {% else %}
+            <img src="{% static 'images/user-regular.svg' %}" alt="">
+            {% endif %}
+          </div>
+          <div>
+            <h3>{{ review.user }}</h3>
+            {{ review.created_at|date:"F Y" }} г.
+          </div>
+        </div>
         <div>
-          <h3>{{ review.user }}</h3>
-          {{ review.created_at|date:"F Y" }} г.
           <p>{{ review.review }}</p>
         </div>
       </div>

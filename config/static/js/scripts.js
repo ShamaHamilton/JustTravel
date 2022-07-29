@@ -34,8 +34,8 @@ rating.addEventListener("change", function (e) {
         method: 'POST',
         body: data
     })
-        .then(response => alert("Оценка установлена"))
-        .catch(error => alert("Ошибка"))
+        // .then(response => alert("Оценка установлена"))
+        // .catch(error => alert("Ошибка"))
 });
 
 

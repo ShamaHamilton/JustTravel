@@ -160,11 +160,13 @@
     .container-right-col {
         margin-bottom: 20px;
     }
-    .sidebar{
+
+    .sidebar {
         padding: 10px 30px;
         margin-top: 20px;
     }
-    .sidebar h3{
+
+    .sidebar h3 {
         margin: 10px 0 10px;
     }
 }
@@ -175,23 +177,29 @@
     .container .list-container h1 {
         font-size: 20px;
     }
+
     .object-img img {
         width: 100%;
         height: 100%;
     }
+
     .object-info h3 {
         font-size: 18px;
     }
+
     .object-info button {
         width: 100%;
     }
-    .sidebar{
+
+    .sidebar {
         padding: 10px 20px;
     }
-    .sidebar h2{
+
+    .sidebar h2 {
         font-size: 20px;
     }
-    .sidebar h3{
+
+    .sidebar h3 {
         font-size: 18px;
         margin: 10px 0 10px;
     }
@@ -237,8 +245,12 @@
     margin: 10px 0;
 }
 
+.row div p {
+    margin-right: 10px;
+}
+
 .house-title span {
-    margin: 0 20px;
+    margin-right: 40px;
 }
 
 .house-title i {
@@ -266,6 +278,11 @@
     width: 660px;
 }
 
+.small-details p {
+    display: inline-flex;
+    margin-right: 25px;
+}
+
 .small-details h2 {
     font-weight: 500;
 }
@@ -285,7 +302,7 @@
 }
 
 .check-form {
-    margin: 30px 0;
+    margin: 30px 0 50px 0;
     background: #fff;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
@@ -312,10 +329,6 @@
     border-radius: 8px;
     font-size: 20px;
     text-align: center;
-}
-
-.check-form input[type="text"] {
-    margin-right: 120px;
 }
 
 .check-form button {
@@ -439,7 +452,7 @@
 }
 
 
-/* Checkbox stars */
+/* Оценка / отзыв */
 .rating {
     overflow: hidden;
     vertical-align: bottom;
@@ -523,6 +536,7 @@
     transition: 0.5s;
 }
 
+/* Список отзывов */
 .reviews {
     margin: 50px 0 20px;
 }
@@ -541,8 +555,13 @@
     background: #fff3f3;
     padding: 25px;
     cursor: pointer;
-    display: inline-flex;
+    /* display: inline-flex; */
     transition: 0.5s;
+    min-width: 250px;
+}
+
+.reviews-col-header {
+    display: flex;
 }
 
 .reviews-col:hover {
@@ -634,6 +653,234 @@
     to {
         top: 0;
         opacity: 1
+    }
+}
+
+/* ----------for small screen devices ( up to 1500px) ---------- */
+
+@media (max-width: 1500px) {
+    .gallery-img-1 {
+        width: 550px;
+    }
+
+    .check-form {
+        padding: 10px 20px;
+    }
+
+    .review-box {
+        width: 50%;
+    }
+
+    .check-form button {
+        width: 210px;
+    }
+}
+
+/* ----------for small screen devices ( up to 1280px) ---------- */
+
+@media (max-width: 1280px) {
+    .house-details {
+        margin-top: 95px;
+    }
+
+    .house-title h1 {
+        font-size: 26px;
+    }
+
+    .gallery-img-1 {
+        width: 500px;
+    }
+
+    .guest-field {
+        flex: 0;
+    }
+
+    .guest-field input {
+        width: 100px;
+        margin-right: 20px;
+    }
+
+    .check-form button {
+        width: 150px;
+        flex: auto;
+    }
+
+    .review-box {
+        width: 60%;
+    }
+
+    .reviews-row {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 48%));
+        column-gap: 4%;
+        row-gap: 2%;
+    }
+}
+
+/* ----------for small screen devices ( up to 1100px) ---------- */
+
+@media (max-width: 1100px) {
+    .gallery-img-1 {
+        width: 400px;
+    }
+
+    .check-form {
+        display: block;
+        text-align: center;
+    }
+
+    .check-form div {
+        padding: 10px 20px 0 20px;
+    }
+
+    .check-form input {
+        width: 250px;
+    }
+
+    .check-form button {
+        width: 250px;
+        flex: auto;
+    }
+
+    .guest-field input {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+
+    .review-box {
+        width: 70%;
+    }
+
+    .reviews-row {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 100%));
+        margin-bottom: 150px;
+    }
+}
+
+/* ----------for small screen devices ( up to 900px) ---------- */
+
+@media (max-width: 900px) {
+    .gallery {
+        grid-template-areas: 'first first''. .''. .';
+    }
+
+    .gallery .gallery-img-1 {
+        width: 100%;
+    }
+
+    .review-box {
+        width: 80%;
+    }
+}
+
+/* ----------for small screen devices ( up to 700px) ---------- */
+
+@media (max-width: 700px) {
+    .house-title h1 {
+        font-size: 22px;
+    }
+
+    .gallery{
+        margin-top: 10px;
+    }
+
+    .small-details h2 {
+        font-weight: 500;
+        font-size: 22px;
+    }
+
+    .small-details h4 {
+        text-align: right;
+        font-size: 20px;
+        margin-top: 5px;
+    }
+
+    .map h3 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .review-box {
+        width: 90%;
+    }
+
+    .small-details p {
+        display: block;
+    }
+}
+
+/* ----------for small screen devices ( up to 400px) ---------- */
+
+@media (max-width: 440px) {
+    .house-details {
+        padding: 0 7%;
+    }
+
+    .check-form input,
+    .check-form button,
+    .review-form button {
+        width: 200px;
+    }
+
+    .check-form {
+        padding: 10px;
+    }
+
+    .check-form div {
+        padding: 10px 0;
+    }
+
+    .home-desc {
+        margin-bottom: 25px;
+    }
+
+    .review-box {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .reviews-col {
+        padding: 10px;
+        min-width: 200px;
+    }
+
+    .reviews-col h3 {
+        font-size: 18px;
+    }
+
+    .host img {
+        width: 70px;
+        margin-right: 10px;
+    }
+
+    .host h2 {
+        font-size: 20px;
+    }
+
+    .contact-host {
+        margin: 0;
+        padding: 10px;
+    }
+
+    .line {
+        margin: 15px 0 30px;
+    }
+}
+
+/* ----------for small screen devices ( up to 310px) ---------- */
+@media (max-width: 310px) {
+
+    .flatpickr-calendar {
+        font-size: 12px;
+        width: 280px;
+    }
+
+    .flatpickr-weekdays {
+        width: 90%;
+    }
+
+    .dayContainer {
+        min-width: 260px;
+        max-width: 280px;
     }
 }
 
