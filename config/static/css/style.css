@@ -312,7 +312,6 @@
     border-radius: 8px;
     font-size: 20px;
     text-align: center;
-    /* margin-right: 100px; */
 }
 
 .check-form input[type="text"] {
@@ -337,7 +336,6 @@
 }
 
 .flatpickr-day.flatpickr-disabled {
-    /* background: #f7a8af; */
     color: rgb(148, 148, 148);
     text-decoration: line-through;
     text-decoration-color: #ff5361;
@@ -416,13 +414,8 @@
     font-weight: 500;
 }
 
-/* .host i {
-    color: #ff5361;
-} */
-
 .contact-host {
     display: inline-block;
-    /* margin: 40px 0 40px 120px; */
     margin: 0 10px 0 0;
     text-decoration: none;
     color: #555;
@@ -643,8 +636,6 @@
         opacity: 1
     }
 }
-
-/* ----------media query for hous details page---------- */
 
 /* ----- locality detail / place detail ----- */
 
