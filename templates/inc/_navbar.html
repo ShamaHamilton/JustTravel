@@ -1,3 +1,4 @@
+{% load static %}
 <nav id="navBar" class="navbar-white">
   <a href="{% url 'blogs:home' %}" class="logo">
     <!-- <img src="images/logo.png" class="logo"> -->
@@ -11,6 +12,15 @@
   </ul>
   <ul class='nav-btn'>
     {% if request.user.is_authenticated %}
+    <li>
+      <a href="{% url 'accounts:account' %}">
+        <div class="account-btn">
+          <div><img src="{% static 'images/menu.png' %}"></div>
+          <div><img src="{% static 'images/user.png' %}"></div>
+        </div>
+      </a>
+    </li>
+    <!-- <a href="{% url 'rooms:create_room' %}">Сдайте жилье</a> -->
     <!-- <li><a href="{% url 'rooms:create_room' %}" class="create_room-btn">Сдайте жилье</a></li> -->
     <li><a href="{% url 'accounts:logout' %}" class="logout-btn">Выход</a></li>
     {% else %}
@@ -18,15 +28,6 @@
     <li><a href="{% url 'accounts:register' %}" class="register-btn">Регистрация</a></li>
     {% endif %}
 
-    <div class="dropdown">
-      {% if request.user.is_authenticated %}
-        <i class="fa-solid fa-bars" onclick="myFunction()"></i>
-      <!-- <div id="myDropdown" class="dropdown-content">
-        <a href="{% url 'accounts:account' %}">Личный кабинет</a>
-        <a href="{% url 'rooms:create_room' %}">Сдайте жилье</a>
-      </div> -->
-      {% endif %}
-    </div>
     <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
   </ul>
 </nav>

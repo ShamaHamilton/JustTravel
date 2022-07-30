@@ -44,6 +44,28 @@ nav {
     color: #fff;
 }
 
+.account-btn{
+    border: none;
+    border-radius: 20px;
+    height: 32px;
+    width: 60px;
+    position: relative;
+    background: #fff;
+}
+.nav-btn{
+    display: flex;
+    align-items: center;
+}
+.nav-btn div{
+    display: inline-block;
+    text-align: center;
+}
+.account-btn img{
+    width: 18px;
+    height: 18px;
+    margin: 6px 0;
+}
+
 .create_room-btn,
 .logout-btn,
 .login-btn,
@@ -244,7 +266,7 @@ nav .fa-bars {
     }
 
     .hidemenu {
-        max-height: 300px;
+        max-height: 350px;
     }
 
     .header h1 {

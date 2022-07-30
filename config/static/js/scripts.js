@@ -4,6 +4,7 @@ function togglebtn() {
     navBar.classList.toggle("hidemenu");
 }
 
+// выделение активного окна
 $('.nav-links li a').each(function () {
     let location = window.location.protocol + '//' + window.location.host + window.location.pathname;
     let link = this.href;
@@ -13,27 +14,6 @@ $('.nav-links li a').each(function () {
 });
 
 $("#id_phone").mask("+7 (999) 999-99-99")
-
-
-/* Когда пользователь нажимает на кнопку,
-переключение между скрытием и отображением раскрывающегося содержимого */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Закройте выпадающее меню, если пользователь щелкает за его пределами
-window.onclick = function (event) {
-    if (!event.target.matches('.fa-bars')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
 
 // Add star rating
 const rating = document.querySelector('form[name=rating]');
