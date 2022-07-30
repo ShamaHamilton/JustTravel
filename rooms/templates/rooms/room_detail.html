@@ -27,17 +27,16 @@
         <div id="myModal" class="modal">
           <div class="modal-content">
             <div class="modal-header">
-              <span class="closeBtn">&times;</span>
               <h3>
-                <i class="fa-solid fa-star"></i>
-                {% if room.get_ratings.star__avg %}
-                {{ room.get_ratings.star__avg|floatformat:2 }}
-                {% else %}
-                <b>Новое</b>
-                {% endif %}
-                &#183;
-                Отзывов: {{ room.get_reviews.count }}
-              </h3>
+                <p><i class="fa-solid fa-star"></i>
+                  {% if room.get_ratings.star__avg %}
+                  {{ room.get_ratings.star__avg|floatformat:2 }}
+                  {% else %}
+                  <b>Новое</b>
+                  {% endif %}</p>
+                  <p>Отзывов: {{ room.get_reviews.count }}</p>
+                </h3>
+                <span class="closeBtn">&times;</span>
             </div>
             {% for review in room.get_reviews %}
             <div class="modal-body">

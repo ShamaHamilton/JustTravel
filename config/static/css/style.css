@@ -258,6 +258,86 @@
     font-size: 14px;
 }
 
+/* Modal */
+#modalBtn {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+    padding: 30px 20px;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal-header i {
+    font-size: 20px;
+}
+
+.modal-header h3 {
+    display: flex;
+}
+
+.modal-header .closeBtn {
+    color: #aaa;
+    font-size: 50px;
+    font-weight: bold;
+    position: absolute;
+    right: 50px;
+    margin-right: 0;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 600px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+.modal-body {
+    padding: 2px 16px;
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+/* end Modal */
+
 .gallery {
     display: grid;
     grid-gap: 10px;
@@ -584,78 +664,6 @@
     text-align: left;
 }
 
-#modalBtn {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-header {
-    padding: 30px 20px;
-}
-
-.modal-header span {
-    margin: 0;
-}
-
-.modal-header i {
-    font-size: 20px;
-}
-
-.closeBtn {
-    color: #aaa;
-    float: right;
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.closeBtn:hover,
-.closeBtn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 600px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 10px;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-}
-
-.modal-body {
-    padding: 2px 16px;
-}
-
-@keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0
-    }
-
-    to {
-        top: 0;
-        opacity: 1
-    }
-}
-
 /* ----------for small screen devices ( up to 1500px) ---------- */
 
 @media (max-width: 1500px) {
@@ -672,7 +680,7 @@
     }
 
     .check-form button {
-        width: 210px;
+        width: 200px;
     }
 }
 
@@ -695,8 +703,12 @@
         flex: 0;
     }
 
+    .check-form input {
+        width: 180px;
+    }
+
     .guest-field input {
-        width: 100px;
+        width: 130px;
         margin-right: 20px;
     }
 
@@ -779,7 +791,25 @@
         font-size: 22px;
     }
 
-    .gallery{
+    .modal-content {
+        padding: 10px;
+        width: 400px;
+    }
+
+    .modal-header .closeBtn {
+        font-size: 40px;
+        right: 30px;
+    }
+
+    .modal-body {
+        padding: 2px 8px;
+    }
+
+    .modal-body h3 {
+        font-size: 18px;
+    }
+
+    .gallery {
         margin-top: 10px;
     }
 
@@ -815,6 +845,32 @@
         padding: 0 7%;
     }
 
+    .modal-content {
+        padding: 5px;
+        width: 290px;
+    }
+
+    .modal-header .closeBtn {
+        font-size: 30px;
+        right: 25px;
+    }
+
+    .modal-content p {
+        font-size: 16px;
+    }
+
+    .modal-header i {
+        font-size: 15px;
+    }
+
+    .modal-body {
+        padding: 2px 5px;
+    }
+
+    .row .modal-body p {
+        margin-right: 0;
+    }
+
     .check-form input,
     .check-form button,
     .review-form button {
@@ -843,6 +899,10 @@
         min-width: 200px;
     }
 
+    .reviews-col-header img {
+        margin-right: 10px;
+    }
+
     .reviews-col h3 {
         font-size: 18px;
     }
@@ -868,6 +928,17 @@
 
 /* ----------for small screen devices ( up to 310px) ---------- */
 @media (max-width: 310px) {
+    .modal-header {
+        padding: 20px 15px;
+    }
+
+    .modal-content {
+        padding: 5px;
+        width: 240px;
+    }
+    .modal-header .closeBtn {
+        right: 20px;
+    }
 
     .flatpickr-calendar {
         font-size: 12px;
