@@ -1187,11 +1187,6 @@
     margin-bottom: 20px;
 }
 
-.login-register-form label {
-    font-size: 20px;
-    font-weight: 600;
-}
-
 .login-register-form input {
     border: 1px solid #ff5361;
     border-radius: 20px;
@@ -1218,4 +1213,69 @@
     background: #ff5361;
     color: #fff;
     transition: 0.5s;
+}
+
+/* ----------for small screen devices ( up to 500px) ---------- */
+@media (max-width: 500px) {
+    .container-login-register {
+        width: 300px;
+        padding: 0 25px 25px;
+    }
+
+    .container-login-register h1 {
+        font-size: 26px;
+    }
+
+    .login-register-form input {
+        width: 250px;
+    }
+
+    .login-register-form button {
+        width: 250px;
+    }
+}
+
+/* ----------for small screen devices ( up to 400px) ---------- */
+@media (max-width: 400px) {
+    .container-login-register {
+        width: 260px;
+        padding: 0 10px 25px;
+    }
+
+    .container-login-register h1 {
+        font-size: 26px;
+    }
+
+    .login-register-form input {
+        width: 230px;
+    }
+
+    .login-register-form button {
+        width: 230px;
+    }
+}
+
+/* ----------for small screen devices ( up to 310px) ---------- */
+@media (max-width: 310px) {
+    .container-login-register {
+        width: 230px;
+        padding: 0 10px 25px;
+    }
+    .login-register-form div {
+        margin-bottom: 10px;
+    }
+
+    .container-login-register h1 {
+        font-size: 26px;
+    }
+
+    .login-register-form input {
+        width: 200px;
+        font-size: 18px;
+    }
+
+    .login-register-form button {
+        width: 200px;
+        font-size: 18px;
+    }
 }
