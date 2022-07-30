@@ -56,4 +56,14 @@
     .pagination {
         margin-top: 20px;
     }
+    .pagination li{
+        margin: 8px 5px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+    }
+    .pagination img{
+        margin: 6px 5px;
+        width: 12px;
+    }
 }
