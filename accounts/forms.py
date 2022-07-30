@@ -65,12 +65,14 @@ class UserRegisterForm(ModelForm):
             user.save()
         return user
 
+
 class UserLoginForm(AuthenticationForm):
     """Форма аутентификации"""
     username = forms.CharField(
         label='',
         widget=forms.TextInput(attrs={
-            'placeholder': 'Номер телефона'
+            'placeholder': 'Номер телефона',
+            'id': 'id_phone'
         }),
     )
     password = forms.CharField(
