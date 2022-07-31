@@ -1,0 +1,24 @@
+<nav id="navBar" class="navbar-white">
+  <ul class="nav-links">
+    <li>
+      <a href="{% url 'accounts:active_reservs' %}">
+        Активных бронирований: {{ active_reservs|length }}
+      </a>
+    </li>
+
+    <li>
+      <a href="{% url 'accounts:inactive_reservs' %}">
+        Неактивных бронирований: {{ inactive_reservs|length }}
+      </a>
+    </li>
+
+    <li>
+      <a href="{% url 'accounts:canceled_reservs' %}">
+        Отмененных бронирований: {{ canceled_reservs|length }}
+      </a>
+    </li>
+  </ul>
+  <ul class='nav-btn'>
+    <li><a href="{% url 'accounts:personal_data' %}">Личные данные</a></li>
+  </ul>
+</nav>

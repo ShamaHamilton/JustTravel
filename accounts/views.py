@@ -2,10 +2,12 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.contrib.auth import login, logout
 from django.contrib import messages
+from datetime import date
+from django.db.models import Q
 
 from .models import CustomUser
+from rooms.models import Reservation
 from .forms import UserRegisterForm, UserLoginForm
-from accounts.functions.account_func import get_reservs_list
 
 
 def user_register(request):
@@ -48,24 +50,42 @@ def user_account(request):
     """Личный кабинет пользователя."""
     if request.user.rents_apartment:
         return redirect(reverse('landlord:account'))
-    else:
-        context = get_reservs_list(request)
-        return render(request, 'accounts/account.html', context)
+    return render(request, 'accounts/account.html')
 
 
-def user_active_reservs(request):
-    context = get_reservs_list(request)
-    return render(request, 'accounts/active.html', context)
+def active_reservs(request):
+    active_reservs = Reservation.objects.filter(
+        Q(user_id=request.user),
+        Q(status=True),
+        Q(end_date__gte=date.today())
+    )
+    context = {
+        'active_reservs': active_reservs
+    }
+    return render(request, 'accounts/account.html', context)
 
 
-def user_inactive_reservs(request):
-    context = get_reservs_list(request)
-    return render(request, 'accounts/inactive.html', context)
+def inactive_reservs(request):
+    inactive_reservs = Reservation.objects.filter(
+        Q(user_id=request.user),
+        Q(status=True),
+        Q(end_date__lt=date.today())
+    )
+    context = {
+        'inactive_reservs': inactive_reservs
+    }
+    return render(request, 'accounts/account.html', context)
 
 
-def user_canceled_reservs(request):
-    context = get_reservs_list(request)
-    return render(request, 'accounts/canceled.html', context)
+def canceled_reservs(request):
+    canceled_reservs = Reservation.objects.filter(
+        Q(user_id=request.user),
+        Q(status=False)
+    )
+    context = {
+        'canceled_reservs': canceled_reservs
+    }
+    return render(request, 'accounts/account.html', context)
 
 
 def personal_data(request):
