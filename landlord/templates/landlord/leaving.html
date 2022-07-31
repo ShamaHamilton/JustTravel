@@ -1,42 +1,10 @@
 {% extends 'base.html' %}
 
-
+{% load landlord_tag %}
 
 {% block content %}
 
-<nav id="navBar" class="navbar-white">
-  {% if request.user.is_authenticated %}
-  <ul class="nav-links">
-    <li>
-      <a href="{% url 'landlord:leaving' %}">
-        Выезжают: ({{ leaving|length }})
-      </a>
-    </li>
-
-    <li>
-      <a href="{% url 'landlord:reside' %}">
-        Проживают: ({{ reside|length }})
-      </a>
-    </li>
-
-    <li>
-      <a href="{% url 'landlord:will_arrive_soon' %}">
-        Скоро приедут: ({{ will_arrive_soon|length }})
-      </a>
-    </li>
-
-    <li>
-      <a href="{% url 'landlord:upcoming' %}">
-        Предстоящие: ({{ upcoming|length }})
-      </a>
-    </li>
-
-  </ul>
-  <ul class='nav-btn'>
-    <li><a href="#">Личные данные</a></li>
-  </ul>
-  {% endif %}
-</nav>
+{% landlord_nav %}
 
 <div class="container">
   <div class="container-info">
