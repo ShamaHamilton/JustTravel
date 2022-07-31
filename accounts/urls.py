@@ -9,10 +9,10 @@ from .views import (
 app_name = 'accounts'
 
 urlpatterns = [
+    path('', user_account, name='account'),
     path('register/', user_register, name='register'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
-    path('account/', user_account, name='account'),
     path('active/', active_reservs, name='active_reservs'),
     path('inactive/', inactive_reservs, name='inactive_reservs'),
     path('canceled/', canceled_reservs, name='canceled_reservs'),
