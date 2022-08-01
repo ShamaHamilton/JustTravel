@@ -4,50 +4,47 @@
 
 {% block content %}
 
-<div class="container">
-  <div class="list-container">
-    <h1>Населенные пункты Гунибского района</h1>
-    {% for locality in localities_list %}
-    <div class="container-left-col">
-      <div class="object">
-        <div class="object-img">
-          {% for image in locality.image.all %}
-            {% if forloop.counter0 < 1 %}
-              <img src="{{ image.photo.url }}">
-            {% endif %}
-          {% endfor %}
-        </div>
-        <div class="object-info">
-          <h3>{{ locality.title }}</h3>
-          <p>{{ locality.content|truncatewords_html:50|safe }}</p>
-          <br>
-          <div class="object-date">
-            <p>{{ locality.created_at|date:"d-m-Y" }}</p>
-          </div>
-          <a href="{{ locality.get_absolute_url }}">
-            <button type="submit">Читать далее...</button>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="container-right-col">
-      <div class="sidebar">
-        <h2>Интересные места:</h2>
-        {% for place in locality.places.all %}
-        <a href="{{ place.get_absolute_url }}">
-          <h3>{{ place }}</h3>
-        </a>
-        {% empty %}
-        <h3>Еще не добавлены :-(</h3>
+<div class="list-container">
+  <h1>Населенные пункты Гунибского района</h1>
+  {% for locality in localities_list %}
+  <div class="container-left-col">
+    <div class="object">
+      <div class="object-img">
+        {% for image in locality.image.all %}
+          {% if forloop.counter0 < 1 %}
+            <img src="{{ image.photo.url }}">
+          {% endif %}
         {% endfor %}
       </div>
+      <div class="object-info">
+        <h3>{{ locality.title }}</h3>
+        <p>{{ locality.content|truncatewords_html:50|safe }}</p>
+        <br>
+        <div class="object-date">
+          <p>{{ locality.created_at|date:"d-m-Y" }}</p>
+        </div>
+        <a href="{{ locality.get_absolute_url }}">
+          <button type="submit">Читать далее...</button>
+        </a>
+      </div>
     </div>
-    {% endfor%}
   </div>
 
-  {% include 'inc/_paginator.html' %}
-
+  <div class="container-right-col">
+    <div class="sidebar">
+      <h2>Интересные места:</h2>
+      {% for place in locality.places.all %}
+      <a href="{{ place.get_absolute_url }}">
+        <h3>{{ place }}</h3>
+      </a>
+      {% empty %}
+      <h3>Еще не добавлены :-(</h3>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor%}
 </div>
+
+{% include 'inc/_paginator.html' %}
 
 {% endblock %}

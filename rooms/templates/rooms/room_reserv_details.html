@@ -6,27 +6,27 @@
 
 {% account_header %}
 
-<div class="container">
-  <div class="container-info">
-    <div class="info">
-      <div class="info-item">
-        <a href="{{ current_reserv.apartment.get_absolute_url }}">
-          <h2>{{ current_reserv.apartment }}</h2>
-        </a>
-        <p>Прибытие: {{ current_reserv.start_date|date:"d-m-Y" }}</p>
-        <p>Выезд: {{ current_reserv.end_date|date:"d-m-Y" }}</p>
-        <p>Всего ночей: {{ current_reserv.days_total }}</p>
-        <p>Итого к оплате: {{ current_reserv.price_total|floatformat:"0g" }}&nbsp;р.</p>
-        <p>Оплата наличными.</p>
-        {% if current_reserv.status %}
-          <form method="post">
-            {% csrf_token %}
-            <button type="submit" class="cancel-btn">Уверены?</button>
-          </form>
-        {% endif %}
-      </div>
+
+<div class="container-info">
+  <div class="info">
+    <div class="info-item">
+      <a href="{{ current_reserv.apartment.get_absolute_url }}">
+        <h2>{{ current_reserv.apartment }}</h2>
+      </a>
+      <p>Прибытие: {{ current_reserv.start_date|date:"d-m-Y" }}</p>
+      <p>Выезд: {{ current_reserv.end_date|date:"d-m-Y" }}</p>
+      <p>Всего ночей: {{ current_reserv.days_total }}</p>
+      <p>Итого к оплате: {{ current_reserv.price_total|floatformat:"0g" }}&nbsp;р.</p>
+      <p>Оплата наличными.</p>
+      {% if current_reserv.status %}
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="cancel-btn">Уверены?</button>
+      </form>
+      {% endif %}
     </div>
   </div>
 </div>
 
-  {% endblock %}
+
+{% endblock %}

@@ -10,66 +10,64 @@
 
 {% account_header %}
 
-<div class="container">
-  <div class="container-info">
+<div class="container-info">
 
-    {% if active_reservs %}
-    <div class="info">
-      {% for reserv in active_reservs|dictsort:"start_date" %}
-      <div class="info-item">
-        <a href="{{ reserv.apartment.get_absolute_url }}">
-          <h2>{{ reserv.apartment }}</h2>
+  {% if active_reservs %}
+  <div class="info">
+    {% for reserv in active_reservs|dictsort:"start_date" %}
+    <div class="info-item">
+      <a href="{{ reserv.apartment.get_absolute_url }}">
+        <h2>{{ reserv.apartment }}</h2>
+      </a>
+      <p>Прибытие: {{ reserv.start_date|date:"d-m-Y" }}</p>
+      <p>Выезд: {{ reserv.end_date|date:"d-m-Y" }}</p>
+      <p>Всего ночей: {{ reserv.days_total }}</p>
+      <p>Итого к оплате: {{ reserv.price_total|floatformat:"0g" }}&nbsp;р.</p>
+      <p>Оплата наличными.</p>
+      <div class="cancel">
+        <a href="{{ reserv.get_absolute_url }}">
+          <h3>Отменить</h3>
         </a>
-        <p>Прибытие: {{ reserv.start_date|date:"d-m-Y" }}</p>
-        <p>Выезд: {{ reserv.end_date|date:"d-m-Y" }}</p>
-        <p>Всего ночей: {{ reserv.days_total }}</p>
-        <p>Итого к оплате: {{ reserv.price_total|floatformat:"0g" }}&nbsp;р.</p>
-        <p>Оплата наличными.</p>
-        <div class="cancel">
-          <a href="{{ reserv.get_absolute_url }}">
-            <h3>Отменить</h3>
-          </a>
-        </div>
       </div>
-      {% endfor %}
     </div>
-    {% endif %}
-
-    {% if inactive_reservs %}
-    <div class="info">
-      {% for reserv in inactive_reservs|dictsort:"start_date" %}
-      <div class="info-item">
-        <a href="{{ reserv.apartment.get_absolute_url }}">
-          <h2>{{ reserv.apartment }}</h2>
-        </a>
-        <p>Прибытие: {{ reserv.start_date|date:"d-m-Y" }}</p>
-        <p>Выезд: {{ reserv.end_date|date:"d-m-Y" }}</p>
-        <p>Всего ночей: {{ reserv.days_total }}</p>
-        <p>Итого к оплате: {{ reserv.price_total|floatformat:"0g" }}&nbsp;р.</p>
-        <p>Оплата наличными.</p>
-      </div>
-      {% endfor %}
-    </div>
-    {% endif %}
-
-    {% if canceled_reservs %}
-    <div class="info">
-      {% for reserv in canceled_reservs|dictsort:"start_date" %}
-      <div class="info-item">
-        <a href="{{ reserv.apartment.get_absolute_url }}">
-          <h2>{{ reserv.apartment }}</h2>
-        </a>
-        <p>Прибытие: {{ reserv.start_date|date:"d-m-Y" }}</p>
-        <p>Выезд: {{ reserv.end_date|date:"d-m-Y" }}</p>
-        <p>Всего ночей: {{ reserv.days_total }}</p>
-        <p>Итого к оплате: {{ reserv.price_total|floatformat:"0g" }}&nbsp;р.</p>
-        <p>Оплата наличными.</p>
-      </div>
-      {% endfor %}
-    </div>
-    {% endif %}
-
+    {% endfor %}
   </div>
+  {% endif %}
+
+  {% if inactive_reservs %}
+  <div class="info">
+    {% for reserv in inactive_reservs|dictsort:"start_date" %}
+    <div class="info-item">
+      <a href="{{ reserv.apartment.get_absolute_url }}">
+        <h2>{{ reserv.apartment }}</h2>
+      </a>
+      <p>Прибытие: {{ reserv.start_date|date:"d-m-Y" }}</p>
+      <p>Выезд: {{ reserv.end_date|date:"d-m-Y" }}</p>
+      <p>Всего ночей: {{ reserv.days_total }}</p>
+      <p>Итого к оплате: {{ reserv.price_total|floatformat:"0g" }}&nbsp;р.</p>
+      <p>Оплата наличными.</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if canceled_reservs %}
+  <div class="info">
+    {% for reserv in canceled_reservs|dictsort:"start_date" %}
+    <div class="info-item">
+      <a href="{{ reserv.apartment.get_absolute_url }}">
+        <h2>{{ reserv.apartment }}</h2>
+      </a>
+      <p>Прибытие: {{ reserv.start_date|date:"d-m-Y" }}</p>
+      <p>Выезд: {{ reserv.end_date|date:"d-m-Y" }}</p>
+      <p>Всего ночей: {{ reserv.days_total }}</p>
+      <p>Итого к оплате: {{ reserv.price_total|floatformat:"0g" }}&nbsp;р.</p>
+      <p>Оплата наличными.</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
 </div>
 
 {% endblock %}

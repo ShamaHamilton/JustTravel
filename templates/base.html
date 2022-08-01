@@ -18,18 +18,24 @@
 
 <body>
 
+  <!-- Навбар -->
   {% include 'inc/_navbar.html' %}
 
   <div class="container">
-    {% if messages %}
-    {% for message in messages %}
-    {{ message }}
-    {% endfor%}
-    {% endif %}
+
+    <div class="user-message">
+      {% if messages %}
+      {% for message in messages %}
+      {{ message }}
+      {% endfor%}
+      {% endif %}
+    </div>
+
+    {% block content %} CONTENT {% endblock %}
+
   </div>
 
-  {% block content %} CONTENT {% endblock %}
-
+  <!-- Футер -->
   {% include 'inc/_footer.html' %}
 
   <script src="{% static 'js/jquery.min.js' %}"></script>

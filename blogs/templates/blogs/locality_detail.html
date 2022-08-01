@@ -2,7 +2,6 @@
 
 {% block content %}
 
-<div class="container">
   <div class="detail-container">
 
     <div class="detail-left-col">
@@ -12,20 +11,19 @@
         <p>{{ locality.created_at|date:"d F Y" }} г.</p>
       </div>
     </div>
-    
-    <div class="detail-right-col">
-    <div class="right-col-img">
-      {% if locality.image %}
-      {% for image in locality.image.all %}
-      <a href="{{ image.photo.url }}" data-lightbox="gallery-imgs">
-        <img src="{{ image.photo.url }}" class="gallery-img">
-      </a>
-      {% endfor %}
-      {% endif %}
-    </div>
-  </div>
 
-</div>
-</div>
+    <div class="detail-right-col">
+      <div class="right-col-img">
+        {% if locality.image %}
+        {% for image in locality.image.all %}
+        <a href="{{ image.photo.url }}" data-lightbox="gallery-imgs">
+          <img src="{{ image.photo.url }}" class="gallery-img">
+        </a>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
 
 {% endblock %}
