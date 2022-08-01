@@ -1140,71 +1140,11 @@
     margin: 6px 0;
 }
 
-/* .header-account {
-    display: flex;
-    justify-content: space-between;
+#account_data{
+    display: block;
+    flex-wrap: wrap;
+    width: 400px;
 }
-
-.header-account li {
-    list-style: none;
-    display: inline-block;
-    margin: 10px 50px 10px 0;
-}
-
-.header-account li a {
-    text-decoration: none;
-    color: #000;
-} */
-
-/* nav.navbar-white .fa-bars {
-    color: #000;
-} */
-
-/* nav .fa-bars {
-    display: none;
-} */
-
-/* .active {
-    position: relative;
-}
-
-.active::after {
-    content: '';
-    background: #ff5361;
-    width: 35px;
-    height: 2px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -12px;
-    border-radius: 2px;
-} */
-
-/* .account-btn {
-    border: 1px solid #ff5361;
-    border-radius: 20px;
-    height: 32px;
-    width: 60px;
-    position: relative;
-} */
-
-/* .header-btn {
-    display: flex;
-    align-items: center;
-} */
-
-/* .nav-btn div {
-    display: inline-block;
-    text-align: center;
-} */
-
-/* .account-btn img {
-    width: 18px;
-    height: 18px;
-    margin: 6px 0;
-} */
-
-
 
 /* end header */
 

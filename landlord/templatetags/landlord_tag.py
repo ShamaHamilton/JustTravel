@@ -6,8 +6,8 @@ from rooms.models import RoomsApplicationModel, Reservation
 register = template.Library()
 
 
-@register.inclusion_tag('landlord/landlord_nav.html', takes_context=True)
-def landlord_nav(context):
+@register.inclusion_tag('landlord/landlord_header.html', takes_context=True)
+def landlord_header(context):
     request = context['request']
     landlord_apartments = RoomsApplicationModel.objects.filter(
         landlord_id=request.user

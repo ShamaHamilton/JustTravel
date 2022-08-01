@@ -4,25 +4,25 @@
   <ul class="header-links">
     <li>
       <a href="{% url 'landlord:leaving' %}">
-        Выезжают ( {{ leaving|length }} )
+        Выезжают ({{ leaving|length }})
       </a>
     </li>
 
     <li>
       <a href="{% url 'landlord:reside' %}">
-        Проживают ( {{ reside|length }} )
+        Проживают ({{ reside|length }})
       </a>
     </li>
 
     <li>
       <a href="{% url 'landlord:will_arrive_soon' %}">
-        Скоро приедут ( {{ will_arrive_soon|length }} )
+        Скоро приедут ({{ will_arrive_soon|length }})
       </a>
     </li>
 
     <li>
       <a href="{% url 'landlord:upcoming' %}">
-        Предстоящие ( {{ upcoming|length }} )
+        Предстоящие ({{ upcoming|length }})
       </a>
     </li>
   </ul>

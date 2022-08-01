@@ -7,9 +7,16 @@
 {% account_header %}
 
 <div class="container">
-  {{ user }} <br>
-  {{ user.phone }} <br>
-  {{ user.email }} <br>
+  <div class="container-info">
+
+    <div class="info" id=account_data>
+      <div class="info-item">
+        <h2>{{ user }}</h2>
+        <p>{{ user.phone }}</p>
+        <p>{{ user.email }}</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock content %}
