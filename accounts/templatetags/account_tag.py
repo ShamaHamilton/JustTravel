@@ -8,8 +8,8 @@ from rooms.models import Reservation
 register = template.Library()
 
 
-@register.inclusion_tag('accounts/account_nav.html', takes_context=True)
-def account_nav(context):
+@register.inclusion_tag('accounts/account_header.html', takes_context=True)
+def account_header(context):
     request = context['request']
     reservs = Reservation.objects.filter(user_id=request.user)
     active_reservs = []
