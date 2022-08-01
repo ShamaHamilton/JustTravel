@@ -10,4 +10,27 @@
 
 {% landlord_header %}
 
+<div class="container">
+  <div class="container-info">
+
+    {% if reservs %}
+    <div class="info">
+      {% for item in reservs|dictsort:"start_date" %}
+        <div class="info-item">
+          <h2>{{ item.user }}</h2>
+          <p>Прибытие: {{ item.start_date }}</p>
+          <p>Выезд: {{ item.end_date }}</p>
+          <p>Всего ночей: {{ item.days_total }}</p>
+          <p>К оплате: {{ item.price_total|floatformat:"0g" }} р.</p>
+        </div>
+      {% endfor %}
+
+    </div>
+    {% else %}
+      <p>{{ message }}</p>
+    {% endif %}
+
+  </div>
+</div>
+
 {% endblock %}

@@ -15,7 +15,7 @@ def leaving(request):
     landlord_apartments = RoomsApplicationModel.objects.filter(
         landlord_id=request.user
     )
-    leaving = []
+    reservs = []
     for apartment in landlord_apartments:
         apartment_reservs = Reservation.objects.filter(
             apartment_id=apartment.pk
@@ -24,9 +24,13 @@ def leaving(request):
             if (reserv.end_date == date.today() or
                 reserv.end_date == date.today() + timedelta(1) and
                 reserv.start_date < date.today()):
-                leaving.append(reserv)
-    context = {'leaving': leaving}
-    return render(request, 'landlord/leaving.html', context)
+                reservs.append(reserv)
+    if reservs:
+        context = {'reservs': reservs}
+    else:
+        message = 'Нет гостей, выезжающих сегодня.'
+        context = {'message': message}
+    return render(request, 'landlord/account.html', context)
 
 
 def reside(request):
@@ -34,7 +38,7 @@ def reside(request):
     landlord_apartments = RoomsApplicationModel.objects.filter(
         landlord_id=request.user
     )
-    reside = []
+    reservs = []
     for apartment in landlord_apartments:
         apartment_reservs = Reservation.objects.filter(
             apartment_id=apartment.pk
@@ -42,9 +46,13 @@ def reside(request):
         for reserv in apartment_reservs:
             if (reserv.start_date < date.today() and
                 reserv.end_date > date.today() + timedelta(1)):
-                reside.append(reserv)
-    context = {'reside': reside}
-    return render(request, 'landlord/reside.html', context)
+                reservs.append(reserv)
+    if reservs:
+        context = {'reservs': reservs}
+    else:
+        message = 'Сейчас у вас нет гостей.'
+        context = {'message': message}
+    return render(request, 'landlord/account.html', context)
 
 
 def will_arrive_soon(request):
@@ -52,7 +60,7 @@ def will_arrive_soon(request):
     landlord_apartments = RoomsApplicationModel.objects.filter(
         landlord_id=request.user
     )
-    will_arrive_soon = []
+    reservs = []
     for apartment in landlord_apartments:
         apartment_reservs = Reservation.objects.filter(
             apartment_id=apartment.pk
@@ -60,9 +68,13 @@ def will_arrive_soon(request):
         for reserv in apartment_reservs:
             if (reserv.start_date == date.today() or
                 reserv.start_date == date.today() + timedelta(1)):
-                will_arrive_soon.append(reserv)
-    context = {'will_arrive_soon': will_arrive_soon}
-    return render(request, 'landlord/will_arrive_soon.html', context)
+                reservs.append(reserv)
+    if reservs:
+        context = {'reservs': reservs}
+    else:
+        message = 'Нет гостей, прибывающих сегодня или завтра.'
+        context = {'message': message}
+    return render(request, 'landlord/account.html', context)
 
 
 def upcoming(request):
@@ -70,16 +82,20 @@ def upcoming(request):
     landlord_apartments = RoomsApplicationModel.objects.filter(
         landlord_id=request.user
     )
-    upcoming = []
+    reservs = []
     for apartment in landlord_apartments:
         apartment_reservs = Reservation.objects.filter(
             apartment_id=apartment.pk
         )
         for reserv in apartment_reservs:
             if (reserv.start_date > date.today() + timedelta(1)):
-                upcoming.append(reserv)
-    context = {'upcoming': upcoming}
-    return render(request, 'landlord/upcoming.html', context)
+                reservs.append(reserv)
+    if reservs:
+        context = {'reservs': reservs}
+    else:
+        message = 'У вас нет предстоящих бронирований.'
+        context = {'message': message}
+    return render(request, 'landlord/account.html', context)
 
 
 def personal_data(request):
