@@ -1,5 +1,7 @@
-<nav id="navBar" class="navbar-white">
-  <ul class="nav-links">
+{% load static %}
+<div class="container-header">
+
+  <ul class="header-links">
     <li>
       <a href="{% url 'accounts:active_reservs' %}">
         Активных бронирований: {{ active_reservs|length }}
@@ -18,7 +20,15 @@
       </a>
     </li>
   </ul>
-  <ul class='nav-btn'>
-    <li><a href="{% url 'accounts:personal_data' %}">Личные данные</a></li>
+
+  <ul class='header-btn'>
+    <li>
+      <a href="{% url 'accounts:personal_data' %}">
+        <div class="personal-btn">
+          <img src="{% static 'images/user.png' %}">
+        </div>
+      </a>
+    </li>
   </ul>
-</nav>
+
+</div>

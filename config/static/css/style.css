@@ -1100,6 +1100,114 @@
 
 /* ----- accounts ----- */
 
+
+/* header */
+.container-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 7% 0;
+}
+
+.header-links li,
+.header-btn li {
+    list-style: none;
+    display: inline-block;
+    margin: 10px 50px 0 0;
+}
+
+.header-links li a{
+    text-decoration: none;
+    color: #000;
+}
+
+.header-btn li{
+    margin: 0;
+}
+
+.personal-btn{
+    border: 1px solid #ff5361;
+    border-radius: 50%;
+    height: 37px;
+    width: 37px;
+    position: relative;
+    text-align: center;
+}
+
+.header-btn img{
+    width: 25px;
+    height: 25px;
+    margin: 6px 0;
+}
+
+/* .header-account {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-account li {
+    list-style: none;
+    display: inline-block;
+    margin: 10px 50px 10px 0;
+}
+
+.header-account li a {
+    text-decoration: none;
+    color: #000;
+} */
+
+/* nav.navbar-white .fa-bars {
+    color: #000;
+} */
+
+/* nav .fa-bars {
+    display: none;
+} */
+
+/* .active {
+    position: relative;
+}
+
+.active::after {
+    content: '';
+    background: #ff5361;
+    width: 35px;
+    height: 2px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -12px;
+    border-radius: 2px;
+} */
+
+/* .account-btn {
+    border: 1px solid #ff5361;
+    border-radius: 20px;
+    height: 32px;
+    width: 60px;
+    position: relative;
+} */
+
+/* .header-btn {
+    display: flex;
+    align-items: center;
+} */
+
+/* .nav-btn div {
+    display: inline-block;
+    text-align: center;
+} */
+
+/* .account-btn img {
+    width: 18px;
+    height: 18px;
+    margin: 6px 0;
+} */
+
+
+
+/* end header */
+
 .container-info {
     background: #F7F7F7;
     margin-top: 50px;

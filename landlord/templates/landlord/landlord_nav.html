@@ -1,5 +1,7 @@
-<nav id="navBar" class="navbar-white">
-  <ul class="nav-links">
+{% load static %}
+<div class="container-header">
+
+  <ul class="header-links">
     <li>
       <a href="{% url 'landlord:leaving' %}">
         Выезжают ( {{ leaving|length }} )
@@ -23,10 +25,16 @@
         Предстоящие ( {{ upcoming|length }} )
       </a>
     </li>
-
-  </ul>
-  <ul class='nav-btn'>
-    <li><a href="{% url 'accounts:personal_data' %}">Личные данные</a></li>
   </ul>
 
-</nav>
+  <ul class='header-btn'>
+    <li>
+      <a href="{% url 'landlord:personal_data' %}">
+        <div class="personal-btn">
+          <img src="{% static 'images/user.png' %}">
+        </div>
+      </a>
+    </li>
+  </ul>
+
+</div>

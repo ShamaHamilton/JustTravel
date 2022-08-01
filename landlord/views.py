@@ -84,4 +84,4 @@ def upcoming(request):
 
 def personal_data(request):
     context = CustomUser.objects.get(id=request.user.id)
-    return render(request, 'accounts/personal_data.html', {'user': context})
+    return render(request, 'landlord/personal_data.html', {'user': context})
