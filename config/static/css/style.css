@@ -1098,11 +1098,11 @@
     }
 }
 
-/* ----- accounts ----- */
+/* ----- account ----- */
 
 
 /* header */
-.container-header{
+.container-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1116,16 +1116,16 @@
     margin: 10px 50px 0 0;
 }
 
-.header-links li a{
+.header-links li a {
     text-decoration: none;
     color: #000;
 }
 
-.header-btn li{
+.header-btn li {
     margin: 0;
 }
 
-.personal-btn{
+.personal-btn {
     border: 1px solid #ff5361;
     border-radius: 50%;
     height: 37px;
@@ -1134,13 +1134,13 @@
     text-align: center;
 }
 
-.header-btn img{
+.header-btn img {
     width: 25px;
     height: 25px;
     margin: 6px 0;
 }
 
-#account_data{
+#account_data {
     display: block;
     flex-wrap: wrap;
     width: 400px;
@@ -1157,7 +1157,6 @@
 }
 
 .container-info p {
-    font-size: 20px;
     text-align: center;
 }
 
@@ -1175,6 +1174,11 @@
     border: 1px solid #999;
     padding: 15px;
     border-radius: 10px;
+}
+
+.info-item h2,
+.info-item a {
+    margin-bottom: 10px;
 }
 
 .info-item p {
@@ -1213,6 +1217,103 @@
     cursor: pointer;
     margin-top: 10px;
     font-weight: 600;
+}
+
+.header-active {
+    position: relative;
+}
+
+.header-active::after {
+    content: '';
+    background: #ff5361;
+    width: 50px;
+    height: 2px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -12px;
+    border-radius: 2px;
+}
+
+/* ----------for small screen devices ( up to 1280px) ---------- */
+@media (max-width: 1280px) {
+    .info {
+        width: 90%;
+    }
+
+    .container-info h2,
+    .container-info h3,
+    .container-info a {
+        font-size: 22px;
+    }
+
+    .container-info p {
+        font-size: 18px;
+    }
+}
+
+/* ----------for small screen devices ( up to 850px) ---------- */
+@media (max-width: 850px) {
+
+    /* header */
+    .container-header {
+        position: relative;
+        top: 0;
+        display: block;
+        width: 100%;
+        text-align: right;
+        max-height: 50px;
+    }
+
+    .header-links li {
+        display: block;
+    }
+
+    .header-links li,
+    .header-btn li {
+        margin-right: 7%;
+    }
+
+    .header-btn li {
+        margin-top: 20px;
+    }
+
+    /* end header */
+
+    .container-info {
+        margin-top: 200px;
+    }
+
+    .info {
+        width: 90%;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-row-gap: 15px;
+        grid-column-gap: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .info {
+        width: 90%;
+    }
+
+    .container-info h2,
+    .container-info h3,
+    .container-info a {
+        font-size: 20px;
+    }
+
+    .container-info p {
+        font-size: 16px;
+    }
+
+    .header-active::after {
+        width: 25px;
+        left: -40px;
+        transform: translate(0, 50%);
+        bottom: 50%;
+    }
 }
 
 /* ----- login / register ----- */
@@ -1309,6 +1410,7 @@
         width: 230px;
         padding: 0 10px 25px;
     }
+
     .login-register-form div {
         margin-bottom: 10px;
     }

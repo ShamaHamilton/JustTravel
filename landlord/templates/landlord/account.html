@@ -18,10 +18,10 @@
       {% for item in reservs|dictsort:"start_date" %}
         <div class="info-item">
           <h2>{{ item.user }}</h2>
-          <p>Прибытие: {{ item.start_date }}</p>
-          <p>Выезд: {{ item.end_date }}</p>
+          <p>Прибытие: {{ item.start_date|date:"d-m-Y" }}</p>
+          <p>Выезд: {{ item.end_date|date:"d-m-Y" }}</p>
           <p>Всего ночей: {{ item.days_total }}</p>
-          <p>К оплате: {{ item.price_total|floatformat:"0g" }} р.</p>
+          <p>К оплате: {{ item.price_total|floatformat:"0g" }}&nbsp;р.</p>
         </div>
       {% endfor %}
 
