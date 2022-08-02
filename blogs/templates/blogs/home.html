@@ -1,136 +1,54 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ru">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <link rel="stylesheet" href="{% static 'css/style_home.css' %}">
-  <link rel="stylesheet" href="{% static 'css/style_footer.css' %}">
-  <title>JustTravel</title>
-</head>
+{% block navbar %}
+  {% include 'inc/_home_header.html' %}
+{% endblock navbar %}
 
-<body>
+{% block content %}
 
-  <div class="header">
-    <nav id="navBar">
-      <a href="{% url 'blogs:home' %}" class="logo">JustTravel</a>
-      <ul class="nav-links">
-        <li><a href="{% url 'blogs:localities' %}">Населенные пункты</a></li>
-        <li><a href="{% url 'blogs:places' %}">Интересные места</a></li>
-        <li><a href="{% url 'rooms:rooms' %}">Жилье</a></li>
-      </ul>
-      <ul class='nav-btn'>
-        {% if request.user.is_authenticated %}
-        <li>
-          <a href="{% url 'accounts:account' %}">
-            <div class="account-btn">
-              <div><img src="{% static 'images/menu.png' %}"></div>
-              <div><img src="{% static 'images/user.png' %}"></div>
-            </div>
-          </a>
-        </li>
-        <!-- <li><a href="{% url 'rooms:create_room' %}" class="create_room-btn">Сдайте жилье</a></li> -->
-        <li><a href="{% url 'accounts:logout' %}" class="logout-btn">Выход</a></li>
-        {% else %}
-        <li><a href="{% url 'accounts:login' %}" class="login-btn">Вход</a></li>
-        <li><a href="{% url 'accounts:register' %}" class="register-btn">Регистрация</a></li>
+<h2 class="sub-title">Интересные места</h2>
+<div class="places">
+  {% for place in places_view %}
+  <a href="{{ place.get_absolute_url }}">
+    <div>
+      {% for image in place.image.all %}
+        {% if forloop.counter0 < 1 %}
+          <img src="{{ image.photo.url }}">
         {% endif %}
-      </ul>
-      <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
-    </nav>
-
-    <div class="container">
-      <h1></h1>
-      <div class="search-bar">
-        <form action="{% url 'rooms:search' %}" method="get">
-          <div class="location-input">
-            <label>Место</label>
-            <input type="text" name="place" placeholder="Куда направляетесь?" required>
-          </div>
-          <div>
-            <label>Прибытие</label>
-            <input type="date" name="start_date" placeholder="Укажите дату" required>
-          </div>
-          <div>
-            <label>Выезд</label>
-            <input type="date" name="end_date" placeholder="Укажите дату" required>
-          </div>
-          <div>
-            <label>Сколько гостей?</label>
-            <input type="text" placeholder="Добавить гостей">
-          </div>
-          <button type="submit"><img src="{%static 'images/search.png' %}"></button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <h2 class="sub-title">Интересные места</h2>
-    <div class="places">
-      {% for place in places_view %}
-      <a href="{{ place.get_absolute_url }}">
-        <div>
-          {% for image in place.image.all %}
-          {% if forloop.counter0 < 1 %} <img src="{{ image.photo.url }}">
-            {% endif %}
-            {% endfor %}
-            <span>
-              <h3>{{ place.title }}</h3>
-              <p>{{ place.category.title }}</p>
-            </span>
-        </div>
-      </a>
       {% endfor %}
+      <span>
+        <h3>{{ place.title }}</h3>
+        <p>{{ place.category.title }}</p>
+      </span>
     </div>
+  </a>
+  {% endfor %}
+</div>
 
-    <h2 class="sub-title">Населенные пункты</h2>
-    <div class="locality">
-      {% for locality in localities_view %}
-      <a href="{{ locality.get_absolute_url }}">
-        <div>
-          {% for image in locality.image.all %}
-          {% if forloop.counter0 < 1 %} <img src="{{ image.photo.url }}">
-            {% endif %}
-            {% endfor %}
-            <h3>{{ locality.title }}</h3>
-        </div>
-      </a>
+<h2 class="sub-title">Населенные пункты</h2>
+<div class="locality">
+  {% for locality in localities_view %}
+  <a href="{{ locality.get_absolute_url }}">
+    <div>
+      {% for image in locality.image.all %}
+        {% if forloop.counter0 < 1 %}
+          <img src="{{ image.photo.url }}">
+        {% endif %}
       {% endfor %}
+      <h3>{{ locality.title }}</h3>
     </div>
+  </a>
+  {% endfor %}
+</div>
 
-    <div class="about-msg">
-      <h2>About JustTravel</h2>
-      <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
-        in a piece of classical Latin literature from 45 BC, making it over 2000 years
-        old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,
-        looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum
-        passage, and going through the cites of the word in classical literature,
-        discovered the undoubtable source.</p>
-    </div>
+<div class="about-msg">
+  <h2>About JustTravel</h2>
+  <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
+    in a piece of classical Latin literature from 45 BC, making it over 2000 years
+    old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,
+    looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum
+    passage, and going through the cites of the word in classical literature,
+    discovered the undoubtable source.</p>
+</div>
 
-  </div>
-
-  {% include 'inc/_footer.html' %}
-
-  <script src="https://kit.fontawesome.com/4f4432713b.js" crossorigin="anonymous"></script>
-  <script src="{% static 'js/scripts.js' %}"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
-  <script>
-    config = {
-      "locale": "ru",
-      // dateFormat: "Y-m-d",
-      dateFormat: "d-m-Y",
-      minDate: "today",
-      disableMobile: "true",
-    }
-    datepickr = flatpickr("input[type=date]", config);
-  </script>
-</body>
-
-</html>
+{% endblock %}

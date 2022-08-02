@@ -19,7 +19,9 @@
 <body>
 
   <!-- Навбар -->
-  {% include 'inc/_navbar.html' %}
+  {% block navbar %}
+    {% include 'inc/_navbar.html' %}
+  {% endblock navbar %}
 
   <div class="container">
 

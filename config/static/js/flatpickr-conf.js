@@ -1,3 +1,14 @@
+
+// flatpickr на главной странице
+config = {
+    "locale": "ru",
+    // dateFormat: "Y-m-d",
+    dateFormat: "d-m-Y",
+    minDate: "today",
+    disableMobile: "true",
+}
+datepickr = flatpickr("input[type=date]", config);
+
 // Прибытие-настройки
 const value1 = JSON.parse(document.getElementById('value1').textContent);
 config1 = {

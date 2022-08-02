@@ -1,0 +1,54 @@
+{% load static %}
+<div class="header">
+  <nav id="navBar">
+    <a href="{% url 'blogs:home' %}" class="logo">JustTravel</a>
+    <ul class="nav-links">
+      <li><a href="{% url 'blogs:localities' %}">Населенные пункты</a></li>
+      <li><a href="{% url 'blogs:places' %}">Интересные места</a></li>
+      <li><a href="{% url 'rooms:rooms' %}">Жилье</a></li>
+    </ul>
+    <ul class='nav-btn'>
+      {% if request.user.is_authenticated %}
+      <li>
+        <a href="{% url 'accounts:account' %}">
+          <div class="account-btn">
+            <div><img src="{% static 'images/menu.png' %}"></div>
+            <div><img src="{% static 'images/user.png' %}"></div>
+          </div>
+        </a>
+      </li>
+      <!-- <li><a href="{% url 'rooms:create_room' %}" class="create_room-btn">Сдайте жилье</a></li> -->
+      <li><a href="{% url 'accounts:logout' %}" class="logout-btn">Выход</a></li>
+      {% else %}
+      <li><a href="{% url 'accounts:login' %}" class="login-btn">Вход</a></li>
+      <li><a href="{% url 'accounts:register' %}" class="register-btn">Регистрация</a></li>
+      {% endif %}
+    </ul>
+    <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
+  </nav>
+
+  <div class="container">
+    <h1></h1>
+    <div class="search-bar">
+      <form action="{% url 'rooms:search' %}" method="get">
+        <div class="location-input">
+          <label>Место</label>
+          <input type="text" name="place" placeholder="Куда направляетесь?" required>
+        </div>
+        <div>
+          <label>Прибытие</label>
+          <input type="date" name="start_date" placeholder="Укажите дату" required>
+        </div>
+        <div>
+          <label>Выезд</label>
+          <input type="date" name="end_date" placeholder="Укажите дату" required>
+        </div>
+        <div>
+          <label>Сколько гостей?</label>
+          <input type="text" placeholder="Добавить гостей">
+        </div>
+        <button type="submit"><img src="{%static 'images/search.png' %}"></button>
+      </form>
+    </div>
+  </div>
+</div>
