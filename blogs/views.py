@@ -26,7 +26,7 @@ class LocalitiesView(ListView):
 
     def get_queryset(self):
         """Метод для фильтрации объектов по условию."""
-        return Localities.objects.filter(is_published=True)
+        return Localities.objects.filter(is_published=True).prefetch_related('places')
 
 
 class LicalityDetailView(DetailView):
@@ -40,14 +40,13 @@ class LicalityDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         self.object.views = F('views') + 1
         self.object.save()
-        self.object.refresh_from_db()
         return context
 
 
 def places_list_view(request):
     """Список интересных мест."""
     places_list = Places.objects.filter(is_published=True)
-    paginator = Paginator(places_list, 2)
+    paginator = Paginator(places_list, 5)
     page_num = request.GET.get('page', 1)
     page_objects = paginator.get_page(page_num)
     context = {

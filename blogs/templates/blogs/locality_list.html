@@ -10,11 +10,7 @@
   <div class="container-left-col">
     <div class="object">
       <div class="object-img">
-        {% for image in locality.image.all %}
-          {% if forloop.counter0 < 1 %}
-            <img src="{{ image.photo.url }}">
-          {% endif %}
-        {% endfor %}
+        <img src="{{ locality.preview.url }}">
       </div>
       <div class="object-info">
         <h3>{{ locality.title }}</h3>
