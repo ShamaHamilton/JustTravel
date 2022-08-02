@@ -219,11 +219,11 @@ class RoomsApplicationModel(models.Model):
         return self.header
 
     def get_reviews(self):
-        """Возвращает список отзывов."""
+        """Возвращает список отзывов жилья."""
         return self.reviews_set.filter(status=True).order_by('-id')
 
     def get_ratings(self):
-        """Возвращает список оценок."""
+        """Возвращает среднюю оценку жилья."""
         return self.rating_set.filter(status=True).aggregate(Avg('star'))
 
     def get_absolute_url(self):
@@ -365,3 +365,4 @@ class Reviews(models.Model):
     class Meta:
         verbose_name = 'отзыв'
         verbose_name_plural = 'отзывы'
+        ordering = ['-created_at']

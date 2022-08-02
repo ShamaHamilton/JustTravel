@@ -15,30 +15,30 @@
     <div class="row">
       <div>
         <p><i class="fa-solid fa-star"></i>
-          {% if room.get_ratings.star__avg %}
-          {{ room.get_ratings.star__avg|floatformat:2 }}
+          {% if rating %}
+            {{ rating.value__avg|floatformat:2 }}
           {% else %}
           <b>Новое</b>
           {% endif %}
         </p>
       </div>
       <div>
-        <span id="modalBtn">Отзывов: {{ room.get_reviews.count }}</span>
+        <span id="modalBtn">Отзывов: {{ reviews.count }}</span>
         <div id="myModal" class="modal">
           <div class="modal-content">
             <div class="modal-header">
               <h3>
                 <p><i class="fa-solid fa-star"></i>
-                  {% if room.get_ratings.star__avg %}
-                  {{ room.get_ratings.star__avg|floatformat:2 }}
+                  {% if rating %}
+                    {{ rating.value__avg|floatformat:2 }}
                   {% else %}
-                  <b>Новое</b>
+                    <b>Новое</b>
                   {% endif %}</p>
-                  <p>Отзывов: {{ room.get_reviews.count }}</p>
+                  <p>Отзывов: {{ room.reviews.count }}</p>
                 </h3>
                 <span class="closeBtn">&times;</span>
             </div>
-            {% for review in room.get_reviews %}
+            {% for review in reviews %}
             <div class="modal-body">
               <h3>{{ review.user }}</h3>
               <p>{{ review.review }}</p>
@@ -211,7 +211,7 @@
   <!-- Список отзывов -->
   <div class="reviews">
     <div class="reviews-row">
-      {% for review in room.get_reviews|slice:":6" %}
+      {% for review in reviews|slice:":6" %}
       <div class="reviews-col">
         <div class="reviews-col-header">
           <div>

@@ -1,7 +1,6 @@
 from .forms import CreateRoomForm, ReservationForm, RatingForm, ReviewForm
-from .models import Rating, RoomsApplicationModel, Reservation
+from .models import Rating, RoomsApplicationModel, Reservation, Reviews, RatingStar
 from .import constants
-from .functions.rooms_func import get_reservs_date
 
 from django.http import HttpResponse
 from django.views.generic.base import View
@@ -12,6 +11,8 @@ from django.forms import modelform_factory
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth import get_user_model
+from datetime import date, timedelta
+from django.db.models import Avg
 User = get_user_model()
 
 
@@ -89,14 +90,54 @@ class RoomsView(ListView):
         return RoomsApplicationModel.objects.filter(status=True)
 
 
+def get_reservs_date(kwargs):
+    room = RoomsApplicationModel.objects.get(pk=kwargs['pk'])
+    # Извлечение броней связанных с данным жильем
+    reservs = Reservation.objects.filter(
+        Q(apartment_id=room.pk),
+        Q(status=True),
+        Q(end_date__gt=date.today())
+    )
+    reserv_days_in = []      # Список занятых дат прибытия
+    reserv_days_out = []     # Список занятых дат выезда
+    # Извлечение списка зарезервированных дат для передачи в календарь
+    for reserv in reservs:
+        start_day = reserv.start_date
+        end_day = reserv.end_date
+        delta_days = int((end_day - start_day).days)
+        day = 0
+        for day in range(delta_days):
+            reserv_days_in.append(start_day.strftime("%d-%m-%Y"))
+            reserv_days_out.append(end_day.strftime("%d-%m-%Y"))
+            start_day += timedelta(days=1)
+            end_day -= timedelta(days=1)
+    reserv_days_in.sort()   # Сортировка дат по возрастанию
+    reserv_days_out.sort()  # Сортировка дат по возрастанию
+    room.views += 1
+    room.save()
+    return(reserv_days_in, reserv_days_out)
+
+
 class RoomDetailView(DetailView):
+    """Подробная информация о жилье."""
     model = RoomsApplicationModel
     template_name = 'rooms/room_detail.html'
     context_object_name = 'room'
+    queryset = RoomsApplicationModel.objects.select_related('landlord')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         reserv_days_in, reserv_days_out = get_reservs_date(self.kwargs)
+        rating = RatingStar.objects.filter(
+            Q(rating__apartment=self.kwargs['pk']),
+            Q(rating__status=True)
+        ).aggregate(Avg('value'))
+        reviews = Reviews.objects.filter(
+            Q(apartment=self.kwargs['pk']),
+            Q(status=True)
+        ).select_related()
+        context['rating'] = rating
+        context['reviews'] = reviews
         context['reserv'] = ReservationForm()
         context['star_form'] = RatingForm()
         context['review_form'] = ReviewForm()
