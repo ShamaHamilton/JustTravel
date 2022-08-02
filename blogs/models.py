@@ -2,6 +2,11 @@ from django.db import models
 from django.urls import reverse
 
 
+def localities_preview_upload_to(instance, filename):
+    """Динамический путь для сохранения превью населенных пунктов."""
+    return f'photos/{instance.title}/{instance.title}/{filename}'
+
+
 class Localities(models.Model):
     """Населенные пункты."""
     title = models.CharField(
@@ -19,11 +24,11 @@ class Localities(models.Model):
         verbose_name='содержание',
         blank=True,
     )
-    # photo = models.ImageField(
-    #     verbose_name='изображение',
-    #     upload_to=localities_photo_upload_to,
-    #     blank=True,
-    # )
+    preview = models.ImageField(
+        verbose_name='превью',
+        upload_to=localities_preview_upload_to,
+        blank=True,
+    )
     created_at = models.DateTimeField(
         verbose_name='дата создания',
         auto_now_add=True,
@@ -82,7 +87,12 @@ class LocalityImages(models.Model):
         ordering = ['category']
 
 
-class InterestingPlaces(models.Model):
+def places_preview_upload_to(instance, filename):
+    """Динамический путь для сохранения изображений интересных мест."""
+    return f'photos/{instance.category.title}/{instance.title}/{filename}'
+
+
+class Places(models.Model):
     """Интересные места."""
     title = models.CharField(
         verbose_name='заголовок',
@@ -97,6 +107,11 @@ class InterestingPlaces(models.Model):
     )
     content = models.TextField(
         verbose_name='содержание',
+        blank=True,
+    )
+    preview = models.ImageField(
+        verbose_name='изображение',
+        upload_to=places_preview_upload_to,
         blank=True,
     )
     created_at = models.DateTimeField(
@@ -144,7 +159,7 @@ def intresting_place_photo_upload_to(instance, filename):
 
 class PlaceImages(models.Model):
     category_place = models.ForeignKey(
-        InterestingPlaces,
+        Places,
         on_delete=models.CASCADE,
         verbose_name='место',
         related_name='image',

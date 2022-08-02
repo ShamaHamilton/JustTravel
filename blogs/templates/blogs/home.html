@@ -8,14 +8,10 @@
 
 <h2 class="sub-title">Интересные места</h2>
 <div class="places">
-  {% for place in places_view %}
+  {% for place in places %}
   <a href="{{ place.get_absolute_url }}">
     <div>
-      {% for image in place.image.all %}
-        {% if forloop.counter0 < 1 %}
-          <img src="{{ image.photo.url }}">
-        {% endif %}
-      {% endfor %}
+      <img src="{{ place.preview.url }}">
       <span>
         <h3>{{ place.title }}</h3>
         <p>{{ place.category.title }}</p>
@@ -27,14 +23,10 @@
 
 <h2 class="sub-title">Населенные пункты</h2>
 <div class="locality">
-  {% for locality in localities_view %}
+  {% for locality in localities %}
   <a href="{{ locality.get_absolute_url }}">
     <div>
-      {% for image in locality.image.all %}
-        {% if forloop.counter0 < 1 %}
-          <img src="{{ image.photo.url }}">
-        {% endif %}
-      {% endfor %}
+      <img src="{{ locality.preview.url }}">
       <h3>{{ locality.title }}</h3>
     </div>
   </a>

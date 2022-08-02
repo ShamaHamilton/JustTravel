@@ -3,15 +3,15 @@ from django.views.generic import ListView, DetailView
 from django.db.models import F
 from django.core.paginator import Paginator
 
-from .models import Localities, InterestingPlaces
+from .models import Localities, Places
 
 
 def home(request):
-    places_view = InterestingPlaces.objects.filter(is_published=True)
-    localities_view = Localities.objects.filter(is_published=True)
+    places = Places.objects.filter(is_published=True).select_related()
+    localities = Localities.objects.filter(is_published=True)
     context = {
-        'places_view': places_view,
-        'localities_view': localities_view,
+        'places': places,
+        'localities': localities,
     }
     return render(request, 'blogs/home.html', context)
 
@@ -46,7 +46,7 @@ class LicalityDetailView(DetailView):
 
 def places_list_view(request):
     """Список интересных мест."""
-    places_list = InterestingPlaces.objects.filter(is_published=True)
+    places_list = Places.objects.filter(is_published=True)
     paginator = Paginator(places_list, 2)
     page_num = request.GET.get('page', 1)
     page_objects = paginator.get_page(page_num)
@@ -58,7 +58,7 @@ def places_list_view(request):
 
 def place_detail_view(request, slug):
     """Детальная информация об интересном месте."""
-    place = InterestingPlaces.objects.get(slug=slug)
+    place = Places.objects.get(slug=slug)
     place.views += 1
     place.save()
     context = {

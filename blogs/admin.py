@@ -3,7 +3,7 @@ from django.utils.safestring import mark_safe
 from django import forms
 from ckeditor.widgets import CKEditorWidget
 
-from .models import Localities, LocalityImages, InterestingPlaces, PlaceImages
+from .models import Localities, LocalityImages, Places, PlaceImages
 
 
 class LocalitiesAdminForm(forms.ModelForm):
@@ -32,6 +32,7 @@ class LocalitiesAdmin(admin.ModelAdmin):
         'title',
         'slug',
         'content',
+        'preview',
         'created_at',
         'updated_at',
         'is_published',
@@ -43,16 +44,16 @@ class LocalitiesAdmin(admin.ModelAdmin):
 admin.site.register(Localities, LocalitiesAdmin)
 
 
-class InterestingPlacesAdminForm(forms.ModelForm):
+class PlacesAdminForm(forms.ModelForm):
     content = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
-        model = InterestingPlaces
+        model = Places
         fields = '__all__'
 
 
-class InterestingPlacesAdmin(admin.ModelAdmin):
-    form = InterestingPlacesAdminForm
+class PlacesAdmin(admin.ModelAdmin):
+    form = PlacesAdminForm
     prepopulated_fields = {'slug': ('title',)}
     save_as = True
     list_display = (
@@ -72,6 +73,7 @@ class InterestingPlacesAdmin(admin.ModelAdmin):
         'slug',
         'category',
         'content',
+        'preview',
         'created_at',
         'updated_at',
         'is_published',
@@ -81,7 +83,7 @@ class InterestingPlacesAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
-admin.site.register(InterestingPlaces, InterestingPlacesAdmin)
+admin.site.register(Places, PlacesAdmin)
 
 
 class LocalityImagesAdmin(admin.ModelAdmin):
