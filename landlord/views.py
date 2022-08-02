@@ -18,7 +18,7 @@ def leaving(request):
         Q(end_date=date.today()) |
         Q(end_date=date.today()+timedelta(1)) &
         Q(start_date__gt=date.today())
-    ).order_by('start_date')
+    ).order_by('start_date').select_related()
     if reservs:
         context = {'reservs': reservs}
     else:
@@ -33,7 +33,7 @@ def reside(request):
         Q(apartment__status=True),
         Q(start_date__lt=date.today()),
         Q(end_date__gt=date.today()+timedelta(1))
-    ).order_by('start_date')
+    ).order_by('start_date').select_related()
     if reservs:
         context = {'reservs': reservs}
     else:
@@ -48,7 +48,7 @@ def will_arrive_soon(request):
         Q(apartment__status=True),
         Q(start_date=date.today()) |
         Q(start_date=date.today()+timedelta(1))
-    ).order_by('start_date')
+    ).order_by('start_date').select_related()
     if reservs:
         context = {'reservs': reservs}
     else:
@@ -63,7 +63,7 @@ def upcoming(request):
         Q(apartment__status=True),
         Q(status=True),
         Q(start_date__gt=date.today()+timedelta(1))
-    ).order_by('start_date')
+    ).order_by('start_date').select_related()
     if reservs:
         context = {'reservs': reservs}
     else:
