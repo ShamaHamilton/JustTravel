@@ -4,7 +4,7 @@ from django.db.models import Q
 from datetime import date, timedelta
 
 from accounts.models import CustomUser
-from rooms.models import RoomsApplicationModel, Reservation
+from rooms.models import Reservation
 
 def account(request):
     return render(request, 'landlord/account.html')
@@ -12,92 +12,65 @@ def account(request):
 
 def leaving(request):
     """Выезжают."""
-    landlord_apartments = RoomsApplicationModel.objects.filter(
-        landlord_id=request.user
-    )
-    reservs = []
-    for apartment in landlord_apartments:
-        apartment_reservs = Reservation.objects.filter(
-            apartment_id=apartment.pk
-        )
-        for reserv in apartment_reservs:
-            if (reserv.end_date == date.today() or
-                reserv.end_date == date.today() + timedelta(1) and
-                reserv.start_date < date.today()):
-                reservs.append(reserv)
+    reservs = Reservation.objects.filter(
+        Q(apartment__landlord=request.user),
+        Q(apartment__status=True),
+        Q(end_date=date.today()) |
+        Q(end_date=date.today()+timedelta(1)) &
+        Q(start_date__gt=date.today())
+    ).order_by('start_date')
     if reservs:
         context = {'reservs': reservs}
     else:
-        message = 'Нет гостей, выезжающих сегодня.'
-        context = {'message': message}
+        context = {'message': 'Нет гостей, выезжающих сегодня или завтра.'}
     return render(request, 'landlord/account.html', context)
 
 
 def reside(request):
     """Проживают."""
-    landlord_apartments = RoomsApplicationModel.objects.filter(
-        landlord_id=request.user
-    )
-    reservs = []
-    for apartment in landlord_apartments:
-        apartment_reservs = Reservation.objects.filter(
-            apartment_id=apartment.pk
-        )
-        for reserv in apartment_reservs:
-            if (reserv.start_date < date.today() and
-                reserv.end_date > date.today() + timedelta(1)):
-                reservs.append(reserv)
+    reservs = Reservation.objects.filter(
+        Q(apartment__landlord=request.user),
+        Q(apartment__status=True),
+        Q(start_date__lt=date.today()),
+        Q(end_date__gt=date.today()+timedelta(1))
+    ).order_by('start_date')
     if reservs:
         context = {'reservs': reservs}
     else:
-        message = 'Сейчас у вас нет гостей.'
-        context = {'message': message}
+        context = {'message': 'Сейчас у вас нет гостей.'}
     return render(request, 'landlord/account.html', context)
 
 
 def will_arrive_soon(request):
     """Скоро приедут."""
-    landlord_apartments = RoomsApplicationModel.objects.filter(
-        landlord_id=request.user
-    )
-    reservs = []
-    for apartment in landlord_apartments:
-        apartment_reservs = Reservation.objects.filter(
-            apartment_id=apartment.pk
-        )
-        for reserv in apartment_reservs:
-            if (reserv.start_date == date.today() or
-                reserv.start_date == date.today() + timedelta(1)):
-                reservs.append(reserv)
+    reservs = Reservation.objects.filter(
+        Q(apartment__landlord=request.user),
+        Q(apartment__status=True),
+        Q(start_date=date.today()) |
+        Q(start_date=date.today()+timedelta(1))
+    ).order_by('start_date')
     if reservs:
         context = {'reservs': reservs}
     else:
-        message = 'Нет гостей, прибывающих сегодня или завтра.'
-        context = {'message': message}
+        context = {'message': 'Нет гостей, прибывающих сегодня или завтра.'}
     return render(request, 'landlord/account.html', context)
 
 
 def upcoming(request):
     """Предстоящие."""
-    landlord_apartments = RoomsApplicationModel.objects.filter(
-        landlord_id=request.user
-    )
-    reservs = []
-    for apartment in landlord_apartments:
-        apartment_reservs = Reservation.objects.filter(
-            apartment_id=apartment.pk
-        )
-        for reserv in apartment_reservs:
-            if (reserv.start_date > date.today() + timedelta(1)):
-                reservs.append(reserv)
+    reservs = Reservation.objects.filter(
+        Q(apartment__landlord=request.user),
+        Q(apartment__status=True),
+        Q(status=True),
+        Q(start_date__gt=date.today()+timedelta(1))
+    ).order_by('start_date')
     if reservs:
         context = {'reservs': reservs}
     else:
-        message = 'У вас нет предстоящих бронирований.'
-        context = {'message': message}
+        context = {'message': 'У вас нет предстоящих бронирований.'}
     return render(request, 'landlord/account.html', context)
 
 
 def personal_data(request):
-    context = CustomUser.objects.get(id=request.user.id)
-    return render(request, 'landlord/personal_data.html', {'user': context})
+    user = CustomUser.objects.get(id=request.user.id)
+    return render(request, 'landlord/personal_data.html', {'user': user})

@@ -14,7 +14,7 @@
 
   {% if reservs %}
   <div class="info">
-    {% for item in reservs|dictsort:"start_date" %}
+    {% for item in reservs %}
     <div class="info-item">
       <h2>{{ item.user }}</h2>
       <p>Прибытие: {{ item.start_date|date:"d-m-Y" }}</p>
