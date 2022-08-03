@@ -256,6 +256,9 @@ class Reservation(models.Model):
         verbose_name='имя пользователя',
         blank=True,
     )
+    guests = models.PositiveSmallIntegerField(
+        verbose_name='гостей'
+    )
     days_total = models.IntegerField(
         verbose_name='всего дней',
         blank=True,

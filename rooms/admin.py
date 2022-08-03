@@ -133,6 +133,7 @@ class ReservationAdmin(admin.ModelAdmin):
         'status',
         'start_date',
         'end_date',
+        'guests',
         'days_total',
         'price_total',
     )
@@ -145,6 +146,7 @@ class ReservationAdmin(admin.ModelAdmin):
         'start_date',
         'end_date',
         'user',
+        'guests',
         'days_total',
         'price_total',
         'status',
