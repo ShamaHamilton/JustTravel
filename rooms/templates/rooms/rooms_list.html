@@ -16,8 +16,12 @@
         </div>
         <div class="object-info">
           <p>Расположение: {{ item.location }}</p>
-          <h3>{{ item.housing_header }}</h3>
-          <p>1 Bedroom / 1 Bathroom / Wifi / Kitchen</p>
+          <h3>{{ item.header }}</h3>
+          <ul>
+            <li><p>Кроватей: {{ item.beds }}</p></li><p class="slash">&nbsp;/&nbsp;</p>
+            <li><p>Ванная: {{ item.bathroom }}</p></li><p class="slash">&nbsp;/&nbsp;</p>
+            <li><p>{{ item.popular_amenities }}</p></li>
+          </ul>
           <p><i class="fa-solid fa-star"></i>
             {% if item.get_ratings.star__avg %}
               {{ item.get_ratings.star__avg|floatformat:2 }}
