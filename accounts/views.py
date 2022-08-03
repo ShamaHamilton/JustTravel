@@ -72,7 +72,7 @@ def inactive_reservs(request):
         Q(end_date__lt=date.today())
     ).select_related()
     context = {
-        'inactive_reservs': inactive_reservs
+        'reservs': inactive_reservs
     }
     return render(request, 'accounts/account.html', context)
 
@@ -83,7 +83,7 @@ def canceled_reservs(request):
         Q(status=False)
     ).select_related()
     context = {
-        'canceled_reservs': canceled_reservs
+        'reservs': canceled_reservs
     }
     return render(request, 'accounts/account.html', context)
 

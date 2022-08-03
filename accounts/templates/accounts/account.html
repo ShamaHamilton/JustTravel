@@ -12,9 +12,10 @@
 
 <div class="container-info">
 
+  <!-- активные резервы -->
   {% if active_reservs %}
   <div class="info">
-    {% for reserv in active_reservs|dictsort:"start_date" %}
+    {% for reserv in active_reservs %}
     <div class="info-item">
       <a href="{{ reserv.apartment.get_absolute_url }}">
         <h2>{{ reserv.apartment }}</h2>
@@ -35,27 +36,10 @@
   </div>
   {% endif %}
 
-  {% if inactive_reservs %}
+  <!-- неактивные или отмененные резервы -->
+  {% if reservs %}
   <div class="info">
-    {% for reserv in inactive_reservs|dictsort:"start_date" %}
-    <div class="info-item">
-      <a href="{{ reserv.apartment.get_absolute_url }}">
-        <h2>{{ reserv.apartment }}</h2>
-      </a>
-      <p>Прибытие: {{ reserv.start_date|date:"d-m-Y" }}</p>
-      <p>Выезд: {{ reserv.end_date|date:"d-m-Y" }}</p>
-      <p>Гостей: {{ reserv.guests }}</p>
-      <p>Всего ночей: {{ reserv.days_total }}</p>
-      <p>Итого к оплате: {{ reserv.price_total|floatformat:"0g" }}&nbsp;р.</p>
-      <p>Оплата наличными.</p>
-    </div>
-    {% endfor %}
-  </div>
-  {% endif %}
-
-  {% if canceled_reservs %}
-  <div class="info">
-    {% for reserv in canceled_reservs|dictsort:"start_date" %}
+    {% for reserv in reservs %}
     <div class="info-item">
       <a href="{{ reserv.apartment.get_absolute_url }}">
         <h2>{{ reserv.apartment }}</h2>
