@@ -19,21 +19,21 @@ def landlord_header(context):
         Q(start_date__lt=date.today()),
         Q(end_date=date.today()) |
         Q(end_date=date.today() + timedelta(1))
-    )
+    ).count()
     # Проживают
     reside = reservs.filter(
         Q(start_date__lt=date.today()),
         Q(end_date__gt=date.today())
-    )
+    ).count()
     # Скоро приедут
     will_arrive_soon = reservs.filter(
         Q(start_date=date.today()) |
         Q(start_date=date.today() + timedelta(1))
-    )
+    ).count()
     # Предстоящие
     upcoming = reservs.filter(
         Q(start_date__gte=date.today())
-    )
+    ).count()
     context = {
         'leaving': leaving,
         'reside': reside,
