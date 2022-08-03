@@ -9,7 +9,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.forms import modelform_factory
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, F
 from django.contrib.auth import get_user_model
 from datetime import date, timedelta
 from django.db.models import Avg
@@ -91,10 +91,9 @@ class RoomsView(ListView):
 
 
 def get_reservs_date(kwargs):
-    room = RoomsApplicationModel.objects.get(pk=kwargs['pk'])
     # Извлечение броней связанных с данным жильем
     reservs = Reservation.objects.filter(
-        Q(apartment_id=room.pk),
+        Q(apartment_id=kwargs['pk']),
         Q(status=True),
         Q(end_date__gt=date.today())
     )
@@ -111,10 +110,7 @@ def get_reservs_date(kwargs):
             reserv_days_out.append(end_day.strftime("%d-%m-%Y"))
             start_day += timedelta(days=1)
             end_day -= timedelta(days=1)
-    reserv_days_in.sort()   # Сортировка дат по возрастанию
-    reserv_days_out.sort()  # Сортировка дат по возрастанию
-    room.views += 1
-    room.save()
+    reserv_days_out.append(date.today().strftime("%d-%m-%Y"))
     return(reserv_days_in, reserv_days_out)
 
 
@@ -143,6 +139,8 @@ class RoomDetailView(DetailView):
         context['review_form'] = ReviewForm()
         context['reserv_days_in'] = reserv_days_in
         context['reserv_days_out'] = reserv_days_out
+        self.object.views += 1
+        self.object.save()
         return context
 
 
