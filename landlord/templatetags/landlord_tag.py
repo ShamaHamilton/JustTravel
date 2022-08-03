@@ -2,7 +2,7 @@ from django import template
 from django.db.models import Q
 from datetime import date, timedelta
 
-from rooms.models import RoomsApplicationModel, Reservation
+from rooms.models import Reservation
 
 register = template.Library()
 
