@@ -4,19 +4,19 @@
   <ul class="header-links">
     <li>
       <a href="{% url 'accounts:active_reservs' %}">
-        Активных: {{ active_reservs|length }}
+        Активных: {{ active_reservs}}
       </a>
     </li>
 
     <li>
       <a href="{% url 'accounts:inactive_reservs' %}">
-        Неактивных: {{ inactive_reservs|length }}
+        Неактивных: {{ inactive_reservs }}
       </a>
     </li>
 
     <li>
       <a href="{% url 'accounts:canceled_reservs' %}">
-        Отмененных: {{ canceled_reservs|length }}
+        Отмененных: {{ canceled_reservs }}
       </a>
     </li>
   </ul>

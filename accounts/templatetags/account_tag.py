@@ -11,17 +11,21 @@ register = template.Library()
 @register.inclusion_tag('accounts/account_header.html', takes_context=True)
 def account_header(context):
     request = context['request']
-    reservs = Reservation.objects.filter(user_id=request.user)
-    active_reservs = []
-    inactive_reservs = []
-    canceled_reservs = []
-    for reserv in reservs:
-        if reserv.end_date >= date.today() and reserv.status:
-            active_reservs.append(reserv)
-        elif reserv.status == False:
-            canceled_reservs.append(reserv)
-        else:
-            inactive_reservs.append(reserv)
+    reservs = Reservation.objects.filter(user=request.user)
+    # Активные резервы
+    active_reservs = reservs.filter(
+        Q(status=True),
+        Q(end_date__gte=date.today())
+    ).count()
+    #  Неактивные резервы
+    inactive_reservs = reservs.filter(
+        Q(status=True),
+        Q(end_date__lt=date.today())
+    ).count()
+    # Отмененные резервы
+    canceled_reservs = reservs.filter(
+        Q(status=False)
+    ).count()
     context = {
         'active_reservs': active_reservs,
         'inactive_reservs': inactive_reservs,
