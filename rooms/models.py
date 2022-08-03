@@ -284,7 +284,7 @@ class Reservation(models.Model):
     class Meta:
         verbose_name = 'резерв жилья'
         verbose_name_plural = 'резерв жилья'
-        ordering = ['created_at']
+        ordering = ['start_date']
 
 
 class RatingStar(models.Model):

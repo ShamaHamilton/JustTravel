@@ -139,7 +139,7 @@ class ReservationAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'user', 'apartment',)
     # search_fields = ('apartment',)
     list_editable = ('status',)
-    list_filter = ('apartment',)
+    list_filter = ('apartment', 'status')
     fields = (
         'apartment',
         'start_date',

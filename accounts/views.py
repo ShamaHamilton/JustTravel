@@ -58,7 +58,7 @@ def active_reservs(request):
         Q(user_id=request.user),
         Q(status=True),
         Q(end_date__gte=date.today())
-    )
+    ).select_related()
     context = {
         'active_reservs': active_reservs
     }
@@ -70,7 +70,7 @@ def inactive_reservs(request):
         Q(user_id=request.user),
         Q(status=True),
         Q(end_date__lt=date.today())
-    )
+    ).select_related()
     context = {
         'inactive_reservs': inactive_reservs
     }
@@ -81,7 +81,7 @@ def canceled_reservs(request):
     canceled_reservs = Reservation.objects.filter(
         Q(user_id=request.user),
         Q(status=False)
-    )
+    ).select_related()
     context = {
         'canceled_reservs': canceled_reservs
     }

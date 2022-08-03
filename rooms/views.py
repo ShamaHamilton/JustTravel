@@ -1,3 +1,5 @@
+from multiprocessing import context
+from pyexpat import model
 from .forms import CreateRoomForm, ReservationForm, RatingForm, ReviewForm
 from .models import Rating, RoomsApplicationModel, Reservation, Reviews, RatingStar
 from .import constants
@@ -80,14 +82,10 @@ class CreateRoomView(FormView):
 
 
 class RoomsView(ListView):
-    model = RoomsApplicationModel
+    queryset = RoomsApplicationModel.objects.filter(status=True)
     template_name = 'rooms/rooms_list.html'
     context_object_name = 'rooms_list'
-    paginate_by = 1
-
-    def get_queryset(self):
-        """Метод для фильтрации объектов по условию."""
-        return RoomsApplicationModel.objects.filter(status=True)
+    paginate_by = 5
 
 
 def get_reservs_date(kwargs):
@@ -160,7 +158,7 @@ class AddReserv(View):
             form.days_total = delta
             form.price_total = delta * apartment.price
             form.save()
-        return redirect('rooms:rooms')
+        return redirect('accounts:account')
 
 
 class AddStarRating(View):
