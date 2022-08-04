@@ -84,49 +84,58 @@ class AddReserv(View):
     """Резер жилья."""
 
     def post(self, request, pk):
-        form = ReservationForm(request.POST)
-        apartment = RoomsModel.objects.get(pk=pk)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.user = request.user
-            form.apartment_id = apartment.id
-            start_date = form.start_date
-            end_date = form.end_date
-            delta = (end_date - start_date).days
-            form.days_total = delta
-            form.price_total = delta * apartment.price
-            form.save()
-        return redirect('accounts:account')
+        if request.user.is_authenticated:
+            form = ReservationForm(request.POST)
+            apartment = RoomsModel.objects.get(pk=pk)
+            if form.is_valid():
+                form = form.save(commit=False)
+                form.user = request.user
+                form.apartment_id = apartment.id
+                start_date = form.start_date
+                end_date = form.end_date
+                delta = (end_date - start_date).days
+                form.days_total = delta
+                form.price_total = delta * apartment.price
+                form.save()
+            return redirect('accounts:account')
+        else:
+            return redirect('accounts:register')
 
 
 class AddStarRating(View):
     """Добавление рейтинга жилья."""
 
     def post(self, request):
-        form = RatingForm(request.POST)
-        if form.is_valid():
-            Rating.objects.update_or_create(
-                user=request.user,
-                apartment_id=int(request.POST.get('apartment')),
-                defaults={'star_id': int(request.POST.get('star'))}
-            )
-            return HttpResponse(status=201)
+        if request.user.is_authenticated:
+            form = RatingForm(request.POST)
+            if form.is_valid():
+                Rating.objects.update_or_create(
+                    user=request.user,
+                    apartment_id=int(request.POST.get('apartment')),
+                    defaults={'star_id': int(request.POST.get('star'))}
+                )
+                return HttpResponse(status=201)
+            else:
+                return HttpResponse(status=400)
         else:
-            return HttpResponse(status=400)
+            return redirect('accounts:register')
 
 
 class AddReview(View):
     """Отзывы."""
 
     def post(self, request, pk):
-        form = ReviewForm(request.POST)
-        apartment = RoomsModel.objects.get(pk=pk)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.user = request.user
-            form.apartment = apartment
-            form.save()
-        return redirect(apartment.get_absolute_url())
+        if request.user.is_authenticated:
+            form = ReviewForm(request.POST)
+            apartment = RoomsModel.objects.get(pk=pk)
+            if form.is_valid():
+                form = form.save(commit=False)
+                form.user = request.user
+                form.apartment = apartment
+                form.save()
+            return redirect(apartment.get_absolute_url())
+        else:
+            return redirect('accounts:register')
 
 
 def room_reser_details(request, pk):
@@ -134,7 +143,6 @@ def room_reser_details(request, pk):
     if request.method == 'POST':
         current_reserv.status = False
         current_reserv.save()
-        messages.success(request, 'Бронь отменена')
         return redirect('accounts:account')
     context = {
         'current_reserv': current_reserv,
