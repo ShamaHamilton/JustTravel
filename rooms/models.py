@@ -7,10 +7,12 @@ User = get_user_model()
 
 
 def rooms_photo_upload_to(instance, filename):
-    return f'rooms/{instance.landlord}/{instance.id}/{filename}'
+    """Динамический путь для сохранения изображений жилья."""
+    return f'rooms/{instance.landlord}/{instance.header}/{filename}'
 
 
 class RoomsModel(models.Model):
+    """Модель для создания жилья."""
     created_at = models.DateTimeField(
         verbose_name='дата создания',
         auto_now_add=True,
@@ -230,6 +232,7 @@ class RatingStar(models.Model):
 
 
 class Rating(models.Model):
+    """Рейтинг жилья."""
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

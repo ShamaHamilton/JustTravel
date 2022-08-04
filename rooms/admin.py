@@ -1,10 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from .models import (
-    RoomsModel, Reservation,
-    RatingStar, Rating, Reviews
-)
+from .models import RoomsModel, Reservation,RatingStar, Rating, Reviews
 
 
 class RoomsCreationForm(forms.ModelForm):

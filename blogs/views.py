@@ -7,6 +7,7 @@ from .models import Localities, Places
 
 
 def home(request):
+    """Домашнаяя страница."""
     places = Places.objects.filter(is_published=True).select_related()
     localities = Localities.objects.filter(is_published=True)
     context = {

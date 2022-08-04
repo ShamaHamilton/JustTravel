@@ -10,6 +10,7 @@ from .models import (
 
 
 class CreateRoomForm(forms.ModelForm):
+    """Форма для добавления жилья."""
     class Meta:
         model = RoomsModel
         exclude = ['landlord']

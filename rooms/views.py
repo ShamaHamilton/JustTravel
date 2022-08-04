@@ -15,11 +15,13 @@ User = get_user_model()
 
 
 class CreateRoomView(CreateView):
+    """Добавление жилья."""
     form_class = CreateRoomForm
     template_name = 'rooms/room_create.html'
 
 
 class RoomsView(ListView):
+    """Список доступного жилья."""
     queryset = RoomsModel.objects.filter(status=True)
     template_name = 'rooms/rooms_list.html'
     context_object_name = 'rooms_list'
@@ -27,6 +29,7 @@ class RoomsView(ListView):
 
 
 def get_reservs_date(kwargs):
+    """Возвращает забронированные (занятые) даты для конкреного жилья."""
     # Извлечение броней связанных с данным жильем
     reservs = Reservation.objects.filter(
         Q(apartment_id=kwargs['pk']),
@@ -139,6 +142,7 @@ class AddReview(View):
 
 
 def room_reser_details(request, pk):
+    """Детали забронированного жилья в ЛК."""
     current_reserv = Reservation.objects.get(pk=pk)
     if request.method == 'POST':
         current_reserv.status = False

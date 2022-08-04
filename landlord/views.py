@@ -6,7 +6,9 @@ from datetime import date, timedelta
 from accounts.models import CustomUser
 from rooms.models import Reservation
 
+
 def account(request):
+    """Аккаунт арендодателя."""
     return render(request, 'landlord/account.html')
 
 
@@ -72,5 +74,6 @@ def upcoming(request):
 
 
 def personal_data(request):
+    """Личные данные арендодателя."""
     user = CustomUser.objects.get(id=request.user.id)
     return render(request, 'landlord/personal_data.html', {'user': user})

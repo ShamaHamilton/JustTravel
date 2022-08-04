@@ -5,6 +5,7 @@ from .models import CustomUser
 
 
 class UserRegisterForm(UserCreationForm):
+    """Форма регистрации."""
     phone = forms.CharField(
         label='',
         widget=forms.TextInput(attrs={

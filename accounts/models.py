@@ -5,6 +5,7 @@ from django.contrib.auth.models import (
 
 
 class CustomUserManager(BaseUserManager):
+    """Менеджер для создания кастомных пользователей."""
     
     def create_user(self, phone, first_name, last_name, password=None, **kwargs):
         if not phone:
@@ -21,7 +22,7 @@ class CustomUserManager(BaseUserManager):
 
     def create_superuser(self, phone, first_name, last_name, password=None, **kwargs):
         """
-        Создает и сохраняет суперпользователя и указанным номером телефона,
+        Создает и сохраняет суперпользователя с указанным номером телефона,
         именем, фамилией и паролем.
         """
         kwargs.setdefault('is_active', True)
@@ -40,7 +41,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    """Модель для регистрации нового пользователя."""
+    """Кастомная модель для регистрации нового пользователя."""
     phone = models.CharField(
         verbose_name='номер телефона',
         max_length=18,

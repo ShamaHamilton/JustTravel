@@ -7,6 +7,7 @@ from .models import Localities, LocalityImages, Places, PlaceImages
 
 
 class LocalitiesAdminForm(forms.ModelForm):
+    """Подключение CKEditor к форме модели."""
     content = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
@@ -15,6 +16,7 @@ class LocalitiesAdminForm(forms.ModelForm):
 
 
 class LocalitiesAdmin(admin.ModelAdmin):
+    """Населенные пункты."""
     form = LocalitiesAdminForm
     prepopulated_fields = {'slug': ('title',)}
     list_display = (
@@ -45,6 +47,7 @@ admin.site.register(Localities, LocalitiesAdmin)
 
 
 class PlacesAdminForm(forms.ModelForm):
+    """Подключение CKEditor к форме модели."""
     content = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
@@ -53,6 +56,7 @@ class PlacesAdminForm(forms.ModelForm):
 
 
 class PlacesAdmin(admin.ModelAdmin):
+    """Интересные места."""
     form = PlacesAdminForm
     prepopulated_fields = {'slug': ('title',)}
     save_as = True
@@ -87,6 +91,7 @@ admin.site.register(Places, PlacesAdmin)
 
 
 class LocalityImagesAdmin(admin.ModelAdmin):
+    """Изображения населенных пунктов."""
     list_display = ('id', 'category', 'get_photo',)
     list_display_links = ('category',)
     search_fields = ('category',)
@@ -105,6 +110,7 @@ admin.site.register(LocalityImages, LocalityImagesAdmin)
 
 
 class PlaceImagesAdmin(admin.ModelAdmin):
+    """Изображения интересных мест."""
     list_display = ('id', 'category_place', 'get_photo',)
     list_display_links = ('category_place',)
     search_fields = ('category_place',)

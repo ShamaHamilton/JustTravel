@@ -11,6 +11,7 @@ from .forms import UserRegisterForm, UserLoginForm
 
 
 def user_register(request):
+    """Регистрация."""
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -54,6 +55,7 @@ def user_account(request):
 
 
 def active_reservs(request):
+    """Активные бронирования пользователя."""
     active_reservs = Reservation.objects.filter(
         Q(user_id=request.user),
         Q(status=True),
@@ -66,6 +68,7 @@ def active_reservs(request):
 
 
 def inactive_reservs(request):
+    """Неактивные бронирования пользователя."""
     inactive_reservs = Reservation.objects.filter(
         Q(user_id=request.user),
         Q(status=True),
@@ -78,6 +81,7 @@ def inactive_reservs(request):
 
 
 def canceled_reservs(request):
+    """Отмененные бронирования пользователя."""
     canceled_reservs = Reservation.objects.filter(
         Q(user_id=request.user),
         Q(status=False)
@@ -89,5 +93,6 @@ def canceled_reservs(request):
 
 
 def personal_data(request):
+    """Личные данные пользователя."""
     context = CustomUser.objects.get(id=request.user.id)
     return render(request, 'accounts/personal_data.html', {'user': context})

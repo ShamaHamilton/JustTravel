@@ -67,6 +67,7 @@ def localities_photo_upload_to(instance, filename):
 
 
 class LocalityImages(models.Model):
+    """Изображения населенных пунктов."""
     category = models.ForeignKey(
         Localities,
         on_delete=models.CASCADE,
@@ -88,7 +89,7 @@ class LocalityImages(models.Model):
 
 
 def places_preview_upload_to(instance, filename):
-    """Динамический путь для сохранения изображений интересных мест."""
+    """Динамический путь для сохранения превью интересных мест."""
     return f'photos/{instance.category.title}/{instance.title}/{filename}'
 
 
