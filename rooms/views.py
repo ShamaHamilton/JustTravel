@@ -4,20 +4,22 @@ from .models import Rating, RoomsModel, Reservation, Reviews, RatingStar
 from django.http import HttpResponse
 from django.views.generic.base import View
 from django.views.generic import CreateView, ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.contrib import messages
 from django.db.models import Q
-from django.contrib.auth import get_user_model
 from datetime import date, timedelta
 from django.db.models import Avg
+from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class CreateRoomView(CreateView):
+class CreateRoomView(LoginRequiredMixin, CreateView):
     """Добавление жилья."""
     form_class = CreateRoomForm
     template_name = 'rooms/room_create.html'
+    login_url = 'accounts:register'
 
 
 class RoomsView(ListView):
