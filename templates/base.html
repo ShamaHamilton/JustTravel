@@ -24,14 +24,16 @@
   {% endblock navbar %}
 
   <div class="container">
-
+    
+    {% comment %}
     <div class="user-message">
       {% if messages %}
-      {% for message in messages %}
-      {{ message }}
-      {% endfor%}
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor%}
       {% endif %}
     </div>
+    {% endcomment %}
 
     {% block content %} CONTENT {% endblock %}
 

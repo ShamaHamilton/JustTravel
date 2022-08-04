@@ -6,11 +6,7 @@
   <h1>Регистрация</h1>
   <form method="post" class="login-register-form">
     {% csrf_token %}
-    {% for field in form %}
-    <div>
-      {{ field }}
-    </div>
-    {% endfor %}
+    {{ form.as_p }}
     <button type="submit">Регистрация</button>
   </form>
 </div>

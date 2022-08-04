@@ -1482,7 +1482,7 @@
     margin-bottom: 20px;
 }
 
-.login-register-form div {
+.login-register-form p input {
     margin-bottom: 20px;
 }
 
@@ -1512,6 +1512,10 @@
     background: #ff5361;
     color: #fff;
     transition: 0.5s;
+}
+
+.login-register-form ul{
+    list-style: none;
 }
 
 /* ----------for small screen devices ( up to 500px) ---------- */
