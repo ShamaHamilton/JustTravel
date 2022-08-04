@@ -2,45 +2,24 @@ from django.contrib import admin
 from django import forms
 
 from .models import (
-    RoomsApplicationModel, Reservation,
+    RoomsModel, Reservation,
     RatingStar, Rating, Reviews
 )
 
 
-class RoomCreationForm(forms.ModelForm):
+class RoomsCreationForm(forms.ModelForm):
     """Форма для создания жилья из админки."""
 
     class Meta:
-        model = RoomsApplicationModel
-        fields = (
-            'landlord',
-            'status',
-            'header',
-            'description',
-            'housing',
-            'housing_type',
-            'offer_type',
-            'location',
-            'guests',
-            'beds',
-            'bathroom',
-            'special_amenities',
-            'popular_amenities',
-            'safety',
-            'photo1',
-            'photo2',
-            'photo3',
-            'photo4',
-            'photo5',
-            'price',
-        )
+        model = RoomsModel
+        fields = '__all__'
 
 
-class RoomChangeForm(forms.ModelForm):
+class RoomsChangeForm(forms.ModelForm):
     """Форма для редактирования пользовательских параметров."""
 
     class Meta:
-        model = RoomsApplicationModel
+        model = RoomsModel
         fields = (
             'landlord',
             'status',
@@ -50,6 +29,7 @@ class RoomChangeForm(forms.ModelForm):
             'housing_type',
             'offer_type',
             'location',
+            'map_location',
             'guests',
             'beds',
             'bathroom',
@@ -65,10 +45,10 @@ class RoomChangeForm(forms.ModelForm):
         )
 
 
-class RoomAdmin(admin.ModelAdmin):
+class RoomsAdmin(admin.ModelAdmin):
     """Форма для добавления и изменения пользовательских экземпляров."""
-    form = RoomCreationForm
-    add_form = RoomChangeForm
+    form = RoomsCreationForm
+    add_form = RoomsChangeForm
     list_display = (
         'id',
         'landlord',
@@ -92,6 +72,7 @@ class RoomAdmin(admin.ModelAdmin):
         'housing_type',
         'offer_type',
         'location',
+        'map_location',
         'guests',
         'beds',
         'bathroom',
@@ -112,14 +93,14 @@ class RoomAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
-admin.site.register(RoomsApplicationModel, RoomAdmin)
+admin.site.register(RoomsModel, RoomsAdmin)
 
 
 class ReservationForm(forms.ModelForm):
     """Форма для создания жилья из админки."""
 
     class Meta:
-        model = RoomsApplicationModel
+        model = RoomsModel
         fields = '__all__'
         exclude = ('created_at',)
 
