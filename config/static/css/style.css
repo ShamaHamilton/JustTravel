@@ -1427,6 +1427,9 @@
     .header-btn li {
         margin-top: 20px;
     }
+    #account_data {
+        width: 90%;
+    }
 
     /* end header */
 
