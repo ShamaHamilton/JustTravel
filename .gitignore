@@ -10,8 +10,7 @@ static/admin
 static/ckeditor
 static/debug_toolbar
 
-**/migrations/**
-!**/migrations
+**migrations/
 !**/migrations/__init__.py
 
 db.sqlite3
