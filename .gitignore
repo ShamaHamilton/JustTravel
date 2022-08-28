@@ -19,6 +19,3 @@ db.sqlite3
 nginx/
 .env.prod
 .env.prod.db
-docker-compose.prod.yml
-Dockerfile.prod
-entrypoint.prod.sh

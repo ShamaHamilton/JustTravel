@@ -1,6 +1,8 @@
+version: '3.8'
+
 services:
   web:
-    build: ./
+    build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/usr/src/app/
@@ -9,13 +11,13 @@ services:
     env_file:
       - ./.env.dev
   db:
-    image: postgres:14.5
+    image: postgres:14.5-alpine
     volumes:
-      - jt_postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=jt_admin
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123456
-      - POSTGRES_DB=jt_db
+      - POSTGRES_DB=postgresdb
 
 volumes:
-  jt_postgres_data:
+  postgres_data:
