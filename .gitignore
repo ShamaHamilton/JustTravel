@@ -16,6 +16,5 @@ static/debug_toolbar
 
 db.sqlite3
 
-nginx/
 .env.prod
 .env.prod.db
