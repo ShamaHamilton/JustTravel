@@ -9,7 +9,8 @@ class UserRegisterForm(UserCreationForm):
     phone = forms.CharField(
         label='',
         widget=forms.TextInput(attrs={
-            'placeholder': 'Номер телефона'
+            'placeholder': 'Номер телефона',
+            'type': 'tel',
         }),
     )
     first_name = forms.CharField(
@@ -55,7 +56,8 @@ class UserLoginForm(AuthenticationForm):
         label='',
         widget=forms.TextInput(attrs={
             'placeholder': 'Номер телефона',
-            'id': 'id_phone'
+            'id': 'id_phone',
+            'type': 'tel',
         }),
     )
     password = forms.CharField(

@@ -97,7 +97,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Закомментировать на деплое
-# STATIC_DIR = BASE_DIR / 'static'
+STATIC_DIR = BASE_DIR / 'static'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]

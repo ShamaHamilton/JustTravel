@@ -44,7 +44,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     """Кастомная модель для регистрации нового пользователя."""
     phone = models.CharField(
         verbose_name='номер телефона',
-        max_length=18,
+        max_length=20,
         unique=True,
     )
     first_name = models.CharField(

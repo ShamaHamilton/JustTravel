@@ -22,7 +22,9 @@ $('.header-links li a').each(function () {
     }
 });
 
-$("#id_phone").mask("+7 (999) 999-99-99")
+jQuery(function($){
+    $("#id_phone").mask("+7 (999) 999-99-99");
+});
 
 // Add star rating
 const rating = document.querySelector('form[name=rating]');
