@@ -9,6 +9,7 @@ config = {
 }
 datepickr = flatpickr("input[type=date]", config);
 
+// flatpickr в бронировании жилья
 // Прибытие-настройки
 const value1 = JSON.parse(document.getElementById('value1').textContent);
 config1 = {
@@ -16,9 +17,7 @@ config1 = {
     dateFormat: "d.m.Y",
     minDate: "today",
     disable: value1,
-    // onOpen: function () {
-    //     endPicker.open();
-    // },
+    disableMobile: "true",
 }
 // Выезд-настройки
 const value2 = JSON.parse(document.getElementById('value2').textContent);
@@ -27,9 +26,7 @@ config2 = {
     dateFormat: "d.m.Y",
     minDate: "today",
     disable: value2,
-    // onOpen: function () {
-    //     startPicker.open();
-    // },
+    disableMobile: "true",
 }
 startPicker = flatpickr("input[type=date_in]", config1);
 endPicker = flatpickr("input[type=date_out]", config2);
